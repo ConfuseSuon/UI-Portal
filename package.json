@@ -1,5 +1,5 @@
 {
-  "name": "cv-manager",
+  "name": "demo-app",
   "version": "3.3.2",
   "private": true,
   "homepage": "",
@@ -38,7 +38,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "vite",
+    "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview"
   },

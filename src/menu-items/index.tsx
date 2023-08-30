@@ -1,13 +1,13 @@
-import dashboard from './dashboard';
+import dashboard from "./dashboard";
 // import pages from './pages';
 // import utilities from './utilities';
 // import other from './other';
-import applicant from './applicant';
+import pages from "./pages";
 // import cvmanager from './cvmanager';
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [dashboard, applicant]
+  items: [dashboard, pages],
 };
 
 export default menuItems;

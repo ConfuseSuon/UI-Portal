@@ -1,1 +1,0 @@
-{"version":3,"file":"index-67a76fc4.js","sources":["../../src/views/dashboard/Default/index.tsx"],"sourcesContent":["const Dashboard = () => {\r\n  return(\r\n    <h1>Dashboard</h1>\r\n  )\r\n}\r\n\r\nexport default Dashboard"],"names":["Dashboard","jsx"],"mappings":"wCAAA,MAAMA,EAAY,IAEdC,EAAA,IAAC,MAAG,SAAS,WAAA,CAAA"}

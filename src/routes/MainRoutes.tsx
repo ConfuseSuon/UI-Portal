@@ -1,127 +1,98 @@
-import { lazy } from 'react';
+import { lazy } from "react";
 
 // project imports
 
-import MainLayout from '../layout/MainLayout';
-import Loadable from '../ui-component/Loadable';
+import MainLayout from "../layout/MainLayout";
+import Loadable from "../ui-component/Loadable";
+import MyTest from "../views/pages/tests/MyTest";
+import Results from "../views/pages/results/Results";
+import Slas from "../views/pages/results/Slas";
+import Reports from "../views/pages/results/Reports";
+import Inventory from "../views/pages/manage/Inventory";
+import Topologies from "../views/pages/manage/Topologies";
+import TestingAssests from "../views/pages/manage/TestingAssests";
+import Platfrom from "../views/pages/learn/Platfrom";
+import Faq from "../views/pages/learn/Faq";
 // import { Outlet } from 'react-router';
 
 // dashboard routing
-const DashboardDefault = Loadable(lazy(() => import('../views/dashboard/Default')));
-
-// utilities routing
-// const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
-// const UtilsColor = Loadable(lazy(() => import('views/utilities/Color')));
-// const UtilsShadow = Loadable(lazy(() => import('views/utilities/Shadow')));
-// const UtilsMaterialIcons = Loadable(lazy(() => import('views/utilities/MaterialIcons')));
-// const UtilsTablerIcons = Loadable(lazy(() => import('views/utilities/TablerIcons')));
-
-// sample page routing
-// const SamplePage = Loadable(lazy(() => import('views/sample-page')));
-// import New from 'views/utilities/New';
+const DashboardDefault = Loadable(
+  lazy(() => import("../views/dashboard/Default"))
+);
 
 // ==============================|| MAIN ROUTING ||============================== //
-const ApplicantPage = Loadable(lazy(() => import('../views/applicants/Applicants')));
-const EditApplicants = Loadable(lazy(() => import('../views/applicants/EditApplicants')));
+const SetupaTest = Loadable(
+  lazy(() => import("../views/pages/tests/SetupaTest"))
+);
 const MainRoutes = {
-  path: '/',
+  path: "/",
   element: <MainLayout />,
   children: [
     {
-      path: '/',
-      element: <DashboardDefault />
+      path: "/",
+      element: <DashboardDefault />,
     },
     {
-      path: 'dashboard',
+      path: "tests",
       children: [
         {
-          index: true,
-          element: <DashboardDefault />
-        }
-      ]
-    },
-    // {
-    //   path: 'utils',
-    //   children: [
-    //     {
-    //       path: 'util-typography',
-    //       element: <UtilsTypography />
-    //     }
-    //   ]
-    // },
-    // {
-    //   path: 'utils',
-    //   children: [
-    //     {
-    //       path: 'util-color',
-    //       element: <UtilsColor />
-    //     }
-    //   ]
-    // },
-    // {
-    //   path: 'utils',
-    //   children: [
-    //     {
-    //       path: 'util-shadow',
-    //       element: <UtilsShadow />
-    //     }
-    //   ]
-    // },
-    // {
-    //   path: 'utils',
-    //   children: [
-    //     {
-    //       path: 'util-new',
-    //       element: <New />
-    //     }
-    //   ]
-    // },
-    // {
-    //   path: 'icons',
-    //   children: [
-    //     {
-    //       path: 'tabler-icons',
-    //       element: <UtilsTablerIcons />
-    //     }
-    //   ]
-    // },
-    // {
-    //   path: 'icons',
-    //   children: [
-    //     {
-    //       path: 'material-icons',
-    //       element: <UtilsMaterialIcons />
-    //     }
-    //   ]
-    // },
-    // {
-    //   path: 'sample-page',
-    //   element: <SamplePage />
-    // },
-    // {
-    //   path: 'applicant-page',
-    //   element: <ApplicantPage />
-    // },
-
-    // {
-    //   path: 'applicant-page',
-    //   element: <ApplicantPage />
-    // }
-
-    {
-      path: 'applicants',
-      children: [
-        {
-          index: true,
-          element: <ApplicantPage />
+          path: "setup-a-test",
+          element: <SetupaTest />,
         },
         {
-          path: 'edit-applicants:id',
-          element: <EditApplicants />
-        }
-      ]
-    }
-  ]
+          path: "my-tests",
+          element: <MyTest />,
+        },
+      ],
+    },
+    {
+      path: "results",
+      children: [
+        {
+          path: "result",
+          element: <Results />,
+        },
+        {
+          path: "slas",
+          element: <Slas />,
+        },
+        {
+          path: "reports",
+          element: <Reports />,
+        },
+      ],
+    },
+    {
+      path: "manage",
+      children: [
+        {
+          path: "inventory",
+          element: <Inventory />,
+        },
+        {
+          path: "topologies",
+          element: <Topologies />,
+        },
+        {
+          path: "testing-assests",
+          element: <TestingAssests />,
+        },
+      ],
+    },
+    {
+      path: "learn",
+      children: [
+        {
+          path: "platform",
+          element: <Platfrom />,
+        },
+        {
+          path: "faq",
+          element: <Faq />,
+        },
+      ],
+    },
+  ],
 };
 
 export default MainRoutes;

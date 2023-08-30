@@ -1,22 +1,27 @@
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 // material-ui
-import { ButtonBase } from '@mui/material';
+import { ButtonBase } from "@mui/material";
 
 // project imports
-import config from '../../../config';
-import Logo from '../../../ui-component/Logo';
-import { MENU_OPEN } from '../../../store/actions';
+import config from "../../../config";
+import logo from "../../../assets/Amniverse-1.svg";
+import { MENU_OPEN } from "../../../store/actions";
 
 // ==============================|| MAIN LOGO ||============================== //
 
 const LogoSection = () => {
-  const defaultId = useSelector((state:any) => state.customization.defaultId);
+  const defaultId = useSelector((state: any) => state.customization.defaultId);
   const dispatch = useDispatch();
   return (
-    <ButtonBase disableRipple onClick={() => dispatch({ type: MENU_OPEN, id: defaultId })} component={Link} to={config.defaultPath}>
-      <Logo />
+    <ButtonBase
+      disableRipple
+      onClick={() => dispatch({ type: MENU_OPEN, id: defaultId })}
+      component={Link}
+      to={"/"}
+    >
+      <img src={logo} alt="" height={45} />
     </ButtonBase>
   );
 };

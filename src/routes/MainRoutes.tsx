@@ -24,6 +24,7 @@ const DashboardDefault = Loadable(
 const SetupaTest = Loadable(
   lazy(() => import("../views/pages/tests/SetupaTest"))
 );
+
 const MainRoutes = {
   path: "/",
   element: <MainLayout />,

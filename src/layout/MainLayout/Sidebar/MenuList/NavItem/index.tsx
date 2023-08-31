@@ -1,5 +1,5 @@
 import * as PropTypes from "prop-types";
-import { forwardRef, useEffect } from "react";
+import React, { ReactElement, forwardRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -20,12 +20,14 @@ import { MENU_OPEN, SET_MENU } from "../../../../../store/actions";
 
 // assets
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import { AppState } from "../../../../../store/reducer";
+import { JsxElement } from "typescript";
 
 // ==============================|| SIDEBAR MENU LIST ITEMS ||============================== //
 type RootState = {
   customization: any;
 };
-const NavItem = ({ item, level }: any) => {
+const NavItem = ({ item, level }: any): ReactElement => {
   const theme: any = useTheme();
   const dispatch = useDispatch();
   const { pathname } = useLocation();

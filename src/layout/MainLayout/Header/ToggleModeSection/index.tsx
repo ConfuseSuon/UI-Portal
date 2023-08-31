@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 import React from "react";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import { useMediaQuery } from "@mui/material";
 const ModeBox = styled.div`
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
   * {
     box-sizing: border-box;
   }
@@ -41,8 +41,14 @@ const ModeBox = styled.div`
 `;
 
 const ToggleModeSection = () => {
+  const isMobile = useMediaQuery("(max-width: 550px)"); // Adjust the max-width to your desired breakpoint
+
+  if (isMobile) {
+    return null;
+  }
+
   return (
-    <ModeBox>
+    <ModeBox style={{ marginRight: "1.5rem" }}>
       <input type="checkbox" className="checkbox" id="checkbox" />
       <label htmlFor="checkbox" className="checkbox-label">
         <NightsStayIcon sx={{ color: "yellow", fontSize: "1rem" }} />

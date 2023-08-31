@@ -31,6 +31,7 @@ import NotificationList from "./NotificationList";
 
 // assets
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 // notification status options
 const status = [
   {
@@ -94,7 +95,7 @@ const NotificationSection = () => {
           ml: 2,
           mr: 3,
           [theme.breakpoints.down("md")]: {
-            mr: 2,
+            mr: "-0.1rem",
           },
         }}
       >
@@ -103,7 +104,7 @@ const NotificationSection = () => {
             variant="rounded"
             sx={{
               ...theme.typography.commonAvatar,
-              ...theme.typography.mediumAvatar,
+              ...theme.typography.customAvatar,
               transition: "all .2s ease-in-out",
               background: theme.palette.primary.light,
               color: theme.palette.primary.dark,
@@ -119,6 +120,7 @@ const NotificationSection = () => {
             color="inherit"
           >
             <InfoOutlinedIcon />
+            <KeyboardArrowDownOutlinedIcon sx={{ fontSize: "1rem" }} />
           </Avatar>
         </ButtonBase>
       </Box>

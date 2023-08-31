@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // material-ui
 import { useTheme } from "@mui/material/styles";
@@ -38,12 +38,15 @@ import User1 from "../../../../assets/images/users/user-round.svg";
 // const User1:string = require('assets/images/users/user-round.svg').default;
 // assets
 import { IconLogout, IconSearch, IconSettings, IconUser } from "@tabler/icons";
+import { TypeUserInfo, handleLogout } from "../../../../features/authSlice";
+import { AppDispatch, AppState } from "../../../../store/reducer";
 
 // ==============================|| PROFILE MENU ||============================== //
 type RootState = {
   customization: any;
 };
 const ProfileSection = () => {
+  const dispatch: AppDispatch = useDispatch();
   const theme = useTheme<any>();
   const customization = useSelector((state: RootState) => state.customization);
   const navigate = useNavigate();
@@ -53,13 +56,13 @@ const ProfileSection = () => {
   const [notification, setNotification] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = useState(false);
+
+  const { userInfo } = useSelector((state: AppState) => state.auth);
+
   /**
    * anchorRef is used on different componets and specifying one type leads to other components throwing an error
    * */
   const anchorRef = useRef<any>(null);
-  const handleLogout = async () => {
-    console.log("Logout");
-  };
 
   const handleClose = (event: any) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -93,31 +96,26 @@ const ProfileSection = () => {
     <>
       <Chip
         sx={{
-          height: "48px",
+          height: "0px",
           alignItems: "center",
-          borderRadius: "27px",
           transition: "all .2s ease-in-out",
-          borderColor: theme.palette.primary.light,
-          backgroundColor: theme.palette.primary.light,
-          '&[aria-controls="menu-list-grow"], &:hover': {
-            borderColor: theme.palette.primary.main,
-            background: `${theme.palette.primary.main}!important`,
-            color: theme.palette.primary.light,
-            "& svg": {
-              stroke: theme.palette.primary.light,
-            },
-          },
-          "& .MuiChip-label": {
-            lineHeight: 0,
+          backgroundColor: "transparent",
+          border: "none",
+          mr: "-1rem",
+          [theme.breakpoints.down("md")]: {
+            mr: "-1rem",
           },
         }}
         icon={
           <Avatar
-            src={User1}
+            src={userInfo?.picture}
             sx={{
-              ...theme.typography.mediumAvatar,
+              ...theme.typography.largeAvatar,
               margin: "8px 0 8px 8px !important",
               cursor: "pointer",
+              [theme.breakpoints.down("xs")]: {
+                ...theme.typography.mediumAvatar,
+              },
             }}
             ref={anchorRef}
             aria-controls={open ? "menu-list-grow" : undefined}
@@ -125,13 +123,13 @@ const ProfileSection = () => {
             color="inherit"
           />
         }
-        label={
-          <IconSettings
-            stroke={1.5}
-            size="1.5rem"
-            color={theme.palette.primary.main}
-          />
-        }
+        // label={
+        //   <IconSettings
+        //     stroke={1.5}
+        //     size="1.5rem"
+        //     color={theme.palette.primary.main}
+        //   />
+        // }
         variant="outlined"
         ref={anchorRef}
         aria-controls={open ? "menu-list-grow" : undefined}
@@ -177,11 +175,11 @@ const ProfileSection = () => {
                           variant="h4"
                           sx={{ fontWeight: 400 }}
                         >
-                          John Wills
+                          {userInfo?.name}
                         </Typography>
                       </Stack>
                       <Typography variant="subtitle2">
-                        Software Developer
+                        {userInfo?.email}
                       </Typography>
                     </Stack>
                   </Box>
@@ -332,7 +330,10 @@ const ProfileSection = () => {
                             borderRadius: `${customization.borderRadius}px`,
                           }}
                           selected={selectedIndex === 4}
-                          onClick={handleLogout}
+                          onClick={() => {
+                            dispatch(handleLogout());
+                            navigate("/login");
+                          }}
                         >
                           <ListItemIcon>
                             <IconLogout stroke={1.5} size="1.3rem" />

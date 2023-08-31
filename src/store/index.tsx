@@ -1,9 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import reducer from './reducer';
+import { configureStore } from "@reduxjs/toolkit";
+import reducer, { setupStore } from "./reducer";
 
 // ==============================|| REDUX - MAIN STORE ||============================== //
 
-const store = configureStore({ reducer });
-const persister = 'Free';
+const store = setupStore();
+const persister = "Free";
 
 export { store, persister };

@@ -13,6 +13,7 @@ interface TypeInitialState {
   userInfo: null | TypeUserInfo;
   access_token: string | undefined | void;
   dataOnLocalStorage: object;
+  darkMode: boolean;
   toastify: any;
 }
 
@@ -29,7 +30,7 @@ export interface TypeUserInfo {
 }
 
 const initialState: TypeInitialState = {
-  isAuthenticated: !!localStorage.getItem("key"),
+  isAuthenticated: false,
   userInfo: null,
   access_token: "",
   toastify: {
@@ -42,6 +43,7 @@ const initialState: TypeInitialState = {
     progress: undefined,
     theme: "light",
   },
+  darkMode: false,
   dataOnLocalStorage: {},
 };
 
@@ -69,6 +71,9 @@ const authSlice = createSlice({
     handleLogout: (state) => {
       state.isAuthenticated = false;
       localStorage.clear();
+    },
+    toggleDarkMode: (state, { payload }) => {
+      state.darkMode = !state.darkMode;
     },
   },
   extraReducers: (builder) => {
@@ -99,5 +104,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { handleLogout } = authSlice.actions;
+export const { handleLogout, toggleDarkMode } = authSlice.actions;
 export default authSlice.reducer;

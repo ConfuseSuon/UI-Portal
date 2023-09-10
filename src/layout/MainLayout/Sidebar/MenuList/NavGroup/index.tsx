@@ -1,24 +1,29 @@
-  import * as PropTypes from 'prop-types';
+import * as PropTypes from "prop-types";
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
-import { Divider, List, Typography } from '@mui/material';
+import { useTheme } from "@mui/material/styles";
+import { Divider, List, Typography } from "@mui/material";
 
 // project imports
-import NavItem from '../NavItem';
-import NavCollapse from '../NavCollapse';
+import NavItem from "../NavItem";
+import NavCollapse from "../NavCollapse";
+import colors from "../../../../../assets/scss/_themes-vars.module.scss";
+import { useSelector } from "react-redux";
+import { AppState } from "../../../../../store/reducer";
 
 // ==============================|| SIDEBAR MENU LIST GROUP ||============================== //
 
-const NavGroup = ({ item }:any) => {
-  const theme:any = useTheme();
+const NavGroup = ({ item }: any) => {
+  const theme: any = useTheme();
+  const color = colors;
 
+  const { darkMode } = useSelector((state: AppState) => state.auth);
   // menu list collapse & items
-  const items = item.children?.map((menu:any) => {
+  const items = item.children?.map((menu: any) => {
     switch (menu.type) {
-      case 'collapse':
+      case "collapse":
         return <NavCollapse key={menu.id} menu={menu} level={1} />;
-      case 'item':
+      case "item":
         return <NavItem key={menu.id} item={menu} level={1} />;
       default:
         return (
@@ -34,10 +39,20 @@ const NavGroup = ({ item }:any) => {
       <List
         subheader={
           item.title && (
-            <Typography variant="caption" sx={{ ...theme.typography.menuCaption }} display="block" gutterBottom>
+            <Typography
+              variant="caption"
+              sx={{ ...theme.typography.menuCaption }}
+              display="block"
+              gutterBottom
+            >
               {item.title}
               {item.caption && (
-                <Typography variant="caption" sx={{ ...theme.typography.subMenuCaption }} display="block" gutterBottom>
+                <Typography
+                  variant="caption"
+                  sx={{ ...theme.typography.subMenuCaption }}
+                  display="block"
+                  gutterBottom
+                >
                   {item.caption}
                 </Typography>
               )}
@@ -55,7 +70,7 @@ const NavGroup = ({ item }:any) => {
 };
 
 NavGroup.propTypes = {
-  item: PropTypes.object
+  item: PropTypes.object,
 };
 
 export default NavGroup;

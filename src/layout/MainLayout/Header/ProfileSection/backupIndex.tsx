@@ -118,7 +118,7 @@ const ProfileSection = () => {
               ...theme.typography.largeAvatar,
               margin: "8px 0 8px 8px !important",
               cursor: "pointer",
-              [theme.breakpoints.down("md")]: {
+              [theme.breakpoints.down("xs")]: {
                 ...theme.typography.mediumAvatar,
               },
             }}

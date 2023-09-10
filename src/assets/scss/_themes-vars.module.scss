@@ -49,13 +49,15 @@ $grey900: #121926;
 // ==============================|| DARK THEME VARIANTS ||============================== //
 
 // paper & background
-$darkBackground: #1a223f; // level 3
-$darkPaper: #111936; // level 4
+$darkLevel4: #24292f; // level 3
+$darkLevel3: #0d1117; // level 4
 
+$selectedItem: #1a1f24;
 // dark 800 & 900
-$darkLevel1: #29314f; // level 1
+$darkLevel1: #161b22; // level 1
 $darkLevel2: #212946; // level 2
 
+$inputfieldDark: #21262d;
 // primary dark
 $darkPrimaryLight: #eef2f6;
 $darkPrimaryMain: #2196f3;
@@ -129,13 +131,13 @@ $darkTextSecondary: #8492c4;
   // ==============================|| DARK THEME VARIANTS ||============================== //
 
   // paper & background
-  darkPaper: $darkPaper;
-  darkBackground: $darkBackground;
-
-  // dark 800 & 900
+  
+  // dark mode bg
   darkLevel1: $darkLevel1;
   darkLevel2: $darkLevel2;
-
+  darkLevel3: $darkLevel3;
+  darkLevel4: $darkLevel4;
+  selectedItem: $selectedItem;
   // text variants
   darkTextTitle: $darkTextTitle;
   darkTextPrimary: $darkTextPrimary;

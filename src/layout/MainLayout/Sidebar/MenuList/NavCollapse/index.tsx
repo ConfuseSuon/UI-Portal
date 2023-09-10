@@ -115,7 +115,13 @@ const NavCollapse = ({ menu, level }: any) => {
         selected={selected === menu.id}
         onClick={handleClick}
       >
-        <ListItemIcon sx={{ my: "auto", minWidth: !menu.icon ? 18 : 36 }}>
+        <ListItemIcon
+          sx={{
+            my: "auto",
+            minWidth: !menu.icon ? 18 : 36,
+            ...theme.typography.navDarkModeColor,
+          }}
+        >
           {menuIcon}
         </ListItemIcon>
         <ListItemText
@@ -123,7 +129,7 @@ const NavCollapse = ({ menu, level }: any) => {
             <Typography
               variant={selected === menu.id ? "h5" : "body1"}
               color="inherit"
-              sx={{ my: "auto" }}
+              sx={{ my: "auto", ...theme.typography.navDarkModeColor }}
             >
               {menu.title}
             </Typography>
@@ -132,7 +138,9 @@ const NavCollapse = ({ menu, level }: any) => {
             menu.caption && (
               <Typography
                 variant="caption"
-                sx={{ ...theme.typography.subMenuCaption }}
+                sx={{
+                  ...theme.typography.subMenuCaption,
+                }}
                 display="block"
                 gutterBottom
               >

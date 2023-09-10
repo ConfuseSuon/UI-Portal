@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline, StyledEngineProvider } from "@mui/material";
-
+import "./App.css";
 // routing
 import Routes from "./routes";
 
@@ -34,8 +34,8 @@ const App = () => {
       const parseData = JSON.parse(localStorageData);
       const token = parseData.access_tokenLocal;
       await dispatch(getUserAuthCredentials(token));
-      if (!userInfo) {
-        return navigate("/login");
+      if (userInfo !== null) {
+        return navigate(1);
       }
     } else {
       navigate("/login");

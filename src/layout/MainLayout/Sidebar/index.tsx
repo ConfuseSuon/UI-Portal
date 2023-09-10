@@ -14,21 +14,30 @@ import LogoSection from "../LogoSection";
 // import MenuCard from './MenuCard';
 // import { drawerWidth } from 'store/constant';
 import { drawerWidth } from "../../../store/constant";
-
+import { useSelector } from "react-redux";
 // ==============================|| SIDEBAR DRAWER ||============================== //
 
 const Sidebar = ({ drawerOpen, drawerToggle, window }: any) => {
-  const theme = useTheme();
+  const theme = useTheme<any>();
   const matchUpMd = useMediaQuery(theme.breakpoints.up("md"));
-
   const drawer = (
     <>
-      <Box sx={{ display: { xs: "block", md: "none" } }}>
-        <Box sx={{ display: "flex", p: 2, mx: "auto" }}>
+      <Box
+        sx={{
+          display: { xs: "block", md: "none" },
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            p: 2,
+            mx: "auto",
+          }}
+        >
           <LogoSection />
         </Box>
       </Box>
-      <BrowserView>
+      <BrowserView style={{}}>
         <PerfectScrollbar
           component="div"
           style={{
@@ -45,7 +54,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }: any) => {
         </PerfectScrollbar>
       </BrowserView>
       <MobileView>
-        <Box sx={{ px: 2 }}>
+        <Box sx={{ px: 2, ...theme.typography.darkModeBg4 }}>
           <MenuList />
           {/* <MenuCard /> */}
           {/* <Stack direction="row" justifyContent="center" sx={{ mb: 2 }}>
@@ -74,7 +83,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }: any) => {
         sx={{
           "& .MuiDrawer-paper": {
             width: drawerWidth,
-            background: theme.palette.background.default,
+            ...theme.typography.darkModeBg4,
             color: theme.palette.text.primary,
             borderRight: "none",
             [theme.breakpoints.up("md")]: {

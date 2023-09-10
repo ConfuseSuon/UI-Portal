@@ -96,6 +96,7 @@ const NotificationSection = () => {
           mr: 3,
           [theme.breakpoints.down("md")]: {
             mr: "-0.1rem",
+            display: "none",
           },
         }}
       >

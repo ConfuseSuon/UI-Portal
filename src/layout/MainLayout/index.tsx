@@ -9,6 +9,7 @@ import {
   Box,
   CssBaseline,
   useMediaQuery,
+  Divider,
 } from "@mui/material";
 
 // project imports
@@ -63,7 +64,7 @@ const Main = styled<any>("main", {
 // ==============================|| MAIN LAYOUT ||============================== //
 
 const MainLayout = () => {
-  const theme = useTheme();
+  const theme = useTheme<any>();
   const matchDownMd = useMediaQuery(theme.breakpoints.down("md"));
   // Handle left drawer
   const leftDrawerOpened = useSelector(
@@ -75,9 +76,10 @@ const MainLayout = () => {
   };
 
   const { isAuthenticated } = useSelector((state: AppState) => state.auth);
+
   const navigate = useNavigate();
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", ...theme.typography.darkModeBg4 }}>
       <CssBaseline />
       {/* header */}
       <AppBar
@@ -86,17 +88,22 @@ const MainLayout = () => {
         color="inherit"
         elevation={0}
         sx={{
-          bgcolor: theme.palette.background.default,
+          ...theme.typography.darkModeBg4,
           transition: leftDrawerOpened
             ? theme.transitions.create("width")
             : "none",
+          height: "4rem",
         }}
       >
         <Toolbar>
           <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
         </Toolbar>
+        {/* <Divider
+          absolute={false}
+          orientation="horizontal"
+          sx={{ background: "red", height: "1.4rem" }}
+        /> */}
       </AppBar>
-
       {/* drawer */}
       <Sidebar
         drawerOpen={!matchDownMd ? leftDrawerOpened : !leftDrawerOpened}
@@ -104,15 +111,15 @@ const MainLayout = () => {
       />
 
       {/* main content */}
-      <Main theme={theme} open={leftDrawerOpened}>
+      <Main theme={theme} open={leftDrawerOpened} sx={{}}>
         {/* breadcrumb */}
-        <Breadcrumbs
+        {/* <Breadcrumbs
           separator={IconChevronRight}
           navigation={navigation}
           icon
           title
           rightAlign
-        />
+        /> */}
         {isAuthenticated ? <Outlet /> : navigate("/login")}
       </Main>
       {/* <Customization /> */}

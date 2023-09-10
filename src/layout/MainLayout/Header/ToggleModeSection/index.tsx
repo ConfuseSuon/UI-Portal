@@ -3,6 +3,9 @@ import React from "react";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { useMediaQuery } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleDarkMode } from "../../../../features/authSlice";
+import { AppState } from "../../../../store/reducer";
 const ModeBox = styled.div`
   * {
     box-sizing: border-box;
@@ -41,6 +44,8 @@ const ModeBox = styled.div`
 `;
 
 const ToggleModeSection = () => {
+  const dispatch = useDispatch();
+  const { darkMode } = useSelector((state: AppState) => state.auth);
   const isMobile = useMediaQuery("(max-width: 550px)"); // Adjust the max-width to your desired breakpoint
 
   if (isMobile) {
@@ -49,10 +54,15 @@ const ToggleModeSection = () => {
 
   return (
     <ModeBox style={{ marginRight: "1.5rem" }}>
-      <input type="checkbox" className="checkbox" id="checkbox" />
+      <input
+        type="checkbox"
+        className="checkbox"
+        id="checkbox"
+        onClick={() => dispatch(toggleDarkMode(darkMode))}
+      />
       <label htmlFor="checkbox" className="checkbox-label">
-        <NightsStayIcon sx={{ color: "yellow", fontSize: "1rem" }} />
         <LightModeIcon sx={{ color: "yellow", fontSize: "1rem" }} />
+        <NightsStayIcon sx={{ color: "yellow", fontSize: "1rem" }} />
         <span className="ball"></span>
       </label>
     </ModeBox>

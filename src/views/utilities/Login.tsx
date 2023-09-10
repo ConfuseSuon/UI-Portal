@@ -1,6 +1,6 @@
 import { Box, Button, Card, Grid, Typography } from "@mui/material";
 import React, { useEffect } from "react";
-import logo from "../../assets/amniverse_text.svg";
+import logo from "../../assets/Amniverse.svg";
 import jwtDecode from "jwt-decode";
 import {
   CredentialResponse,
@@ -26,7 +26,6 @@ const Login: React.FC = () => {
   const login = useGoogleLogin({
     onSuccess: async (codeResponse) => {
       const { access_token } = codeResponse;
-      console.log(codeResponse);
       await dispatch(getUserAuthCredentials(access_token));
     },
     onError: (error) => console.log("Login Failed:", error),

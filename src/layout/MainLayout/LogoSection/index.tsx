@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // material-ui
-import { ButtonBase } from "@mui/material";
+import { Box, ButtonBase, Typography } from "@mui/material";
 
 // project imports
 import config from "../../../config";
-import logo from "../../../assets/Amniverse-1.svg";
+import logo from "../../../assets/Amniverse.svg";
 import { MENU_OPEN } from "../../../store/actions";
 
 // ==============================|| MAIN LOGO ||============================== //
@@ -21,7 +21,19 @@ const LogoSection = () => {
       component={Link}
       to={"/"}
     >
-      <img src={logo} alt="" height={45} />
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "0.5rem",
+        }}
+      >
+        <img src={logo} alt="" height={45} />
+        <Typography variant="h3" sx={{ alignSelf: "center", mt: "0.4rem" }}>
+          UIPORTAL
+        </Typography>
+      </Box>
     </ButtonBase>
   );
 };

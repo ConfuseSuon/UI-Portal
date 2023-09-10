@@ -3,12 +3,14 @@ import { PreloadedState, combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import customizationReducer from "./customizationReducer";
 import authReducer from "../features/authSlice";
+import setupTestSlice from "../features/setupTestSlice";
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
 const rootReducer = combineReducers({
   customization: customizationReducer,
   auth: authReducer,
+  setupTest: setupTestSlice,
 });
 
 export function setupStore(preloadedState?: PreloadedState<AppState>) {

@@ -3,43 +3,48 @@
  * @param {JsonObject} theme theme customization object
  */
 
+import { useSelector } from "react-redux";
+import { AppState } from "../store/reducer";
+
 export default function themeTypography(theme: any) {
+  const { darkMode } = useSelector((state: AppState) => state.auth);
+
   return {
     fontFamily: theme?.customization?.fontFamily,
     h6: {
       fontWeight: 500,
-      color: theme.heading,
+      color: darkMode ? theme.headingDarkMode : theme.heading,
       fontSize: "0.75rem",
     },
     h5: {
       fontSize: "0.875rem",
-      color: theme.heading,
+      color: darkMode ? theme.headingDarkMode : theme.heading,
       fontWeight: 500,
     },
     h4: {
       fontSize: "1rem",
-      color: theme.heading,
+      color: darkMode ? theme.headingDarkMode : theme.heading,
       fontWeight: 600,
     },
     h3: {
       fontSize: "1.25rem",
-      color: theme.heading,
+      color: darkMode ? theme.headingDarkMode : theme.heading,
       fontWeight: 600,
     },
     h2: {
       fontSize: "1.5rem",
-      color: theme.heading,
+      color: darkMode ? theme.headingDarkMode : theme.heading,
       fontWeight: 700,
     },
     h1: {
       fontSize: "2.125rem",
-      color: theme.heading,
+      color: darkMode ? theme.headingDarkMode : theme.heading,
       fontWeight: 700,
     },
     subtitle1: {
       fontSize: "0.875rem",
       fontWeight: 500,
-      color: theme.textDark,
+      color: darkMode ? theme.headingDarkMode : theme.heading,
     },
     subtitle2: {
       fontSize: "0.75rem",
@@ -55,51 +60,55 @@ export default function themeTypography(theme: any) {
       fontSize: "0.875rem",
       fontWeight: 400,
       lineHeight: "1.334em",
+      color: darkMode ? theme.bodyDarkMode : "",
     },
     body2: {
       letterSpacing: "0em",
       fontWeight: 400,
       lineHeight: "1.5em",
-      color: theme.darkTextPrimary,
+      color: darkMode ? theme.body2DarkMode : theme.darkTextPrimary,
     },
     button: {
       textTransform: "capitalize",
     },
     customInput: {
-      marginTop: 1,
-      marginBottom: 1,
+      marginTop: 0,
+      marginBottom: 1.5,
       "& > label": {
-        top: 23,
+        top: 0,
         left: 0,
+        background: theme.colors.grey50,
         color: theme.grey500,
         '&[data-shrink="false"]': {
-          top: 5,
+          top: 0,
         },
       },
       "& > div > input": {
-        padding: "30.5px 14px 11.5px !important",
+        padding: "5px 13px 5.5px !important",
+        background: "transparent",
       },
       "& legend": {
         display: "none",
+        background: "white",
       },
       "& fieldset": {
         top: 0,
       },
     },
     mainContent: {
-      backgroundColor: theme.background,
+      background: darkMode ? theme.backgroundDarkMode3 : theme.background,
       width: "100%",
-      minHeight: "calc(100vh - 88px)",
+      minHeight: "calc(100vh - 62px)",
       flexGrow: 1,
       padding: "20px",
-      marginTop: "88px",
+      marginTop: "62px",
       marginRight: "20px",
       borderRadius: `${theme?.customization?.borderRadius}px`,
     },
     menuCaption: {
       fontSize: "0.875rem",
       fontWeight: 500,
-      color: theme.heading,
+      color: darkMode ? theme.darkModeText : theme.heading,
       padding: "6px",
       textTransform: "capitalize",
       marginTop: "10px",
@@ -107,7 +116,7 @@ export default function themeTypography(theme: any) {
     subMenuCaption: {
       fontSize: "0.6875rem",
       fontWeight: 500,
-      color: theme.darkTextSecondary,
+      color: "white",
       textTransform: "capitalize",
     },
     commonAvatar: {
@@ -129,11 +138,54 @@ export default function themeTypography(theme: any) {
       height: "44px",
       fontSize: "1.5rem",
     },
+    profileSmall: {
+      width: "28px",
+      height: "28px",
+      fontSize: "0.5rem",
+    },
     customAvatar: {
       width: "48px",
       height: "34px",
       fontSize: "1.3rem",
       paddingLeft: "0.1rem",
     },
+    darkModeBg4: {
+      background: darkMode
+        ? theme.backgroundDarkMode4
+        : theme.backgroundDefault,
+    },
+    darkModeBg3: {
+      background: darkMode ? theme.backgroundDarkMode3 : theme.background,
+      border: darkMode
+        ? `1px solid ${theme.borderColor}`
+        : `1px solid ${theme.borderLightColor}`,
+      transition: "transform 0.3s ease-in-out",
+      "&:hover": {
+        transform: "translateY(5px) rotate(0deg) scale(1.03)",
+        boxShadow:
+          "0 10px 15px -3px rgba(0, 0, 0, 0.1),   0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+      },
+    },
+    darkModeInput: {
+      background: darkMode ? theme.selectedItem : theme.headingDarkMode,
+    },
+    navDarkModeColor: {
+      color: darkMode ? theme.bodyDarkMode : "",
+    },
+    menuSelectedBack: {
+      color: darkMode ? theme.darkLevel1 : theme.primaryLight,
+    },
+    dashboardCard: {
+      border: darkMode
+        ? `1px solid ${theme.borderColor}`
+        : `1px solid ${theme.borderLightColor}`,
+      transition: "transform 0.3s ease-in-out",
+      "&:hover": {
+        transform: "translateY(5px) rotate(0deg) scale(1.03)",
+      },
+    },
   };
 }
+
+// menuSelected: color.primaryDark,
+//     menuSelectedBack: ,

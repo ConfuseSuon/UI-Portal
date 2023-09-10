@@ -13,17 +13,14 @@ import Topologies from "../views/pages/manage/Topologies";
 import TestingAssests from "../views/pages/manage/TestingAssests";
 import Platfrom from "../views/pages/learn/Platfrom";
 import Faq from "../views/pages/learn/Faq";
+import SetupaTest from "../views/pages/tests/SetupaTest";
+import DashboardDefault from "../views/dashboard/Default";
+import SetupPhase from "../views/pages/tests/SetupPhase";
 // import { Outlet } from 'react-router';
 
 // dashboard routing
-const DashboardDefault = Loadable(
-  lazy(() => import("../views/dashboard/Default"))
-);
 
 // ==============================|| MAIN ROUTING ||============================== //
-const SetupaTest = Loadable(
-  lazy(() => import("../views/pages/tests/SetupaTest"))
-);
 
 const MainRoutes = {
   path: "/",
@@ -39,6 +36,10 @@ const MainRoutes = {
         {
           path: "setup-a-test",
           element: <SetupaTest />,
+        },
+        {
+          path: "setup-phase",
+          element: <SetupPhase />,
         },
         {
           path: "my-tests",

@@ -14,6 +14,7 @@ const QuerySection = () => {
         [theme.breakpoints.down("md")]: {
           ml: "2rem",
           mr: "-0.5rem",
+          display: "none",
         },
       }}
     >

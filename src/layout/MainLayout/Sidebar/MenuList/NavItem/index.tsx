@@ -118,6 +118,7 @@ const NavItem = ({ item, level }: any): ReactElement => {
                 : "body1"
             }
             color="inherit"
+            sx={{ ...theme.typography.navDarkModeColor }}
           >
             {item.title}
           </Typography>

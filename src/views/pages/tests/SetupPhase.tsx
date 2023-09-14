@@ -9,7 +9,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import PhaseCard from "../../../ui-component/CustomUIComp/PhaseCard";
 import { useNavigate } from "react-router";
@@ -39,9 +39,14 @@ const SetupPhase = (): ReactElement => {
   const navigate = useNavigate();
 
   const dispatch: AppDispatch = useDispatch();
-  const { testSuiteDetail, selectTopoloy } = useSelector(
-    (state: AppState) => state.setupTest
-  );
+  const { testSuiteDetail, selectTopoloy, testBlockData, dutConfigData } =
+    useSelector((state: AppState) => state.setupTest);
+
+  useEffect(() => {
+    if (!testSuiteDetail) {
+      navigate("/tests/setup-a-test");
+    }
+  }, []);
 
   const [openPopup, setOpenPopup] = useState(false);
   const handlePopupClose = () => setOpenPopup(false);
@@ -72,12 +77,17 @@ const SetupPhase = (): ReactElement => {
           <PhaseCard
             title={"Topology"}
             routeTo={"/manage/topologies"}
-            selectTopoloy={selectTopoloy}
+            viewBy={"topology"}
           />
           <PhaseDivider />
-          <PhaseCard title={"DUT Configuratios"} />
+          <PhaseCard title={"DUT Configuratios"} viewBy={"DUT"} />
           <PhaseDivider />
-          <PhaseCard title={"Test Suite"} data={testSuiteDetail} />
+          <PhaseCard
+            title={"Test Suite"}
+            data={testSuiteDetail}
+            blockData={testBlockData}
+            viewBy={"testSuite"}
+          />
         </Box>
       </Grid>
       <Grid item xs={12} md={12}>
@@ -162,6 +172,17 @@ const SetupPhase = (): ReactElement => {
           }}
         >
           <Typography variant="subtitle1">DUT :</Typography>{" "}
+          <Typography variant="body1">
+            {dutConfigData?.sshCheckValue}
+          </Typography>
+          <Typography variant="body1">
+            {dutConfigData?.channel1Value}
+          </Typography>{" "}
+          <Typography variant="body1">
+            {dutConfigData?.channel2Value}
+          </Typography>{" "}
+          <Typography variant="body1">{dutConfigData?.ssid1Value}</Typography>{" "}
+          <Typography variant="body1">{dutConfigData?.ssid2Value}</Typography>{" "}
         </DialogContent>
 
         <DialogContent

@@ -1,8 +1,11 @@
 import { useTheme } from "@mui/material/styles";
+import { useSelector } from "react-redux";
+import { AppState } from "../store/reducer";
 
 export default function componentStyleOverrides(theme: any) {
   const myTheme = useTheme<any>();
   const bgColor = theme.colors?.grey50;
+  const { darkMode } = useSelector((state: AppState) => state.auth);
   return {
     MuiButton: {
       styleOverrides: {
@@ -39,7 +42,7 @@ export default function componentStyleOverrides(theme: any) {
     MuiCardContent: {
       styleOverrides: {
         root: {
-          padding: "24px",
+          padding: "1rem",
         },
       },
     },
@@ -105,7 +108,6 @@ export default function componentStyleOverrides(theme: any) {
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          background: bgColor,
           borderRadius: `${theme?.customization?.borderRadius}px`,
           "& .MuiOutlinedInput-notchedOutline": {
             borderColor: theme.colors?.grey400,
@@ -118,8 +120,9 @@ export default function componentStyleOverrides(theme: any) {
           },
         },
         input: {
-          fontWeight: 500,
-          background: bgColor,
+          fontWeight: 400,
+          background: myTheme.typography.inputBox,
+          color: darkMode ? "white" : "",
           padding: "15.5px 14px",
           borderRadius: `${theme?.customization?.borderRadius}px`,
           "&.MuiInputBase-inputSizeSmall": {

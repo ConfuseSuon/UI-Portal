@@ -46,7 +46,7 @@ const CustomMyTestCard = (props: Props): ReactElement => {
       sx={{
         minHeight: "4.4rem",
         px: "1rem",
-        ...theme.typography.darkModeBg3,
+        ...theme.typography.dashboardCard,
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",

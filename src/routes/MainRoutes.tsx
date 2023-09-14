@@ -17,6 +17,8 @@ import SetupaTest from "../views/pages/tests/SetupaTest";
 import DashboardDefault from "../views/dashboard/Default";
 import SetupPhase from "../views/pages/tests/SetupPhase";
 // import { Outlet } from 'react-router';
+import { AuthenticatedTemplate } from "@azure/msal-react";
+import Callback from "../views/utilities/Callback";
 
 // dashboard routing
 
@@ -28,7 +30,11 @@ const MainRoutes = {
   children: [
     {
       path: "/",
-      element: <DashboardDefault />,
+      element: (
+        <AuthenticatedTemplate>
+          <DashboardDefault />,
+        </AuthenticatedTemplate>
+      ),
     },
     {
       path: "tests",

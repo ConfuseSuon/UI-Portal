@@ -6,6 +6,8 @@ import MinimalLayout from "../layout/MinimalLayout";
 
 // login option 3 routing
 import Login from "../views/utilities/Login";
+import { AuthenticatedTemplate } from "@azure/msal-react";
+import Callback from "../views/utilities/Callback";
 // const Callback = Loadable(lazy(async () => await import("../views/utilities/auth/Callback")))
 
 // ==============================|| AUTHENTICATION ROUTING ||============================== //
@@ -17,6 +19,14 @@ const AuthenticationRoutes = {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/callback",
+      element: (
+        <AuthenticatedTemplate>
+          <Callback />
+        </AuthenticatedTemplate>
+      ),
     },
   ],
 };

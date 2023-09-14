@@ -24,6 +24,7 @@ import { SET_MENU } from "../../store/actions";
 // assets
 import { IconChevronRight } from "@tabler/icons";
 import { AppState } from "../../store/reducer";
+import { AuthenticatedTemplate, useIsAuthenticated } from "@azure/msal-react";
 
 // styles
 const Main = styled<any>("main", {
@@ -77,53 +78,57 @@ const MainLayout = () => {
 
   const { isAuthenticated } = useSelector((state: AppState) => state.auth);
 
+  const msAuthenticated = useIsAuthenticated();
   const navigate = useNavigate();
   return (
-    <Box sx={{ display: "flex", ...theme.typography.darkModeBg4 }}>
-      <CssBaseline />
-      {/* header */}
-      <AppBar
-        enableColorOnDark
-        position="fixed"
-        color="inherit"
-        elevation={0}
-        sx={{
-          ...theme.typography.darkModeBg4,
-          transition: leftDrawerOpened
-            ? theme.transitions.create("width")
-            : "none",
-          height: "4rem",
-        }}
-      >
-        <Toolbar>
-          <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
-        </Toolbar>
-        {/* <Divider
+    <AuthenticatedTemplate>
+      <Box sx={{ display: "flex", ...theme.typography.darkModeBg4 }}>
+        <CssBaseline />
+        {/* header */}
+        <AppBar
+          enableColorOnDark
+          position="fixed"
+          color="inherit"
+          elevation={0}
+          sx={{
+            ...theme.typography.darkModeBg4,
+            transition: leftDrawerOpened
+              ? theme.transitions.create("width")
+              : "none",
+            height: "4rem",
+          }}
+        >
+          <Toolbar>
+            <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
+          </Toolbar>
+          {/* <Divider
           absolute={false}
           orientation="horizontal"
           sx={{ background: "red", height: "1.4rem" }}
         /> */}
-      </AppBar>
-      {/* drawer */}
-      <Sidebar
-        drawerOpen={!matchDownMd ? leftDrawerOpened : !leftDrawerOpened}
-        drawerToggle={handleLeftDrawerToggle}
-      />
+        </AppBar>
+        {/* drawer */}
+        <Sidebar
+          drawerOpen={!matchDownMd ? leftDrawerOpened : !leftDrawerOpened}
+          drawerToggle={handleLeftDrawerToggle}
+        />
 
-      {/* main content */}
-      <Main theme={theme} open={leftDrawerOpened} sx={{}}>
-        {/* breadcrumb */}
-        {/* <Breadcrumbs
+        {/* main content */}
+        <Main theme={theme} open={leftDrawerOpened} sx={{}}>
+          {/* breadcrumb */}
+          {/* <Breadcrumbs
           separator={IconChevronRight}
           navigation={navigation}
           icon
           title
           rightAlign
         /> */}
-        {isAuthenticated ? <Outlet /> : navigate("/login")}
-      </Main>
-      {/* <Customization /> */}
-    </Box>
+          {/* {isAuthenticated ? <Outlet /> : navigate("/login")} */}
+          {msAuthenticated ? <Outlet /> : navigate("/login")}
+        </Main>
+        {/* <Customization /> */}
+      </Box>
+    </AuthenticatedTemplate>
   );
 };
 

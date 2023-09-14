@@ -95,19 +95,17 @@ const Topologies = (): ReactElement => {
             <Box
               sx={{
                 ...theme.typography.darkModeBg4,
-                height: "100%",
                 px: "1rem",
                 py: "1rem",
                 display: "flex",
-                alignItems: "flex-start",
-                justifyContent: "flex-start",
-                gap: "3rem",
+                gap: "2rem",
                 flexWrap: "wrap",
               }}
             >
               {topologiesData.map((data) => {
                 return (
                   <CustomCard
+                    key={data.id}
                     selectBtnVal={true}
                     topolgiesData={data}
                     viewBy={"topologies"}

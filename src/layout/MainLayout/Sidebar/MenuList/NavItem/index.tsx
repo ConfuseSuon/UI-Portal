@@ -74,15 +74,14 @@ const NavItem = ({ item, level }: any): ReactElement => {
 
   // active menu item on page load
   useEffect(() => {
-    const currentPath = document.location.pathname;
     const currentIndex = document.location.pathname
       .toString()
       .split("/")
-      .findIndex((id) => id === item.id);
+      .findIndex((id) => id == item.id);
     if (currentIndex > -1) {
       dispatch({ type: MENU_OPEN, id: item.id });
     }
-    if (currentPath === "/") {
+    if (pathname === "/") {
       dispatch({ type: MENU_OPEN, id: "dashboard" });
     }
 

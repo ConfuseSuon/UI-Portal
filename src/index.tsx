@@ -14,18 +14,26 @@ import "./assets/scss/style.scss";
 import config from "./config";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
-// ==============================|| REACT DOM RENDER  ||============================== //
+import { PublicClientApplication } from "@azure/msal-browser";
+import { MsalProvider } from "@azure/msal-react";
+import { msalConfig } from "./msAuthConfig";
+import { StrictMode } from "react";
 
-// const container = document.getElementById('root');
-// createRoot(container!) if you use TypeScript
+const msalInstance = new PublicClientApplication(msalConfig);
+
+// ==============================|| REACT DOM RENDER  ||============================== //
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <GoogleOAuthProvider clientId="1023724644077-q076m2vg0sd99n4qertbb11r7u0sj4mh.apps.googleusercontent.com">
-    <Provider store={store}>
-      <BrowserRouter basename={config.basename}>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </GoogleOAuthProvider>
+  <StrictMode>
+    <GoogleOAuthProvider clientId="1023724644077-q076m2vg0sd99n4qertbb11r7u0sj4mh.apps.googleusercontent.com">
+      <Provider store={store}>
+        <BrowserRouter basename={config.basename}>
+          <MsalProvider instance={msalInstance}>
+            <App />
+          </MsalProvider>
+        </BrowserRouter>
+      </Provider>
+    </GoogleOAuthProvider>
+  </StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change

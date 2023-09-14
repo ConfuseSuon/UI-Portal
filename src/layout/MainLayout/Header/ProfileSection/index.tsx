@@ -40,10 +40,12 @@ import User1 from "../../../../assets/images/users/user-round.svg";
 import { IconLogout, IconSearch, IconSettings, IconUser } from "@tabler/icons";
 import {
   TypeUserInfo,
-  handleLogout,
+  // handleLogout,
   toggleDarkMode,
 } from "../../../../features/authSlice";
 import { AppDispatch, AppState } from "../../../../store/reducer";
+import { useMsal } from "@azure/msal-react";
+import { loginRequest } from "../../../../msAuthConfig";
 
 // ==============================|| PROFILE MENU ||============================== //
 type RootState = {
@@ -84,6 +86,7 @@ const ProfileSection = () => {
       navigate(route);
     }
   };
+
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -96,6 +99,14 @@ const ProfileSection = () => {
 
     prevOpen.current = open;
   }, [open]);
+
+  const { instance } = useMsal();
+
+  const handleMsLogout = async () => {
+    instance.logoutRedirect({
+      postLogoutRedirectUri: "/login",
+    });
+  };
 
   return (
     <>
@@ -180,11 +191,11 @@ const ProfileSection = () => {
                           variant="h4"
                           sx={{ fontWeight: 400 }}
                         >
-                          {userInfo?.name}
+                          {userInfo?.displayName}
                         </Typography>
                       </Stack>
                       <Typography variant="subtitle2">
-                        {userInfo?.email}
+                        {userInfo?.mail}
                       </Typography>
                     </Stack>
                   </Box>
@@ -339,8 +350,7 @@ const ProfileSection = () => {
                           }}
                           selected={selectedIndex === 4}
                           onClick={() => {
-                            dispatch(handleLogout());
-                            navigate("/login");
+                            handleMsLogout();
                           }}
                         >
                           <ListItemIcon>

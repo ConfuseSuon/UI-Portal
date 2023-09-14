@@ -5,6 +5,7 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  Typography,
 } from "@mui/material";
 import React, { ReactElement } from "react";
 
@@ -17,10 +18,11 @@ type Props = {
   placeholder?: string;
   sx?: any;
   variant?: any;
+  disabled?: boolean;
 };
 
 const CustomSelectOption = (props: Props): ReactElement => {
-  const { name, label, value, onChange, options, sx } = props;
+  const { name, label, value, onChange, options, sx, disabled } = props;
 
   return (
     <Box sx={{ width: "20rem" }}>
@@ -38,15 +40,18 @@ const CustomSelectOption = (props: Props): ReactElement => {
           variant="outlined"
           name={name}
           sx={sx}
+          disabled={disabled}
         >
           {options?.map((item: any) => {
             return (
               <MenuItem
                 data-testid="customOptionList"
                 key={item.id}
-                value={item.id}
+                value={item.title}
               >
-                {(item.displayName as string) ?? (item?.name as string)}
+                <Typography variant="body1" sx={{ color: "black" }}>
+                  {(item.title as string) ?? (item?.title as string)}
+                </Typography>
               </MenuItem>
             );
           })}

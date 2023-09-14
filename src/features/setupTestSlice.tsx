@@ -11,6 +11,8 @@ interface TyposInitState {
   activeTopologies: TopologiesTypo | null;
   navigatingSetupTest: boolean;
   selectTopoloy: TopologiesTypo | null;
+  testBlockData: TaskTypos[] | null | undefined;
+  dutConfigData: any;
 }
 
 const initialState: TyposInitState = {
@@ -20,6 +22,8 @@ const initialState: TyposInitState = {
   activeTopologies: null,
   navigatingSetupTest: false,
   selectTopoloy: null,
+  testBlockData: null,
+  dutConfigData: null,
 };
 
 const setupTestSlice = createSlice({
@@ -52,6 +56,19 @@ const setupTestSlice = createSlice({
       state.testSuiteDetail = null;
       state.topologyDetail = null;
       state.selectTopoloy = null;
+      state.testBlockData = null;
+      state.dutConfigData = null;
+    },
+    setTestBlockData: (state, { payload }: { payload: TaskTypos[] | null }) => {
+      const queueData = payload?.filter(
+        (task: TaskTypos) => task.columnId === "queue"
+      );
+      state.testBlockData =
+        queueData && queueData.length > 0 ? queueData : null;
+    },
+    setDutConfigData: (state, { payload }) => {
+      state.dutConfigData = payload;
+      console.log(state.dutConfigData);
     },
   },
 });
@@ -63,5 +80,7 @@ export const {
   setNavigatingSetupTest,
   setSelectTopologyData,
   setSetupTestNull,
+  setTestBlockData,
+  setDutConfigData,
 } = setupTestSlice.actions;
 export default setupTestSlice.reducer;

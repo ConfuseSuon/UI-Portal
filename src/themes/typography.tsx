@@ -77,7 +77,7 @@ export default function themeTypography(theme: any) {
       "& > label": {
         top: 0,
         left: 0,
-        background: theme.colors.grey50,
+        background: darkMode ? "transparent" : "white",
         color: theme.grey500,
         '&[data-shrink="false"]': {
           top: 0,
@@ -176,13 +176,22 @@ export default function themeTypography(theme: any) {
       color: darkMode ? theme.darkLevel1 : theme.primaryLight,
     },
     dashboardCard: {
+      boxShadow:
+        "rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
+      background: darkMode ? "transparent" : "white",
       border: darkMode
         ? `1px solid ${theme.borderColor}`
         : `1px solid ${theme.borderLightColor}`,
       transition: "transform 0.3s ease-in-out",
       "&:hover": {
-        transform: "translateY(5px) rotate(0deg) scale(1.03)",
+        transform: "translateY(-5px) rotate(0deg) scale(1.01)",
       },
+    },
+    inputBox: {
+      background: darkMode ? "#24323e" : "white",
+    },
+    transparentBox: {
+      background: darkMode ? "#24323e" : "transparent",
     },
   };
 }

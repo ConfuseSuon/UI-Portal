@@ -14,14 +14,14 @@ const pages = {
       icon: icon.IconUsers,
       children: [
         {
-          id: "setupaTest",
+          id: "setup-a-test",
           title: "Setup a Test",
           type: "item",
           url: "/tests/setup-a-test",
         },
 
         {
-          id: "myTests",
+          id: "my-tests",
           title: "My Tests",
           type: "item",
           url: "/tests/my-tests",
@@ -73,7 +73,7 @@ const pages = {
           url: "/manage/topologies",
         },
         {
-          id: "testingAssests",
+          id: "testing-assests",
           title: "Testing Assests",
           type: "item",
           url: "/manage/testing-assests",

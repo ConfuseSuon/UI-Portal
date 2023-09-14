@@ -23,68 +23,11 @@ import {
   expPieData,
   expcolorsofPieChart,
 } from "../../../ui-component/CustomUIComp/CustomMyTestCard";
-
-const dataBar = [{ name: "Data Point 1", value: 50, value2: 10 }];
-const lastDataBar = [
-  { name: "Data Point 1", value: 50, value2: 30, value3: 35 },
-];
-
-const data = [
-  {
-    name: "Sell",
-    uv: 4000,
-    pv: 15400,
-    amt: 6400,
-  },
-  {
-    name: "Love",
-    uv: 5000,
-    pv: 9098,
-    amt: 2210,
-  },
-  {
-    name: "Hate",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Love",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-];
-
-const areaData = [
-  {
-    name: "Sep",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Nov",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Dec",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Jan",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-];
+import { areaData, data, dataBar, lastDataBar } from "../../../mockData";
 
 const Dashboard = () => {
   const theme = useTheme<any>();
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={12}>
@@ -117,6 +60,7 @@ const Dashboard = () => {
               justifyContent: "space-between",
               alignItems: "center",
               mt: "0.5rem",
+              flexWrap: "wrap",
             }}
           >
             <Box>
@@ -152,7 +96,13 @@ const Dashboard = () => {
           <Box
             sx={{
               display: "flex",
-              justifyContent: "space-around",
+              justifyContent: "flex-start",
+              flexWrap: "wrap",
+              gap: "3rem",
+              [theme.breakpoints.down("sm")]: {
+                justifyContent: "center",
+                gap: "1.5rem",
+              },
             }}
           >
             <CustomDashboardNumCard
@@ -229,7 +179,6 @@ const Dashboard = () => {
               <Box
                 sx={{
                   borderRadius: "6px",
-                  height: "22rem",
                   p: "0.4rem",
                   px: "1rem",
                   display: "flex",
@@ -253,20 +202,20 @@ const Dashboard = () => {
                 <Box
                   sx={{
                     display: "flex",
-                    height: "27rem",
                     gap: "1rem",
                     width: "100%",
+                    flexWrap: "wrap",
                   }}
                 >
-                  <Box sx={{ height: "100%", width: "60%" }}>
+                  <Box sx={{ height: "20rem", width: "50%" }}>
                     <ResponsiveContainer width="100%">
                       <PieChart>
                         <Pie
                           dataKey="value"
                           data={expPieData}
-                          innerRadius={60}
-                          outerRadius={120}
-                          cy={140}
+                          innerRadius={45}
+                          outerRadius={125}
+                          cy={142}
                         >
                           {expPieData.map((entry, index) => (
                             <Cell
@@ -288,7 +237,6 @@ const Dashboard = () => {
 
                   <Box
                     sx={{
-                      height: "18rem",
                       display: "flex",
                       width: "40%",
                       flexDirection: "column",
@@ -834,7 +782,7 @@ const Dashboard = () => {
                 </Box>
               </Box>
               {/* ----------------------------------EndBox-------------------------- */}
-              <Stack direction="row" spacing={4}>
+              <Box sx={{ display: "flex", gap: "2rem" }}>
                 <Box
                   sx={{
                     width: "50%",
@@ -975,7 +923,7 @@ const Dashboard = () => {
                     </Stack>
                   </Stack>
                 </Box>{" "}
-              </Stack>
+              </Box>
             </Stack>
           </Box>
         </Box>

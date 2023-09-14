@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CardActionArea,
@@ -49,30 +50,28 @@ const CustomCard = (props: Props): ReactElement => {
   );
 
   return (
-    <>
+    <React.Fragment>
       {!!testSuiteData ? (
         <Card
           sx={{
-            ...theme.typography.darkModeBg3,
-            width: 250,
-            maxHeight: 320,
             borderRadius: "3%",
+            minWidth: "14rem",
+            maxWidth: "17rem",
+            flex: "1 0 0",
+            maxHeight: "20rem",
             transition: "transform 0.4s ease-in-out",
-            // "&:hover": {
-            //   transform: "translateY(5px) rotate(0deg) scale(1.03)",
-            //   boxShadow:
-            //     "0 10px 15px -3px rgba(0, 0, 0, 0.1),   0 4px 6px -2px rgba(0, 0, 0, 0.05)",
-            // },
+            boxShadow:
+              "rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
+            ...theme.typography.dashboardCard,
           }}
         >
           <CardContent sx={{ textAlign: "center" }}>
-            <Typography variant="h5" component="div">
-              {testSuiteData?.title}
-            </Typography>
+            <Typography variant="h5">{testSuiteData?.title}</Typography>
           </CardContent>
           <CardMedia
             component="img"
-            height="100"
+            width="90rem"
+            height="80rem"
             image={CardCoverImg}
             sx={{
               objectFit: "contain",
@@ -81,14 +80,20 @@ const CustomCard = (props: Props): ReactElement => {
           <CardContent
             sx={{
               textAlign: "center",
-              // background: "white",
-              // border: "1px solid grey",
             }}
           >
-            <Typography gutterBottom variant="body1" component="div">
+            <Typography gutterBottom variant="body1">
               {testSuiteData?.details}
             </Typography>
-
+          </CardContent>
+          <CardContent
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              p: 0,
+            }}
+          >
             <Button onClick={() => dispatch(setSelectTestData(testSuiteData))}>
               Select
             </Button>
@@ -97,10 +102,10 @@ const CustomCard = (props: Props): ReactElement => {
       ) : viewBy === "topologies" ? (
         <Card
           sx={{
-            ...theme.typography.darkModeBg3,
-            width: 250,
-            maxHeight: 320,
+            width: "22rem",
+            flex: "1 0 auto",
             borderRadius: "3%",
+            ...theme.typography.dashboardCard,
             transition: "transform 0.4s ease-in-out",
           }}
         >
@@ -128,7 +133,15 @@ const CustomCard = (props: Props): ReactElement => {
             <Typography gutterBottom variant="body1" component="div">
               {topolgiesData?.reservationName}
             </Typography>
-
+          </CardContent>
+          <CardContent
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              p: 0,
+            }}
+          >
             {navigatingSetupTest && (
               <Button
                 onClick={() => {
@@ -149,22 +162,16 @@ const CustomCard = (props: Props): ReactElement => {
       ) : (
         <Card
           sx={{
-            ...theme.typography.darkModeBg3,
-            width: 250,
-            maxHeight: 320,
+            ...theme.typography.dashboardCard,
             borderRadius: "3%",
             transition: "transform 0.4s ease-in-out",
-            // "&:hover": {
-            //   transform: "translateY(5px) rotate(0deg) scale(1.03)",
-            //   boxShadow:
-            //     "0 10px 15px -3px rgba(0, 0, 0, 0.1),   0 4px 6px -2px rgba(0, 0, 0, 0.05)",
-            // },
+            width: "22rem",
+            flex: "1 0 auto",
+            maxHeight: "320",
           }}
         >
           <CardContent sx={{ textAlign: "center" }}>
-            <Typography variant="h5" component="div">
-              {topolgiesData?.title}
-            </Typography>
+            <Typography variant="h5">{topolgiesData?.title}</Typography>
           </CardContent>
           <CardMedia
             component="img"
@@ -181,18 +188,26 @@ const CustomCard = (props: Props): ReactElement => {
               // border: "1px solid grey",
             }}
           >
-            <Typography gutterBottom variant="body1" component="div">
+            <Typography gutterBottom variant="body1">
               {topolgiesData?.deviceName}
             </Typography>
-            <Typography gutterBottom variant="body1" component="div">
+            <Typography gutterBottom variant="body1">
               {topolgiesData?.reservationName}
             </Typography>
-
+          </CardContent>
+          <CardContent
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              p: 0,
+            }}
+          >
             <Button>Nothing</Button>
           </CardContent>
         </Card>
       )}
-    </>
+    </React.Fragment>
   );
 };
 

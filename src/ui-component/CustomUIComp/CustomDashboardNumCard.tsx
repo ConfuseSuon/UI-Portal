@@ -20,16 +20,15 @@ const CustomDashboardNumCard = (props: DashCardNumProps): ReactElement => {
     <Box
       sx={{
         ...theme.typography.dashboardCard,
+        flex: "2 0 auto",
         height: "9rem",
-        width: "15rem",
+        minWidth: "12rem",
+        maxWidth: "18rem",
         display: "flex",
         flexDirection: "column",
         borderRadius: "7px",
         py: "0.5rem",
         pl: "0.5rem",
-        ...theme.typography.dashboardCard,
-        boxShadow:
-          "rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
       }}
     >
       <Box
@@ -58,11 +57,12 @@ const CustomDashboardNumCard = (props: DashCardNumProps): ReactElement => {
       <Box
         sx={{
           pr: "1.7rem",
-          position: "relative",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <Typography
-          variant="h6"
+          variant="body1"
           sx={{
             fontSize: "3rem",
             fontWeight: "600",
@@ -77,9 +77,8 @@ const CustomDashboardNumCard = (props: DashCardNumProps): ReactElement => {
           variant="body2"
           sx={{
             textAlign: "center",
-            position: "absolute",
             left: "2.5rem",
-            bottom: "-.3rem",
+            pb: "3rem",
             fontStyle: fontStyle ? fontStyle : "",
           }}
         >

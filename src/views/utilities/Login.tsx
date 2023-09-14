@@ -1,5 +1,5 @@
 import { Box, Button, Card, Grid, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { ReactElement, useEffect } from "react";
 import logo from "../../assets/Amniverse.svg";
 import jwtDecode from "jwt-decode";
 import {
@@ -9,8 +9,14 @@ import {
 } from "@react-oauth/google";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, AppState } from "../../store/reducer";
-import { getUserAuthCredentials } from "../../features/authSlice";
+// import { getUserAuthCredentials } from "../../features/authSlice";
 import { useNavigate } from "react-router";
+import {
+  UnauthenticatedTemplate,
+  useIsAuthenticated,
+  useMsal,
+} from "@azure/msal-react";
+import { LoginRequestTypo, loginRequest } from "../../msAuthConfig";
 
 interface TypecCredentialResponset {
   clientId: string;
@@ -18,26 +24,37 @@ interface TypecCredentialResponset {
   select_by: string;
 }
 
-const Login: React.FC = () => {
+const Login = (): ReactElement | void => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
+  const msAuthenticated = useIsAuthenticated();
   const { isAuthenticated } = useSelector((state: AppState) => state.auth);
 
-  const login = useGoogleLogin({
-    onSuccess: async (codeResponse) => {
-      const { access_token } = codeResponse;
-      await dispatch(getUserAuthCredentials(access_token));
-    },
-    onError: (error) => console.log("Login Failed:", error),
-  });
+  // const login = useGoogleLogin({
+  //   onSuccess: async (codeResponse) => {
+  //     const { access_token } = codeResponse;
+  //     await dispatch(getUserAuthCredentials(access_token));
+  //   },
+  //   onError: (error) => console.log("Login Failed:", error),
+  // });
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      return navigate("/");
-    }
-  }, [isAuthenticated]);
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     return navigate("/");
+  //   }
+  // }, [isAuthenticated]);
 
-  return (
+  const { instance } = useMsal();
+
+  const handleMsLogin = () => {
+    instance.loginRedirect(loginRequest as LoginRequestTypo).catch((e) => {
+      console.log(e);
+    });
+  };
+
+  return msAuthenticated ? (
+    navigate("/")
+  ) : (
     <Grid
       container
       justifyContent="center"
@@ -78,14 +95,21 @@ const Login: React.FC = () => {
             variant="h3"
             sx={{ color: "#2196f3", fontSize: "1.5rem", fontWeight: "400" }}
           >
-            Login With Google
+            Login With Microsoft
           </Typography>
-          <Button
+          {/* <Button
             variant="contained"
             sx={{ width: "100%" }}
             onClick={() => login()}
           >
             Login With Google
+          </Button> */}
+          <Button
+            variant="contained"
+            sx={{ width: "100%" }}
+            onClick={() => handleMsLogin()}
+          >
+            Login{" "}
           </Button>
         </Card>
       </Grid>

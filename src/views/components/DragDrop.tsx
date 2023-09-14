@@ -1,4 +1,4 @@
-import { Box, Chip, Stack, Typography } from "@mui/material";
+import { Box, Button, Chip, Divider, Stack, Typography } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import {
@@ -15,9 +15,15 @@ import { SortableContext, arrayMove, useSortable } from "@dnd-kit/sortable";
 import { columnData, taskData } from "../../mockData";
 import { CSS } from "@dnd-kit/utilities";
 import { createPortal } from "react-dom";
-import { useSelector } from "react-redux";
-import { AppState } from "../../store/reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, AppState } from "../../store/reducer";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
+import {
+  setSelectTestData,
+  setTestBlockData,
+  setTestSuiteDetail,
+} from "../../features/setupTestSlice";
+import { useNavigate } from "react-router";
 
 interface ColumnTypos {
   id: string;
@@ -37,10 +43,12 @@ const DragDrop = (): ReactElement => {
   const [activeColumn, setActiveColumn] = useState<ColumnTypos | null>(null);
   const theme = useTheme<any>();
 
+  const navigate = useNavigate();
+  const dispatch: AppDispatch = useDispatch();
   const { selectTestSuite } = useSelector((state: AppState) => state.setupTest);
 
   useEffect(() => {
-    initialTaskColumn("options");
+    initialTaskColumn("absent");
   }, []);
 
   const initialTaskColumn = (newColumnId: string) => {
@@ -100,29 +108,31 @@ const DragDrop = (): ReactElement => {
   };
 
   return (
-    <>
+    <Stack spacing={4} width="100%">
       <DndContext
         onDragStart={dragStart}
         sensors={sensor}
         onDragOver={dragOver}
       >
-        <SortableContext items={columnId}>
-          {columnDatas.map((col: ColumnTypos) => {
-            const filterTask = taskDatas.filter(
-              (task: TaskTypos) => task.columnId == col.id
-            );
-            const disableSorting = col.id === activeColumn?.id;
+        <Stack direction="row" spacing={3} justifyContent="center">
+          <SortableContext items={columnId}>
+            {columnDatas.map((col: ColumnTypos) => {
+              const filterTask = taskDatas.filter(
+                (task: TaskTypos) => task.columnId == col.id
+              );
+              const disableSorting = col.id === activeColumn?.id;
 
-            return (
-              <ColumnContainer
-                key={col.id}
-                colData={col}
-                taskData={filterTask}
-                disableSorting={disableSorting}
-              />
-            );
-          })}
-        </SortableContext>
+              return (
+                <ColumnContainer
+                  key={col.id}
+                  colData={col}
+                  taskData={filterTask}
+                  disableSorting={disableSorting}
+                />
+              );
+            })}
+          </SortableContext>
+        </Stack>
         {createPortal(
           <DragOverlay>
             {activeTask ? <TaskCard taskData={activeTask} /> : null}
@@ -130,7 +140,26 @@ const DragDrop = (): ReactElement => {
           document.body
         )}
       </DndContext>
-    </>
+      <Divider orientation="horizontal" />
+      <Stack direction="row" justifyContent="center" spacing={2}>
+        <Button
+          variant="contained"
+          onClick={() => dispatch(setSelectTestData(null))}
+        >
+          Back
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => {
+            dispatch(setTestSuiteDetail(selectTestSuite));
+            dispatch(setTestBlockData(taskDatas));
+            navigate("/tests/setup-phase");
+          }}
+        >
+          Next
+        </Button>
+      </Stack>
+    </Stack>
   );
 };
 

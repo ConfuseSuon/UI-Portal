@@ -11,7 +11,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import CustomFilter from "../../../ui-component/CustomUIComp/CustomFilter";
 import CustomCard from "../../../ui-component/CustomUIComp/CustomCard";
 import { styled, useTheme } from "@mui/material/styles";
@@ -25,8 +25,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, AppState } from "../../../store/reducer";
 import {
   setSelectTestData,
+  setSetupTestNull,
   setTestSuiteDetail,
 } from "../../../features/setupTestSlice";
+import MainCard from "../../../ui-component/cards/MainCard";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -54,6 +56,10 @@ const SetupaTest = (): ReactElement => {
   const dispatch: AppDispatch = useDispatch();
   const handlePopupClose = () => dispatch(setSelectTestData(null));
 
+  useEffect(() => {
+    dispatch(setSetupTestNull());
+  }, []);
+
   return (
     <>
       <Grid container spacing={1}>
@@ -64,18 +70,26 @@ const SetupaTest = (): ReactElement => {
             showScheduleBtn={true}
           />
         </Grid>
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12} sm={12} md={12}>
           <Box
             sx={{
               ...theme.typography.darkModeBg4,
-              height: "100%",
               px: "1rem",
               py: "1rem",
               display: "flex",
-              alignItems: "flex-start",
               justifyContent: "flex-start",
-              gap: "3rem",
               flexWrap: "wrap",
+              gap: "3rem",
+              alignItems: "flex-start",
+              [theme.breakpoints.down("sm")]: {
+                justifyContent: "center",
+                gap: "1.5rem",
+              },
+              // [theme.breakpoints.down("xs")]: {
+              //   flexDirection: "column",
+              //   justifyContent: "center",
+              //   gap: "1.5rem",
+              // },
             }}
           >
             {testSuites.map((test: TestSuiteTypos) => {
@@ -139,22 +153,6 @@ const SetupaTest = (): ReactElement => {
             }}
           >
             <DragDrop />
-          </DialogContent>
-
-          <Divider orientation="horizontal" />
-
-          <DialogContent>
-            <Stack justifyContent="flex-end" direction="row" spacing={2}>
-              <Button
-                variant="contained"
-                onClick={() => {
-                  dispatch(setTestSuiteDetail(selectTestSuite));
-                  navigate("/tests/setup-phase");
-                }}
-              >
-                Next
-              </Button>
-            </Stack>
           </DialogContent>
         </Dialog>
       </Grid>

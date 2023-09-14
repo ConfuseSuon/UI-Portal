@@ -64,13 +64,14 @@ const Inventory = (): ReactElement => {
           sx={{
             ...theme.typography.darkModeBg4,
             height: "100%",
-            px: "1rem",
+            px: ".5rem",
             py: "1rem",
             display: "flex",
             alignItems: "flex-start",
             justifyContent: "flex-start",
-            gap: "3rem",
+            gap: "2rem",
             flexWrap: "wrap",
+            width: "100%",
           }}
         >
           {topologiesData.map((data) => {
@@ -133,7 +134,7 @@ const Inventory = (): ReactElement => {
                                 width: "100%",
                                 minWidth: 250,
                                 maxWidth: 350,
-                                backgroundColor: theme.palette.background.paper,
+                                ...theme.typography.transparentBox,
                                 borderRadius: "10px",
                                 maxHeight: "20rem",
                                 p: 0,
@@ -149,7 +150,6 @@ const Inventory = (): ReactElement => {
                                 sx={{
                                   borderRadius: `10px`,
                                 }}
-                                // selected={selectedIndex === 4
                               >
                                 <ListItemIcon>
                                   <AddIcon />

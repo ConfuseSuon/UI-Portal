@@ -24,7 +24,7 @@ interface TypecCredentialResponset {
   select_by: string;
 }
 
-const Login = (): ReactElement | void => {
+const Login = (): any => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const msAuthenticated = useIsAuthenticated();

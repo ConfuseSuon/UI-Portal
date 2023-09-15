@@ -38,14 +38,9 @@ import User1 from "../../../../assets/images/users/user-round.svg";
 // const User1:string = require('assets/images/users/user-round.svg').default;
 // assets
 import { IconLogout, IconSearch, IconSettings, IconUser } from "@tabler/icons";
-import {
-  TypeUserInfo,
-  // handleLogout,
-  toggleDarkMode,
-} from "../../../../features/authSlice";
+import { TypeUserInfo, toggleDarkMode } from "../../../../features/authSlice";
 import { AppDispatch, AppState } from "../../../../store/reducer";
 import { useMsal } from "@azure/msal-react";
-import { loginRequest } from "../../../../msAuthConfig";
 
 // ==============================|| PROFILE MENU ||============================== //
 type RootState = {

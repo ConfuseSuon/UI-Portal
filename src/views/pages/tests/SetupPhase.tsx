@@ -58,18 +58,19 @@ const SetupPhase = (): ReactElement => {
             variant="h5"
             sx={{ textAlign: "center", fontSize: "1.2rem" }}
           >
-            Testing For : <span style={{ marginLeft: ".4rem" }} />{" "}
+            Testing : <span style={{ marginLeft: ".4rem" }} />{" "}
             {testSuiteDetail?.title}
           </Typography>
         </Box>
       </Grid>
-      <Grid item xs={12} md={12}>
+      <Grid item xs={12} sm={12} md={12}>
         <Box
           sx={{
-            height: "70vh",
             borderRadius: "7px",
             display: "flex",
-            justifyContent: "space-around",
+            gap: "2rem",
+            justifyContent: "center",
+            flexWrap: "wrap",
             p: "1rem",
             ...theme.typography.darkModeBg4,
           }}
@@ -79,9 +80,7 @@ const SetupPhase = (): ReactElement => {
             routeTo={"/manage/topologies"}
             viewBy={"topology"}
           />
-          <PhaseDivider />
           <PhaseCard title={"DUT Configuratios"} viewBy={"DUT"} />
-          <PhaseDivider />
           <PhaseCard
             title={"Test Suite"}
             data={testSuiteDetail}
@@ -90,7 +89,7 @@ const SetupPhase = (): ReactElement => {
           />
         </Box>
       </Grid>
-      <Grid item xs={12} md={12}>
+      <Grid item xs={12} sm={12} md={12}>
         <Box
           sx={{
             display: "flex",
@@ -148,41 +147,79 @@ const SetupPhase = (): ReactElement => {
         </DialogTitle>
         <Divider orientation="horizontal" sx={{ background: "black" }} />
 
+        {/* <DialogContent sx={{ display: "flex", gap: "4rem" }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
+            <Typography variant="subtitle1">Topology :</Typography>
+            <Typography variant="subtitle1">Topology :</Typography>
+            <Typography variant="subtitle1">Topology :</Typography>
+            <Typography variant="subtitle1">Topology :</Typography>
+            <Typography variant="subtitle1">Topology :</Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "2.9rem",
+              mt: ".5rem",
+            }}
+          >
+            <Typography variant="body1">Topology </Typography>
+            <Typography variant="body1">Topology </Typography>
+            <Typography variant="body1">Topology </Typography>
+            <Typography variant="body1">Topology </Typography>
+            <Typography variant="body1">Topology </Typography>
+          </Box>
+        </DialogContent> */}
+
         <DialogContent
           sx={{
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-start",
-            height: "5rem",
-            gap: "2rem",
+            flexWrap: "wrap",
           }}
         >
-          <Typography variant="subtitle1">Topology :</Typography>{" "}
-          <Typography variant="body1">{selectTopoloy?.title}</Typography>{" "}
+          <Box
+            sx={{
+              width: "10rem",
+            }}
+          >
+            <Typography variant="subtitle1">Topology :</Typography>{" "}
+          </Box>
+          <Box sx={{}}>
+            <Typography variant="body1">{selectTopoloy?.title}</Typography>{" "}
+          </Box>
         </DialogContent>
 
         <DialogContent
           sx={{
-            textAlign: "center",
             display: "flex",
             alignItems: "flex-start",
             justifyContent: "flex-start",
-            height: "5rem",
-            gap: "2rem",
+            flexWrap: "wrap",
           }}
         >
-          <Typography variant="subtitle1">DUT :</Typography>{" "}
-          <Typography variant="body1">
-            {dutConfigData?.sshCheckValue}
-          </Typography>
-          <Typography variant="body1">
-            {dutConfigData?.channel1Value}
-          </Typography>{" "}
-          <Typography variant="body1">
-            {dutConfigData?.channel2Value}
-          </Typography>{" "}
-          <Typography variant="body1">{dutConfigData?.ssid1Value}</Typography>{" "}
-          <Typography variant="body1">{dutConfigData?.ssid2Value}</Typography>{" "}
+          <Box
+            sx={{
+              width: "10rem",
+              textAlign: "left",
+            }}
+          >
+            <Typography variant="subtitle1">DUT :</Typography>{" "}
+          </Box>
+          <Box sx={{ display: "flex", gap: ".8rem", flexWrap: "wrap" }}>
+            <Typography variant="body1">
+              {dutConfigData?.sshCheckValue}
+            </Typography>
+            <Typography variant="body1">
+              {dutConfigData?.channel1Value}
+            </Typography>{" "}
+            <Typography variant="body1">
+              {dutConfigData?.channel2Value}
+            </Typography>{" "}
+            <Typography variant="body1">{dutConfigData?.ssid1Value}</Typography>{" "}
+            <Typography variant="body1">{dutConfigData?.ssid2Value}</Typography>{" "}
+          </Box>
         </DialogContent>
 
         <DialogContent
@@ -190,28 +227,43 @@ const SetupPhase = (): ReactElement => {
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-start",
-            height: "5rem",
-            gap: "2rem",
+            flexWrap: "wrap",
           }}
         >
-          <Typography variant="subtitle1">Test Suite :</Typography>{" "}
-          <Typography variant="body1">{testSuiteDetail?.title}</Typography>{" "}
+          <Box
+            sx={{
+              width: "10rem",
+              textAlign: "left",
+            }}
+          >
+            <Typography variant="subtitle1">Test Suite :</Typography>{" "}
+          </Box>
+          <Box sx={{}}>
+            <Typography variant="body1">{testSuiteDetail?.title}</Typography>{" "}
+          </Box>
         </DialogContent>
 
         <DialogContent
           sx={{
-            textAlign: "center",
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-start",
-            height: "5rem",
-            gap: "2rem",
+            flexWrap: "wrap",
           }}
         >
-          <Typography variant="subtitle1">Reserved By :</Typography>{" "}
-          <Typography variant="body1">
-            {selectTopoloy?.reservationName}
-          </Typography>{" "}
+          <Box
+            sx={{
+              width: "10rem",
+              textAlign: "left",
+            }}
+          >
+            <Typography variant="subtitle1">Reserved By :</Typography>{" "}
+          </Box>
+          <Box sx={{}}>
+            <Typography variant="body1">
+              {selectTopoloy?.reservationName}
+            </Typography>{" "}
+          </Box>
         </DialogContent>
 
         <DialogContent
@@ -236,7 +288,6 @@ const SetupPhase = (): ReactElement => {
 
         <DialogContent
           sx={{
-            textAlign: "center",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",

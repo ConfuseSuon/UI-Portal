@@ -66,13 +66,12 @@ const PhaseCard = (props: Props): ReactElement => {
     (state: AppState) => state.setupTest
   );
 
-  console.log(sshCheckValue, "chann");
-
   return (
     <>
       <Card
         sx={{
           minWidth: "20rem",
+          minHeight: "50vh",
           ...theme.typography.darkModeBg3,
           display: "flex",
           flexDirection: "column",
@@ -91,8 +90,8 @@ const PhaseCard = (props: Props): ReactElement => {
               <CardContent
                 sx={{
                   alignSelf: "flex-start",
-                  height: "50%",
                   width: "20rem",
+                  height: "80%",
                   whiteSpace: "wrap",
                 }}
               >
@@ -137,7 +136,6 @@ const PhaseCard = (props: Props): ReactElement => {
               </CardContent>
               <CardActions
                 sx={{
-                  height: "20%",
                   display: "flex",
                   justifyContent: "space-evenly",
                 }}
@@ -177,8 +175,9 @@ const PhaseCard = (props: Props): ReactElement => {
               <CardContent
                 sx={{
                   alignSelf: "flex-start",
-                  height: "50%",
                   width: "20rem",
+                  height: "80%",
+
                   whiteSpace: "wrap",
                 }}
               >
@@ -209,7 +208,6 @@ const PhaseCard = (props: Props): ReactElement => {
               </CardContent>
               <CardActions
                 sx={{
-                  height: "20%",
                   display: "flex",
                   justifyContent: "space-evenly",
                 }}
@@ -250,9 +248,9 @@ const PhaseCard = (props: Props): ReactElement => {
               <CardContent
                 sx={{
                   alignSelf: "flex-start",
-                  height: "50%",
                   width: "20rem",
                   whiteSpace: "wrap",
+                  height: "80%",
                 }}
               >
                 <Typography
@@ -342,10 +340,7 @@ const PhaseCard = (props: Props): ReactElement => {
       <Dialog
         PaperProps={{
           style: {
-            overflow: "initial",
-            minHeight: "10rem",
             maxWidth: "55rem",
-            width: "70%",
             ...theme.typography.darkModeBg4,
           },
         }}
@@ -396,7 +391,11 @@ const PhaseCard = (props: Props): ReactElement => {
           </span>
         </DialogContent>
 
-        <DialogContent>
+        <DialogContent
+          sx={{
+            overflowX: "hidden",
+          }}
+        >
           <Stack direction="row" alignItems="center" spacing={1} mb=".5rem">
             <Typography variant="h6">Channels</Typography>
             <HelpOutlineOutlinedIcon color="primary" />
@@ -408,6 +407,7 @@ const PhaseCard = (props: Props): ReactElement => {
               value={channel1Value ?? ""}
               options={channel1Data}
               onChange={(event) => setChannel1Value(event.target.value)}
+              sx={{ width: "50%" }}
             />
             <CustomSelectOption
               name={"Channel II"}
@@ -415,11 +415,16 @@ const PhaseCard = (props: Props): ReactElement => {
               value={channel2Value ?? ""}
               options={channel2Data}
               onChange={(event) => setChannel2Value(event.target.value)}
+              sx={{ width: "50%" }}
             />
           </Stack>
         </DialogContent>
 
-        <DialogContent>
+        <DialogContent
+          sx={{
+            overflowX: "hidden",
+          }}
+        >
           <Stack direction="row" alignItems="center" spacing={1} mb=".5rem">
             <Typography variant="h6">SSIDs</Typography>
             <FormControlLabel
@@ -443,7 +448,7 @@ const PhaseCard = (props: Props): ReactElement => {
               label="ByPass SSID Scan"
             />
           </Stack>
-          <Stack spacing={2}>
+          <Stack spacing={2} sx={{}}>
             <CustomSelectOption
               name={"SSID I"}
               label={"2.4GHz SSID 1"}
@@ -451,6 +456,7 @@ const PhaseCard = (props: Props): ReactElement => {
               options={ssid1Data}
               onChange={(event) => setSsid1value(event.target.value)}
               disabled={byPass}
+              sx={{ width: "50%" }}
             />
             <CustomSelectOption
               name={"SSID II"}
@@ -459,6 +465,7 @@ const PhaseCard = (props: Props): ReactElement => {
               onChange={(event) => setSsid2value(event.target.value)}
               options={ssid2Data}
               disabled={byPass}
+              sx={{ width: "50%" }}
             />
           </Stack>
         </DialogContent>

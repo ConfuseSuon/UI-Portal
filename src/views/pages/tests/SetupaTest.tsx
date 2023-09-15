@@ -109,13 +109,11 @@ const SetupaTest = (): ReactElement => {
         <Dialog
           PaperProps={{
             style: {
-              overflow: "initial",
-              minHeight: "10rem",
-              maxWidth: "55rem",
-              width: "70%",
+              maxWidth: "90rem",
               ...theme.typography.darkModeBg4,
             },
           }}
+          sx={{ width: "100%", height: "100%" }}
           open={!!selectTestSuite}
         >
           <Box sx={{ textAlign: "right" }}>
@@ -129,8 +127,11 @@ const SetupaTest = (): ReactElement => {
               pt: "0",
             }}
           >
-            <Typography variant="h5" sx={{ fontSize: "1.2rem" }}>
-              Test Suite Details: {selectTestSuite?.title}
+            <Typography variant="h6" sx={{ fontSize: "1.1rem" }}>
+              Test Suite Details:{" "}
+              <span style={{ fontWeight: "400", fontSize: "1rem" }}>
+                {selectTestSuite?.title}
+              </span>
             </Typography>
           </DialogTitle>
 
@@ -138,10 +139,11 @@ const SetupaTest = (): ReactElement => {
 
           <DialogContent
             sx={{
-              pb: "0",
+              pb: "1rem",
+              overflow: "hidden",
             }}
           >
-            <Typography variant="h6" sx={{ fontSize: "1rem" }}>
+            <Typography variant="subtitle1" sx={{}}>
               Test Blocks
             </Typography>
           </DialogContent>

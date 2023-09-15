@@ -71,14 +71,13 @@ const Callback = () => {
         }}
       >
         <Button
-          variant="outlined"
+          variant="contained"
           size="small"
           sx={{ px: "1rem", py: "1rem" }}
-          startIcon={<CircularProgress size={20} />}
+          startIcon={<CircularProgress size={30} sx={{ color: "white" }} />}
         >
-          <Typography variant="body2" sx={{ ml: "0.5rem" }}>
-            {" "}
-            Entering UI Portal{" "}
+          <Typography variant="h6" sx={{ ml: "0.5rem", color: "white" }}>
+            Entering UI Portal
           </Typography>
         </Button>
       </Box>

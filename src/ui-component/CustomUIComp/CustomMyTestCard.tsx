@@ -46,25 +46,36 @@ const CustomMyTestCard = (props: Props): ReactElement => {
       sx={{
         minHeight: "4.4rem",
         px: "1rem",
+        py: ".5rem",
         ...theme.typography.dashboardCard,
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
         flexWrap: "wrap",
         mb: "1rem",
+        gap: "2rem",
       }}
     >
-      <Typography>Advanced Chamdber 1.1</Typography>
+      <Box>
+        <Typography sx={{ flex: "1 1 auto" }}>Advanced Chamdber 1.1</Typography>
+      </Box>
       {resultPage ? (
-        <Box sx={{ height: 50, width: 100 }}>
-          <ResponsiveContainer>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flex: "5 0 auto",
+          }}
+        >
+          <ResponsiveContainer height={70} width={200}>
             <PieChart>
               <Pie
                 dataKey="value"
                 data={expPieData}
                 innerRadius={8}
-                outerRadius={20}
-                cy={20}
+                outerRadius={30}
+                cy={32}
               >
                 {expPieData.map((entry, index) => (
                   <Cell
@@ -80,15 +91,21 @@ const CustomMyTestCard = (props: Props): ReactElement => {
           </ResponsiveContainer>
         </Box>
       ) : (
-        <Typography>Device</Typography>
+        <Box>
+          <Typography sx={{ flex: "1 1 auto" }}>Device</Typography>
+        </Box>
       )}
-      <Typography>Reserver Name</Typography>
+      <Box>
+        <Typography sx={{ flex: "1 1 auto" }}>Reserver Name</Typography>
+      </Box>
       {resultPage ? (
-        <Typography>Date</Typography>
+        <Typography sx={{ flex: "1 1 auto" }}>Date</Typography>
       ) : (
-        <Typography>Topology</Typography>
+        <Box>
+          <Typography sx={{ flex: "1 1 auto" }}>Topology</Typography>
+        </Box>
       )}
-      <Stack direction="row" spacing={1}>
+      <Stack direction="row" spacing={1} sx={{ flex: "1 1 auto" }}>
         <Chip
           sx={{ color: "white" }}
           icon={<CloudSyncOutlinedIcon />}
@@ -97,6 +114,7 @@ const CustomMyTestCard = (props: Props): ReactElement => {
         />
       </Stack>
       <Button
+        sx={{ flex: "1 0 auto" }}
         variant="outlined"
         onClick={() => {
           setShowPopup && setShowPopup(true);

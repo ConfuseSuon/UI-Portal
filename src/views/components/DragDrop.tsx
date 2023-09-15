@@ -114,7 +114,18 @@ const DragDrop = (): ReactElement => {
         sensors={sensor}
         onDragOver={dragOver}
       >
-        <Stack direction="row" spacing={3} justifyContent="center">
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "3rem",
+            p: "1rem",
+            pb: "1.5rem",
+            flexWrap: "wrap",
+            overflowY: "scroll",
+            overflowX: "hidden",
+          }}
+        >
           <SortableContext items={columnId}>
             {columnDatas.map((col: ColumnTypos) => {
               const filterTask = taskDatas.filter(
@@ -132,7 +143,7 @@ const DragDrop = (): ReactElement => {
               );
             })}
           </SortableContext>
-        </Stack>
+        </Box>
         {createPortal(
           <DragOverlay>
             {activeTask ? <TaskCard taskData={activeTask} /> : null}
@@ -141,7 +152,12 @@ const DragDrop = (): ReactElement => {
         )}
       </DndContext>
       <Divider orientation="horizontal" />
-      <Stack direction="row" justifyContent="center" spacing={2}>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        spacing={2}
+        sx={{ pb: "1rem" }}
+      >
         <Button
           variant="contained"
           onClick={() => dispatch(setSelectTestData(null))}

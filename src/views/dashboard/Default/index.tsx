@@ -74,7 +74,8 @@ const Dashboard = () => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                gap: "1rem",
+                gap: ".7rem",
+                flexWrap: "wrap",
               }}
             >
               <Typography variant="h6">
@@ -135,7 +136,8 @@ const Dashboard = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              mt: "0.5rem",
+              flexWrap: "wrap",
+              mt: "1rem",
             }}
           >
             <Typography variant="h5" sx={{ fontSize: "1.2rem" }}>
@@ -147,7 +149,8 @@ const Dashboard = () => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                gap: "1rem",
+                gap: ".7rem",
+                flexWrap: "wrap",
               }}
             >
               <Typography variant="h6">
@@ -164,23 +167,17 @@ const Dashboard = () => {
           </Box>
           <Divider orientation="horizontal" variant="fullWidth" />
 
-          {/* ----------------------------------End Row ------------------------------- */}
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              gap: "2rem",
-            }}
-          >
-            <Stack sx={{ width: "40rem" }} spacing={4}>
-              {/* First Box */}
+          {/* ----------------------------------End Chart Row ------------------------------- */}
+          <Grid container spacing={2}>
+            {/* First Box */}
+            <Grid item md={6} sm={12} xs={12}>
+              {/* First Box Contain 1 */}
               <Box
                 sx={{
                   borderRadius: "6px",
-                  p: "0.4rem",
+                  py: "0.4rem",
                   px: "1rem",
+                  mb: "1rem",
                   display: "flex",
                   flexDirection: "column",
                   ...theme.typography.dashboardCard,
@@ -202,20 +199,20 @@ const Dashboard = () => {
                 <Box
                   sx={{
                     display: "flex",
-                    gap: "1rem",
-                    width: "100%",
+                    gap: ".5rem",
+                    justifyContent: "space-evenly",
                     flexWrap: "wrap",
                   }}
                 >
-                  <Box sx={{ height: "20rem", width: "50%" }}>
-                    <ResponsiveContainer width="100%">
+                  <Box sx={{ pb: "1rem" }}>
+                    <ResponsiveContainer width={300} height={300}>
                       <PieChart>
                         <Pie
                           dataKey="value"
                           data={expPieData}
-                          innerRadius={45}
-                          outerRadius={125}
-                          cy={142}
+                          innerRadius={40}
+                          outerRadius={120}
+                          cy={140}
                         >
                           {expPieData.map((entry, index) => (
                             <Cell
@@ -228,7 +225,11 @@ const Dashboard = () => {
                             />
                           ))}
                         </Pie>
-                        <Legend />
+                        <Legend
+                          layout="horizontal"
+                          align="center"
+                          verticalAlign="bottom"
+                        />
                         <Tooltip />
                       </PieChart>
                     </ResponsiveContainer>
@@ -238,8 +239,8 @@ const Dashboard = () => {
                   <Box
                     sx={{
                       display: "flex",
-                      width: "40%",
                       flexDirection: "column",
+                      flexWrap: "wrap",
                     }}
                   >
                     <Box
@@ -247,22 +248,11 @@ const Dashboard = () => {
                         display: "flex",
                         flexDirection: "column",
                         gap: "0rem",
-                        height: "10rem",
                       }}
                     >
                       <Typography variant="h6">Today</Typography>
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart
-                          width={200}
-                          height={100}
-                          data={data}
-                          margin={{
-                            top: 0,
-                            right: 20,
-                            left: 0,
-                            bottom: 5,
-                          }}
-                        >
+                      <ResponsiveContainer width={200} height={150}>
+                        <BarChart data={data}>
                           <XAxis dataKey="name" />
                           <Bar dataKey="pv" fill="#0076CE" />
                           <Bar dataKey="uv" fill="#454b4b" />
@@ -278,16 +268,8 @@ const Dashboard = () => {
                       }}
                     >
                       <Typography variant="h6">MTD</Typography>
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart
-                          data={data}
-                          margin={{
-                            top: 0,
-                            right: 20,
-                            left: 0,
-                            bottom: 5,
-                          }}
-                        >
+                      <ResponsiveContainer width={200} height={150}>
+                        <BarChart data={data}>
                           <XAxis dataKey="name" />
                           <Bar dataKey="pv" fill="#0076CE" />
                           <Bar dataKey="uv" fill="#454b4b" />
@@ -297,12 +279,13 @@ const Dashboard = () => {
                   </Box>
                 </Box>
               </Box>
-
+              {/* First Box Contain 2 */}
               <Box
                 sx={{
                   borderRadius: "6px",
                   height: "22rem",
                   p: "0.4rem",
+                  mb: "1rem",
                   px: "1rem",
                   display: "flex",
                   flexDirection: "column",
@@ -325,10 +308,14 @@ const Dashboard = () => {
                       Dolor alt
                     </Typography>
                   </Stack>
-                  <Stack
-                    sx={{ mt: "0.6rem" }}
-                    direction="row"
-                    justifyContent="space-between"
+                  <Box
+                    sx={{
+                      mt: "0.6rem",
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: "1rem",
+                      justifyContent: "space-between",
+                    }}
                   >
                     <Stack>
                       <Typography variant="subtitle1">
@@ -348,7 +335,7 @@ const Dashboard = () => {
                         3 hours, 16 minute
                       </Typography>
                     </Stack>
-                  </Stack>
+                  </Box>
                   <Divider orientation="horizontal" variant="fullWidth" />
                   <Stack>
                     <Typography variant="body2">Loremsyen Ipsum</Typography>
@@ -358,366 +345,14 @@ const Dashboard = () => {
                   </Stack>
                 </Stack>
               </Box>
-            </Stack>
-            {/* ---------------------------Second Box  -------------------------------*/}
-            <Box
-              sx={{
-                width: "25rem",
-                height: "40rem",
-                p: "0.4rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "1rem",
-                px: "1rem",
-                borderRadius: "6px",
-                ...theme.typography.dashboardCard,
-                boxShadow:
-                  "rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
-              }}
-            >
+              {/* First Box Contain 3 */}
               <Box
                 sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Typography variant="h6" sx={{ fontSize: "1.1rem" }}>
-                  Lorem Ipsum
-                </Typography>
-                <MoreVertOutlinedIcon sx={{ fontSize: "1.1rem" }} />
-              </Box>
-              <Box>Indicator box</Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Box>
-                  <Typography variant="subtitle1">Lorem Ipsum</Typography>
-                  <Typography variant="caption">Lorem </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{ fontSize: "1.7rem", color: "#228b22" }}
-                  >
-                    {" "}
-                    60
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    height: "100%",
-                    width: "60%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Typography variant="subtitle2" sx={{ ml: "0.4rem" }}>
-                    Fixed
-                  </Typography>
-                  <ResponsiveContainer width="100%" height={30}>
-                    <BarChart data={dataBar} layout="vertical">
-                      <XAxis type="number" hide />
-                      <YAxis dataKey="name" type="category" hide />
-                      <Tooltip />
-                      <Bar
-                        dataKey="value"
-                        fill="#1f305e"
-                        stackId="a"
-                        barSize={50}
-                      >
-                        <LabelList
-                          dataKey="value"
-                          position="insideLeft"
-                          fill="white"
-                        />
-                      </Bar>
-                      <Bar
-                        dataKey="value2"
-                        fill="#0076CE"
-                        stackId="a"
-                        barSize={50}
-                      >
-                        <LabelList
-                          dataKey="value2"
-                          position="insideLeft"
-                          fill="white"
-                        />
-                      </Bar>
-                    </BarChart>
-                  </ResponsiveContainer>
-                </Box>
-              </Box>
-              <Divider orientation="horizontal" variant="fullWidth" />
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Box>
-                  <Typography variant="subtitle1">Lorem Ipsum</Typography>
-                  <Typography variant="caption">Lorem </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{ fontSize: "1.7rem", color: "#228b22" }}
-                  >
-                    {" "}
-                    60
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    height: "100%",
-                    width: "60%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Typography variant="subtitle2" sx={{ ml: "0.4rem" }}>
-                    Fixed
-                  </Typography>
-                  <ResponsiveContainer width="100%" height={30}>
-                    <BarChart data={dataBar} layout="vertical">
-                      <XAxis type="number" hide />
-                      <YAxis dataKey="name" type="category" hide />
-                      <Tooltip />
-                      <Bar
-                        dataKey="value"
-                        fill="#1f305e"
-                        stackId="a"
-                        barSize={50}
-                      >
-                        <LabelList
-                          dataKey="value"
-                          position="insideLeft"
-                          fill="white"
-                        />
-                      </Bar>
-                      <Bar
-                        dataKey="value2"
-                        fill="#0076CE"
-                        stackId="a"
-                        barSize={50}
-                      >
-                        <LabelList
-                          dataKey="value2"
-                          position="insideLeft"
-                          fill="white"
-                        />
-                      </Bar>
-                    </BarChart>
-                  </ResponsiveContainer>
-                </Box>
-              </Box>
-              <Divider orientation="horizontal" variant="fullWidth" />
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Box>
-                  <Typography variant="subtitle1">Lorem Ipsum</Typography>
-                  <Typography variant="caption">Lorem </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{ fontSize: "1.7rem", color: "#228b22" }}
-                  >
-                    {" "}
-                    60
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    height: "100%",
-                    width: "60%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Typography variant="subtitle2" sx={{ ml: "0.4rem" }}>
-                    Fixed
-                  </Typography>
-                  <ResponsiveContainer width="100%" height={30}>
-                    <BarChart data={dataBar} layout="vertical">
-                      <XAxis type="number" hide />
-                      <YAxis dataKey="name" type="category" hide />
-                      <Tooltip />
-                      <Bar
-                        dataKey="value"
-                        fill="#1f305e"
-                        stackId="a"
-                        barSize={50}
-                      >
-                        <LabelList
-                          dataKey="value"
-                          position="insideLeft"
-                          fill="white"
-                        />
-                      </Bar>
-                      <Bar
-                        dataKey="value2"
-                        fill="#0076CE"
-                        stackId="a"
-                        barSize={50}
-                      >
-                        <LabelList
-                          dataKey="value2"
-                          position="insideLeft"
-                          fill="white"
-                        />
-                      </Bar>
-                    </BarChart>
-                  </ResponsiveContainer>
-                </Box>
-              </Box>
-              <Divider orientation="horizontal" variant="fullWidth" />
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Box>
-                  <Typography variant="subtitle1">Lorem Ipsum</Typography>
-                  <Typography variant="caption">Lorem </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{ fontSize: "1.7rem", color: "#228b22" }}
-                  >
-                    {" "}
-                    60
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    height: "100%",
-                    width: "60%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Typography variant="subtitle2" sx={{ ml: "0.4rem" }}>
-                    Fixed
-                  </Typography>
-                  <ResponsiveContainer width="100%" height={30}>
-                    <BarChart data={dataBar} layout="vertical">
-                      <XAxis type="number" hide />
-                      <YAxis dataKey="name" type="category" hide />
-                      <Tooltip />
-                      <Bar
-                        dataKey="value"
-                        fill="#1f305e"
-                        stackId="a"
-                        barSize={50}
-                      >
-                        <LabelList
-                          dataKey="value"
-                          position="insideLeft"
-                          fill="white"
-                        />
-                      </Bar>
-                      <Bar
-                        dataKey="value2"
-                        fill="#0076CE"
-                        stackId="a"
-                        barSize={50}
-                      >
-                        <LabelList
-                          dataKey="value2"
-                          position="insideLeft"
-                          fill="white"
-                        />
-                      </Bar>
-                    </BarChart>
-                  </ResponsiveContainer>
-                </Box>
-              </Box>
-              <Divider orientation="horizontal" variant="fullWidth" />
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Box>
-                  <Typography variant="subtitle1">Lorem Ipsum</Typography>
-                  <Typography variant="caption">Lorem </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{ fontSize: "1.7rem", color: "#228b22" }}
-                  >
-                    {" "}
-                    60
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    height: "100%",
-                    width: "60%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Typography variant="subtitle2" sx={{ ml: "0.4rem" }}>
-                    Fixed
-                  </Typography>
-                  <ResponsiveContainer width="100%" height={30}>
-                    <BarChart data={dataBar} layout="vertical">
-                      <XAxis type="number" hide />
-                      <YAxis dataKey="name" type="category" hide />
-                      <Tooltip />
-                      <Bar
-                        dataKey="value"
-                        fill="#1f305e"
-                        stackId="a"
-                        barSize={50}
-                      >
-                        <LabelList
-                          dataKey="value"
-                          position="insideLeft"
-                          fill="white"
-                        />
-                      </Bar>
-                      <Bar
-                        dataKey="value2"
-                        fill="#0076CE"
-                        stackId="a"
-                        barSize={50}
-                      >
-                        <LabelList
-                          dataKey="value2"
-                          position="insideLeft"
-                          fill="white"
-                        />
-                      </Bar>
-                    </BarChart>
-                  </ResponsiveContainer>
-                </Box>
-              </Box>
-              <Divider orientation="horizontal" variant="fullWidth" />
-            </Box>
-
-            {/* Third Box */}
-            <Stack spacing={4}>
-              <Box
-                sx={{
-                  width: "37rem",
                   p: "0.4rem",
                   px: "1rem",
-                  height: "19rem",
                   borderRadius: "6px",
+                  width: "100%",
+                  mb: "1rem",
                   display: "flex",
                   flexDirection: "column",
                   gap: "1rem",
@@ -737,13 +372,14 @@ const Dashboard = () => {
                   </Typography>
                   <MoreVertOutlinedIcon sx={{ fontSize: "1.1rem" }} />
                 </Box>
-                <Box
-                  sx={{
-                    height: "80%",
-                    width: "100%",
-                  }}
-                >
-                  <Stack direction="row" spacing={4} marginBottom={2}>
+                <Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      mb: "2rem",
+                      flexWrap: "wrap",
+                    }}
+                  >
                     <Stack direction="column">
                       <Typography variant="h6">QTR TO DATE</Typography>
                       <Typography variant="h4" sx={{ fontSize: "2rem" }}>
@@ -754,25 +390,22 @@ const Dashboard = () => {
                       <Typography variant="h6">ACTUAL</Typography>
                       <Typography variant="h4" sx={{ fontSize: "2rem" }}>
                         86%
+                        <span
+                          style={{
+                            color: "green",
+                            fontSize: ".9rem",
+                            marginLeft: ".5rem",
+                            fontWeight: "500",
+                          }}
+                        >
+                          +5%(26.52)
+                        </span>
                       </Typography>
                     </Stack>
-                    <Typography alignSelf="end" variant="h5" color="#228b22">
-                      +5%(26.52)
-                    </Typography>
-                  </Stack>
+                  </Box>
 
-                  <ResponsiveContainer width="100%" height="78%">
-                    <AreaChart
-                      width={500}
-                      height={100}
-                      data={areaData}
-                      margin={{
-                        top: 0,
-                        right: 0,
-                        left: 0,
-                        bottom: 0,
-                      }}
-                    >
+                  <ResponsiveContainer width="100%" height={300}>
+                    <AreaChart data={areaData}>
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="name" />
                       <Tooltip />
@@ -781,14 +414,370 @@ const Dashboard = () => {
                   </ResponsiveContainer>
                 </Box>
               </Box>
-              {/* ----------------------------------EndBox-------------------------- */}
-              <Box sx={{ display: "flex", gap: "2rem" }}>
+            </Grid>
+            {/* ---------------------------Second Box  -------------------------------*/}
+            <Grid item md={6} sm={12} xs={12}>
+              {/* Second Box Contain 1 */}
+              <Box
+                sx={{
+                  py: "0.4rem",
+                  mb: "1rem",
+                  px: "1rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1rem",
+                  borderRadius: "6px",
+                  ...theme.typography.dashboardCard,
+                  boxShadow:
+                    "rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
+                }}
+              >
                 <Box
                   sx={{
-                    width: "50%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Typography variant="h6" sx={{ fontSize: "1.1rem" }}>
+                    Lorem Ipsum
+                  </Typography>
+                  <MoreVertOutlinedIcon sx={{ fontSize: "1.1rem" }} />
+                </Box>
+                <Box>Indicator box</Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Box>
+                    <Typography variant="subtitle1">Lorem Ipsum</Typography>
+                    <Typography variant="caption">Lorem </Typography>
+                    <Typography
+                      variant="h4"
+                      sx={{ fontSize: "1.7rem", color: "#228b22" }}
+                    >
+                      {" "}
+                      60
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      height: "100%",
+                      width: "60%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Typography variant="subtitle2" sx={{ ml: "0.4rem" }}>
+                      Fixed
+                    </Typography>
+                    <ResponsiveContainer width="100%" height={30}>
+                      <BarChart data={dataBar} layout="vertical">
+                        <XAxis type="number" hide />
+                        <YAxis dataKey="name" type="category" hide />
+                        <Tooltip />
+                        <Bar
+                          dataKey="value"
+                          fill="#1f305e"
+                          stackId="a"
+                          barSize={50}
+                        >
+                          <LabelList
+                            dataKey="value"
+                            position="insideLeft"
+                            fill="white"
+                          />
+                        </Bar>
+                        <Bar
+                          dataKey="value2"
+                          fill="#0076CE"
+                          stackId="a"
+                          barSize={50}
+                        >
+                          <LabelList
+                            dataKey="value2"
+                            position="insideLeft"
+                            fill="white"
+                          />
+                        </Bar>
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </Box>
+                </Box>
+                <Divider orientation="horizontal" variant="fullWidth" />
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Box>
+                    <Typography variant="subtitle1">Lorem Ipsum</Typography>
+                    <Typography variant="caption">Lorem </Typography>
+                    <Typography
+                      variant="h4"
+                      sx={{ fontSize: "1.7rem", color: "#228b22" }}
+                    >
+                      {" "}
+                      60
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      height: "100%",
+                      width: "60%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Typography variant="subtitle2" sx={{ ml: "0.4rem" }}>
+                      Fixed
+                    </Typography>
+                    <ResponsiveContainer width="100%" height={30}>
+                      <BarChart data={dataBar} layout="vertical">
+                        <XAxis type="number" hide />
+                        <YAxis dataKey="name" type="category" hide />
+                        <Tooltip />
+                        <Bar
+                          dataKey="value"
+                          fill="#1f305e"
+                          stackId="a"
+                          barSize={50}
+                        >
+                          <LabelList
+                            dataKey="value"
+                            position="insideLeft"
+                            fill="white"
+                          />
+                        </Bar>
+                        <Bar
+                          dataKey="value2"
+                          fill="#0076CE"
+                          stackId="a"
+                          barSize={50}
+                        >
+                          <LabelList
+                            dataKey="value2"
+                            position="insideLeft"
+                            fill="white"
+                          />
+                        </Bar>
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </Box>
+                </Box>
+                <Divider orientation="horizontal" variant="fullWidth" />
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Box>
+                    <Typography variant="subtitle1">Lorem Ipsum</Typography>
+                    <Typography variant="caption">Lorem </Typography>
+                    <Typography
+                      variant="h4"
+                      sx={{ fontSize: "1.7rem", color: "#228b22" }}
+                    >
+                      {" "}
+                      60
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      height: "100%",
+                      width: "60%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Typography variant="subtitle2" sx={{ ml: "0.4rem" }}>
+                      Fixed
+                    </Typography>
+                    <ResponsiveContainer width="100%" height={30}>
+                      <BarChart data={dataBar} layout="vertical">
+                        <XAxis type="number" hide />
+                        <YAxis dataKey="name" type="category" hide />
+                        <Tooltip />
+                        <Bar
+                          dataKey="value"
+                          fill="#1f305e"
+                          stackId="a"
+                          barSize={50}
+                        >
+                          <LabelList
+                            dataKey="value"
+                            position="insideLeft"
+                            fill="white"
+                          />
+                        </Bar>
+                        <Bar
+                          dataKey="value2"
+                          fill="#0076CE"
+                          stackId="a"
+                          barSize={50}
+                        >
+                          <LabelList
+                            dataKey="value2"
+                            position="insideLeft"
+                            fill="white"
+                          />
+                        </Bar>
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </Box>
+                </Box>
+                <Divider orientation="horizontal" variant="fullWidth" />
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Box>
+                    <Typography variant="subtitle1">Lorem Ipsum</Typography>
+                    <Typography variant="caption">Lorem </Typography>
+                    <Typography
+                      variant="h4"
+                      sx={{ fontSize: "1.7rem", color: "#228b22" }}
+                    >
+                      {" "}
+                      60
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      height: "100%",
+                      width: "60%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Typography variant="subtitle2" sx={{ ml: "0.4rem" }}>
+                      Fixed
+                    </Typography>
+                    <ResponsiveContainer width="100%" height={30}>
+                      <BarChart data={dataBar} layout="vertical">
+                        <XAxis type="number" hide />
+                        <YAxis dataKey="name" type="category" hide />
+                        <Tooltip />
+                        <Bar
+                          dataKey="value"
+                          fill="#1f305e"
+                          stackId="a"
+                          barSize={50}
+                        >
+                          <LabelList
+                            dataKey="value"
+                            position="insideLeft"
+                            fill="white"
+                          />
+                        </Bar>
+                        <Bar
+                          dataKey="value2"
+                          fill="#0076CE"
+                          stackId="a"
+                          barSize={50}
+                        >
+                          <LabelList
+                            dataKey="value2"
+                            position="insideLeft"
+                            fill="white"
+                          />
+                        </Bar>
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </Box>
+                </Box>
+                <Divider orientation="horizontal" variant="fullWidth" />
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Box>
+                    <Typography variant="subtitle1">Lorem Ipsum</Typography>
+                    <Typography variant="caption">Lorem </Typography>
+                    <Typography
+                      variant="h4"
+                      sx={{ fontSize: "1.7rem", color: "#228b22" }}
+                    >
+                      {" "}
+                      60
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      height: "100%",
+                      width: "60%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Typography variant="subtitle2" sx={{ ml: "0.4rem" }}>
+                      Fixed
+                    </Typography>
+                    <ResponsiveContainer width="100%" height={30}>
+                      <BarChart data={dataBar} layout="vertical">
+                        <XAxis type="number" hide />
+                        <YAxis dataKey="name" type="category" hide />
+                        <Tooltip />
+                        <Bar
+                          dataKey="value"
+                          fill="#1f305e"
+                          stackId="a"
+                          barSize={50}
+                        >
+                          <LabelList
+                            dataKey="value"
+                            position="insideLeft"
+                            fill="white"
+                          />
+                        </Bar>
+                        <Bar
+                          dataKey="value2"
+                          fill="#0076CE"
+                          stackId="a"
+                          barSize={50}
+                        >
+                          <LabelList
+                            dataKey="value2"
+                            position="insideLeft"
+                            fill="white"
+                          />
+                        </Bar>
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </Box>
+                </Box>
+              </Box>
+              {/* Second Box Contain 2 */}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "1rem",
+                }}
+              >
+                <Box
+                  sx={{
                     p: "0.4rem",
+                    width: "17rem",
+                    flex: "1 1 auto",
                     px: "1rem",
-                    height: "15rem",
                     borderRadius: "6px",
                     display: "flex",
                     flexDirection: "column",
@@ -808,14 +797,20 @@ const Dashboard = () => {
                     </Typography>
                     <MoreVertOutlinedIcon sx={{ fontSize: "1.1rem" }} />
                   </Stack>
-                  <Box sx={{ height: "80%" }}>
-                    <ResponsiveContainer width="100%">
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <ResponsiveContainer width={250} height={200}>
                       <PieChart>
                         <Pie
                           dataKey="value"
                           data={expPieData}
-                          innerRadius={30}
-                          outerRadius={60}
+                          innerRadius={20}
+                          outerRadius={55}
                           cy={65}
                         >
                           {expPieData.map((entry, index) => (
@@ -829,7 +824,11 @@ const Dashboard = () => {
                             />
                           ))}
                         </Pie>
-                        <Legend />
+                        <Legend
+                          align="center"
+                          verticalAlign="bottom"
+                          layout="horizontal"
+                        />
                         <Tooltip />
                       </PieChart>
                     </ResponsiveContainer>
@@ -837,17 +836,16 @@ const Dashboard = () => {
                 </Box>
                 <Box
                   sx={{
-                    width: "50%",
+                    width: "17rem",
                     p: "0.4rem",
                     px: "1rem",
-                    height: "15rem",
+                    flex: "1 1 auto",
+
                     borderRadius: "6px",
                     display: "flex",
                     flexDirection: "column",
                     gap: "1rem",
                     ...theme.typography.dashboardCard,
-                    boxShadow:
-                      "rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
                   }}
                 >
                   <Stack
@@ -922,10 +920,10 @@ const Dashboard = () => {
                       </Stack>
                     </Stack>
                   </Stack>
-                </Box>{" "}
+                </Box>
               </Box>
-            </Stack>
-          </Box>
+            </Grid>
+          </Grid>
         </Box>
       </Grid>
     </Grid>

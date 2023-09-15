@@ -351,10 +351,7 @@ const Topologies = (): ReactElement => {
       <Dialog
         PaperProps={{
           style: {
-            overflow: "initial",
-            minHeight: "10rem",
-            maxWidth: "55rem",
-            width: "70%",
+            maxWidth: "90rem",
             ...theme.typography.darkModeBg4,
           },
         }}
@@ -387,11 +384,12 @@ const Topologies = (): ReactElement => {
               textAlign: "center",
               display: "flex",
               alignItems: "flex-start",
-              justifyContent: "flex-start",
+              justifyContent: "space-between",
               gap: "2rem",
+              flexWrap: "wrap",
             }}
           >
-            <Box sx={{ width: "60%", textAlign: "left" }}>
+            <Box sx={{ textAlign: "left" }}>
               <Typography variant="h6" sx={{ fontSize: "1rem" }}>
                 {selectTopoloy?.title}
                 <Button>
@@ -404,7 +402,7 @@ const Topologies = (): ReactElement => {
                 sx={{ width: "12rem", height: "2.4rem", borderRadius: "none" }}
               />
             </Box>
-            <Box sx={{ width: "40%", textAlign: "left" }}>
+            <Box sx={{ textAlign: "left" }}>
               <Typography variant="h6" sx={{ fontSize: "1rem" }}>
                 Reservation
                 <Button>
@@ -424,12 +422,12 @@ const Topologies = (): ReactElement => {
               textAlign: "center",
               display: "flex",
               alignItems: "flex-start",
-              justifyContent: "flex-start",
+              justifyContent: "space-between",
               height: "21rem",
               gap: "2rem",
             }}
           >
-            <Box sx={{ width: "60%", textAlign: "left" }}>
+            <Box sx={{ textAlign: "left" }}>
               <Typography variant="h6" sx={{ fontSize: "1rem" }}>
                 Manual Attenuation
               </Typography>
@@ -593,7 +591,7 @@ const Topologies = (): ReactElement => {
                 />
               </Box>
             </Box>
-            <Box sx={{ width: "40%", textAlign: "left" }}>
+            <Box sx={{ textAlign: "left" }}>
               <Typography variant="h6" sx={{ fontSize: "1rem" }}>
                 VLAN Assignment
               </Typography>{" "}
@@ -603,9 +601,7 @@ const Topologies = (): ReactElement => {
 
           <DialogContent
             sx={{
-              textAlign: "center",
               display: "flex",
-              alignItems: "center",
               justifyContent: "center",
               gap: "2rem",
             }}

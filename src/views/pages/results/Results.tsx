@@ -137,10 +137,7 @@ const Results = () => {
       <Dialog
         PaperProps={{
           style: {
-            overflow: "initial",
-            minHeight: "10rem",
             maxWidth: "55rem",
-            width: "70%",
             ...theme.typography.darkModeBg4,
           },
         }}
@@ -157,8 +154,8 @@ const Results = () => {
           sx={{
             display: "flex",
             justifyContent: "space-between",
+            flexWrap: "wrap",
             alignItems: "flex-start",
-            height: "4.9rem",
             pt: "0",
           }}
         >
@@ -166,6 +163,8 @@ const Results = () => {
             sx={{
               width: "50%",
               display: "flex",
+              flexWrap: "wrap",
+
               gap: "0.4rem",
               height: "100%",
             }}
@@ -197,18 +196,22 @@ const Results = () => {
               textAlign: "center",
               display: "flex",
               alignItems: "center",
-              justifyContent: "flex-start",
+              justifyContent: "center",
               gap: "1rem",
+              flexWrap: "wrap",
+              overflowY: "scroll",
+              maxHeight: "14rem",
             }}
           >
             <Box
               sx={{
-                width: "60%",
                 display: "flex",
                 gap: "1.2rem",
+                mr: "4rem",
+                flex: "1 1 auto",
               }}
             >
-              <Box style={{ width: "50%", height: 200 }}>
+              <Box sx={{ width: 200, height: 200, pl: "1rem" }}>
                 <ResponsiveContainer>
                   <PieChart>
                     <Pie
@@ -253,7 +256,7 @@ const Results = () => {
                 </Typography>
               </Box>
             </Box>
-            <Box sx={{ width: "50%", maxHeight: "10rem" }}>
+            <Box sx={{ flex: "1 1 auto", maxHeight: "10rem" }}>
               <Box>
                 <Accordion sx={{ ...theme.typography.darkModeBg3 }}>
                   <AccordionSummary
@@ -326,7 +329,7 @@ const Results = () => {
           <DialogContent
             sx={{
               textAlign: "center",
-              maxHeight: "15rem",
+              maxHeight: "12rem",
               display: "flex",
               alignItems: "flex-start",
               justifyContent: "flex-start",
@@ -337,75 +340,80 @@ const Results = () => {
               <Typography variant="h6" sx={{ fontSize: "1rem" }}>
                 Detailed Results
               </Typography>
-              <Box sx={{ display: "flex", gap: "8rem" }}>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
+              <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+                <Typography
+                  variant="body2"
+                  sx={{ mt: ".3rem", mb: ".2rem", mr: "4rem" }}
+                >
                   Visualization
                 </Typography>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
+                <Typography variant="body2" sx={{ mt: ".3rem", mb: ".4rem" }}>
                   Pramesh's friend who is here hardly any issues he got
                 </Typography>
               </Box>
-              <Box sx={{ display: "flex", gap: "8rem" }}>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
+              <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+                <Typography
+                  variant="body2"
+                  sx={{ mt: ".3rem", mb: ".2rem", mr: "4rem" }}
+                >
                   Visualization
                 </Typography>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
+                <Typography variant="body2" sx={{ mt: ".3rem", mb: ".4rem" }}>
                   Pramesh's friend who is here hardly any issues he got
                 </Typography>
               </Box>
-              <Box sx={{ display: "flex", gap: "8rem" }}>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
+              <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+                <Typography
+                  variant="body2"
+                  sx={{ mt: ".3rem", mb: ".2rem", mr: "4rem" }}
+                >
                   Visualization
                 </Typography>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
+                <Typography variant="body2" sx={{ mt: ".3rem", mb: ".4rem" }}>
                   Pramesh's friend who is here hardly any issues he got
                 </Typography>
               </Box>
-              <Box sx={{ display: "flex", gap: "8rem" }}>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
+              <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+                <Typography
+                  variant="body2"
+                  sx={{ mt: ".3rem", mb: ".2rem", mr: "4rem" }}
+                >
                   Visualization
                 </Typography>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
+                <Typography variant="body2" sx={{ mt: ".3rem", mb: ".4rem" }}>
                   Pramesh's friend who is here hardly any issues he got
                 </Typography>
               </Box>
-              <Box sx={{ display: "flex", gap: "8rem" }}>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
+              <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+                <Typography
+                  variant="body2"
+                  sx={{ mt: ".3rem", mb: ".2rem", mr: "4rem" }}
+                >
                   Visualization
                 </Typography>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
+                <Typography variant="body2" sx={{ mt: ".3rem", mb: ".4rem" }}>
                   Pramesh's friend who is here hardly any issues he got
                 </Typography>
               </Box>
-              <Box sx={{ display: "flex", gap: "8rem" }}>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
+              <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+                <Typography
+                  variant="body2"
+                  sx={{ mt: ".3rem", mb: ".2rem", mr: "4rem" }}
+                >
                   Visualization
                 </Typography>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
+                <Typography variant="body2" sx={{ mt: ".3rem", mb: ".4rem" }}>
                   Pramesh's friend who is here hardly any issues he got
                 </Typography>
-              </Box>{" "}
-              <Box sx={{ display: "flex", gap: "8rem" }}>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
+              </Box>
+              <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+                <Typography
+                  variant="body2"
+                  sx={{ mt: ".3rem", mb: ".2rem", mr: "4rem" }}
+                >
                   Visualization
                 </Typography>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
-                  Pramesh's friend who is here hardly any issues he got
-                </Typography>
-              </Box>{" "}
-              <Box sx={{ display: "flex", gap: "8rem" }}>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
-                  Visualization
-                </Typography>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
-                  Pramesh's friend who is here hardly any issues he got
-                </Typography>
-              </Box>{" "}
-              <Box sx={{ display: "flex", gap: "8rem" }}>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
-                  Visualization
-                </Typography>
-                <Typography variant="body2" sx={{ mt: "1rem", mb: ".4rem" }}>
+                <Typography variant="body2" sx={{ mt: ".3rem", mb: ".4rem" }}>
                   Pramesh's friend who is here hardly any issues he got
                 </Typography>
               </Box>

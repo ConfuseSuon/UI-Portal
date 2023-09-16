@@ -24,9 +24,68 @@ import {
   expcolorsofPieChart,
 } from "../../../ui-component/CustomUIComp/CustomMyTestCard";
 import { areaData, data, dataBar, lastDataBar } from "../../../mockData";
+import { useState } from "react";
+import { dashboardNumCardData } from "../../../mockData";
+import {
+  DndContext,
+  DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import { SortableContext, arrayMove } from "@dnd-kit/sortable";
+import { ResetTvRounded } from "@mui/icons-material";
+import { createPortal } from "react-dom";
+
+export interface DashboardNumCardTypos {
+  id: string;
+  heading: string;
+  title: string;
+  footer: string;
+}
 
 const Dashboard = () => {
   const theme = useTheme<any>();
+  const [numCardData, setNumCardData] =
+    useState<DashboardNumCardTypos[]>(dashboardNumCardData);
+  const [activeCard, setActiveCard] = useState<DashboardNumCardTypos | null>(
+    null
+  );
+
+  const numCardDataId = numCardData?.map(
+    (data: DashboardNumCardTypos) => data.id
+  );
+
+  const dragStart = (event: DragStartEvent) => {
+    if (event?.active?.data?.current?.type === "cardData") {
+      setActiveCard(event.active.data.current?.cardData);
+    }
+  };
+
+  const sensor = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 0, // 300px
+      },
+    })
+  );
+
+  const dragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over) return;
+    const activeCardId = active.id;
+    const overCardId = over.id;
+
+    if (activeCardId === overCardId) return;
+    setNumCardData((card) => {
+      const activeCardIndex = card.findIndex((data) => data.id == activeCardId);
+      const overCardIndex = card.findIndex((data) => data.id == overCardId);
+
+      return arrayMove(numCardData, activeCardIndex, overCardIndex);
+    });
+  };
 
   return (
     <Grid container spacing={2}>
@@ -93,20 +152,48 @@ const Dashboard = () => {
           <Divider orientation="horizontal" variant="fullWidth" />
 
           {/* ------------------------------------- Second Row -------------------------  */}
-
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "flex-start",
-              flexWrap: "wrap",
-              gap: "3rem",
-              [theme.breakpoints.down("sm")]: {
-                justifyContent: "center",
-                gap: "1.5rem",
-              },
-            }}
+          <DndContext
+            onDragStart={dragStart}
+            sensors={sensor}
+            onDragEnd={dragEnd}
           >
-            <CustomDashboardNumCard
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-start",
+                flexWrap: "wrap",
+                gap: "3rem",
+                [theme.breakpoints.down("sm")]: {
+                  justifyContent: "center",
+                  gap: "1.5rem",
+                },
+                // background: "red",
+              }}
+            >
+              <SortableContext items={numCardDataId}>
+                {!!numCardData &&
+                  numCardData.map((data, index) => {
+                    return (
+                      <CustomDashboardNumCard
+                        key={data.id}
+                        cardData={data}
+                        color={
+                          index == 1 ? "#ffdf00" : index == 2 ? "#228b22" : ""
+                        }
+                        fontStyle={index == 2 || index == 3 ? "italic" : ""}
+                      />
+                    );
+                  })}
+                {createPortal(
+                  <DragOverlay>
+                    {activeCard ? (
+                      <CustomDashboardNumCard cardData={activeCard} />
+                    ) : null}
+                  </DragOverlay>,
+                  document.body
+                )}
+              </SortableContext>
+              {/* <CustomDashboardNumCard
               cardBody={"732"}
               cardFooter={"Dulor alt amet"}
             />
@@ -114,8 +201,8 @@ const Dashboard = () => {
               cardBody={"65"}
               cardFooter={"Dulor alt amet"}
               color={"#ffdf00"}
-            />
-            <CustomDashboardNumCard
+              />
+              <CustomDashboardNumCard
               cardBody={"Low"}
               cardFooter={"(Dulor alt amet)"}
               color={"#228b22"}
@@ -126,8 +213,9 @@ const Dashboard = () => {
               cardFooter={"(Dulor alt amet)"}
               fontStyle={"italic"}
             />
-            <CustomDashboardNumCard cardBody={"R67"} />
-          </Box>
+            <CustomDashboardNumCard cardBody={"R67"} /> */}
+            </Box>
+          </DndContext>
 
           {/* ------------------------------------- Third Row -------------------------  */}
 

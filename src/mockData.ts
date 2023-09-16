@@ -317,3 +317,33 @@ export const ssid2Data = [
         title: '5GHz SSID 7'
     },
 ]
+
+export const dashboardNumCardData = [
+    {
+        id: "1",
+        heading: "Lorem Ipsum",
+        title: "732",
+        footer: "Dulor alt met" 
+    },
+    {
+        id: "2",
+        heading: "Lorem Ipsum",
+        title: "65",
+        footer: "Dulor alt met" 
+    },  {
+        id: "3",
+        heading: "Lorem Ipsum",
+        title: "Low",
+        footer: "(Dulor alt met)" 
+    },  {
+        id: "4",
+        heading: "Lorem Ipsum",
+        title: "6.3.1",
+        footer: "(Dulor alt met)" 
+    },  {
+        id: "5",
+        heading: "Lorem Ipsum",
+        title: "R67",
+        footer: "" 
+    },
+]

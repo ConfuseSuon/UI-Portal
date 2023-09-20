@@ -67,15 +67,28 @@ const Inventory = (): ReactElement => {
             px: ".5rem",
             py: "1rem",
             display: "flex",
-            alignItems: "flex-start",
-            justifyContent: "flex-start",
-            gap: "2rem",
+            gap: "4rem",
+            justifyContent: "space-around",
             flexWrap: "wrap",
-            width: "100%",
+            [theme.breakpoints.down("sm")]: {
+              justifyContent: "center",
+            },
+            [theme.breakpoints.down("md")]: {
+              justifyContent: "center",
+            },
+            [theme.breakpoints.down("lg")]: {
+              justifyContent: "center",
+            },
           }}
         >
           {topologiesData.map((data) => {
-            return <CustomCard selectBtnVal={true} topolgiesData={data} />;
+            return (
+              <CustomCard
+                key={data.id}
+                selectBtnVal={true}
+                topolgiesData={data}
+              />
+            );
           })}
           {/* --------------------------------------------------Popper List--------------------------------------------- */}
           <Box

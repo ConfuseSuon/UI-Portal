@@ -17,6 +17,7 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, AppState } from "../../../store/reducer";
 import { setSetupTestNull } from "../../../features/setupTestSlice";
+import ArrowRightOutlinedIcon from "@mui/icons-material/ArrowRightOutlined";
 
 const PhaseDivider = (): ReactElement => {
   const theme = useTheme<any>();
@@ -53,13 +54,23 @@ const SetupPhase = (): ReactElement => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} md={12}>
-        <Box sx={{}}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Typography
             variant="h5"
             sx={{ textAlign: "center", fontSize: "1.2rem" }}
           >
-            Testing : <span style={{ marginLeft: ".4rem" }} />{" "}
-            {testSuiteDetail?.title}
+            Testing
+          </Typography>
+          <ArrowRightOutlinedIcon />
+          <Typography variant="body1" sx={{ ml: ".4rem", mt: ".1rem" }}>
+            {" "}
+            {testSuiteDetail?.title}{" "}
           </Typography>
         </Box>
       </Grid>
@@ -110,6 +121,7 @@ const SetupPhase = (): ReactElement => {
             onClick={() => {
               selectTopoloy && setOpenPopup(true);
             }}
+            sx={{ ...theme.typography.diabledButton }}
             disabled={!selectTopoloy}
           >
             Next

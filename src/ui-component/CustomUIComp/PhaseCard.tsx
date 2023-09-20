@@ -127,6 +127,9 @@ const PhaseCard = (props: Props): ReactElement => {
                         key={data.id}
                         label={data.title}
                         variant="outlined"
+                        sx={{
+                          ...theme.typography.chipText,
+                        }}
                       />
                     ))
                   ) : (
@@ -340,7 +343,10 @@ const PhaseCard = (props: Props): ReactElement => {
       <Dialog
         PaperProps={{
           style: {
+            overflow: "initial",
+            minHeight: "10rem",
             maxWidth: "55rem",
+            width: "70%",
             ...theme.typography.darkModeBg4,
           },
         }}
@@ -502,6 +508,9 @@ const PhaseCard = (props: Props): ReactElement => {
                 setShowDUTModal(false);
               }}
               disabled={!sshCheckValue || !channel1Value || !channel2Value}
+              sx={{
+                ...theme.typography.diabledButton,
+              }}
             >
               Next
             </Button>

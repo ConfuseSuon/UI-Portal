@@ -14,6 +14,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -82,7 +83,13 @@ const Results = () => {
             value="Firmware 1"
             onChange={(event) => {}}
           />
-          <Button variant="contained" disabled>
+          <Button
+            variant="contained"
+            sx={{
+              ...theme.typography.diabledButton,
+            }}
+            disabled={true}
+          >
             View
           </Button>
           <Button variant="contained">Clear</Button>
@@ -197,21 +204,22 @@ const Results = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: "1rem",
+              gap: "4rem",
               flexWrap: "wrap",
               overflowY: "scroll",
-              maxHeight: "14rem",
+              maxHeight: "18rem",
             }}
           >
             <Box
               sx={{
                 display: "flex",
                 gap: "1.2rem",
-                mr: "4rem",
-                flex: "1 1 auto",
+                flex: "1 0 auto",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              <Box sx={{ width: 200, height: 200, pl: "1rem" }}>
+              <Box sx={{ width: 180, height: 200, pl: "1rem" }}>
                 <ResponsiveContainer>
                   <PieChart>
                     <Pie
@@ -256,8 +264,15 @@ const Results = () => {
                 </Typography>
               </Box>
             </Box>
-            <Box sx={{ flex: "1 1 auto", maxHeight: "10rem" }}>
-              <Box>
+
+            <Box
+              sx={{
+                maxHeight: "10rem",
+                flex: "1 1 auto",
+                maxWidth: "25rem",
+              }}
+            >
+              <Stack spacing={1}>
                 <Accordion sx={{ ...theme.typography.darkModeBg3 }}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -270,13 +285,15 @@ const Results = () => {
                     <ListItem sx={{ ...theme.typography.darkModeBg4 }}>
                       <ListItemText primary="User" secondary="username" />
                       <ListItemText primary="Start Time" secondary="username" />
+                    </ListItem>
+                    <ListItem sx={{ ...theme.typography.darkModeBg4 }}>
                       <ListItemText
                         primary="Certification Run"
                         secondary="username"
                       />
+                      <ListItemText primary="Test Suit" secondary="username" />
                     </ListItem>
                     <ListItem sx={{ ...theme.typography.darkModeBg4 }}>
-                      <ListItemText primary="Test Suit" secondary="username" />
                       <ListItemText
                         primary="Data Directory"
                         secondary="username"
@@ -321,7 +338,7 @@ const Results = () => {
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
-              </Box>
+              </Stack>
             </Box>
           </DialogContent>
           <Divider orientation="horizontal" sx={{ background: "black" }} />

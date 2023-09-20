@@ -28,6 +28,8 @@ import {
   setSetupTestNull,
   setTestSuiteDetail,
 } from "../../../features/setupTestSlice";
+import ArrowRightOutlinedIcon from "@mui/icons-material/ArrowRightOutlined";
+
 import MainCard from "../../../ui-component/cards/MainCard";
 
 const Transition = React.forwardRef(function Transition(
@@ -74,22 +76,22 @@ const SetupaTest = (): ReactElement => {
           <Box
             sx={{
               ...theme.typography.darkModeBg4,
-              px: "1rem",
+              height: "100%",
+              px: ".5rem",
               py: "1rem",
               display: "flex",
-              justifyContent: "flex-start",
+              gap: "4rem",
+              justifyContent: "space-around",
               flexWrap: "wrap",
-              gap: "3rem",
-              alignItems: "flex-start",
               [theme.breakpoints.down("sm")]: {
                 justifyContent: "center",
-                gap: "1.5rem",
               },
-              // [theme.breakpoints.down("xs")]: {
-              //   flexDirection: "column",
-              //   justifyContent: "center",
-              //   gap: "1.5rem",
-              // },
+              [theme.breakpoints.down("md")]: {
+                justifyContent: "center",
+              },
+              [theme.breakpoints.down("lg")]: {
+                justifyContent: "center",
+              },
             }}
           >
             {testSuites.map((test: TestSuiteTypos) => {
@@ -125,13 +127,16 @@ const SetupaTest = (): ReactElement => {
           <DialogTitle
             sx={{
               pt: "0",
+              display: "flex",
+              alignItems: "center",
             }}
           >
-            <Typography variant="h6" sx={{ fontSize: "1.1rem" }}>
-              Test Suite Details:{" "}
-              <span style={{ fontWeight: "400", fontSize: "1rem" }}>
-                {selectTestSuite?.title}
-              </span>
+            <Typography variant="h5" sx={{ fontSize: "1.2rem" }}>
+              Test Suite Details
+            </Typography>
+            <ArrowRightOutlinedIcon />
+            <Typography variant="body1" sx={{ ml: ".4rem", mt: ".1rem" }}>
+              {selectTestSuite?.title}
             </Typography>
           </DialogTitle>
 

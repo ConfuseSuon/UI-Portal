@@ -193,6 +193,24 @@ export default function themeTypography(theme: any) {
     transparentBox: {
       background: darkMode ? "#24323e" : "transparent",
     },
+    chipText: {
+      color: darkMode ? "white" : "black",
+    },
+    menuItem: {
+      background: darkMode ? "#24323e" : "",
+      "&:hover": {
+        background: darkMode ? "#24323e" : "", // Change background color on hover
+      },
+      "&.Mui-selected": {
+        background: darkMode ? "#24325f" : "", // Change background color on hover
+      },
+    },
+    diabledButton: {
+      "&.Mui-disabled": {
+        // border: "1px solid grey",
+        color: darkMode ? theme.darkTextSecondary : "",
+      },
+    },
   };
 }
 

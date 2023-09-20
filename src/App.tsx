@@ -13,41 +13,11 @@ import themes from "./themes";
 import NavigationScroll from "./layout/NavigationScroll";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AppDispatch, AppState } from "./store/reducer";
-import { useEffect } from "react";
-// import { getUserAuthCredentials } from "./features/authSlice";
-import { useNavigate } from "react-router";
-import { useIsAuthenticated } from "@azure/msal-react";
 // ==============================|| APP ||============================== //
 type RootState = {
   customization: any;
 };
 const App = (): any => {
-  const dispatch: AppDispatch = useDispatch();
-  const { userInfo, dataOnLocalStorage } = useSelector(
-    (state: AppState) => state.auth
-  );
-  const navigate = useNavigate();
-  const msAuthenticated = useIsAuthenticated();
-
-  // const localStorageData = localStorage.getItem("key");
-  // const keepAuthorizingUser = async () => {
-  //   if (localStorageData != null) {
-  //     const parseData = JSON.parse(localStorageData);
-  //     const token = parseData.access_tokenLocal;
-  //     await dispatch(getUserAuthCredentials(token));
-  //     if (userInfo !== null) {
-  //       return navigate(1);
-  //     }
-  //   } else {
-  //     navigate("/login");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   keepAuthorizingUser();
-  // }, []);
-
   const customization = useSelector((state: RootState) => state.customization);
   return (
     <StyledEngineProvider injectFirst>

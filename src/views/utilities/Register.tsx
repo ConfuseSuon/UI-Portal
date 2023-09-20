@@ -14,10 +14,11 @@ import {
   OutlinedInput,
   Paper,
   Stack,
+  TextField,
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import React, { ReactEventHandler, useState } from "react";
+import React, { ReactEventHandler, useEffect, useState } from "react";
 import logo from "../../assets/Amniverse.svg";
 import AnimateButton from "../../ui-component/extended/AnimateButton";
 import { useTheme } from "@mui/material/styles";
@@ -28,26 +29,39 @@ import { useSelector } from "react-redux";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Google from "../../assets/images/icons/social-google.svg";
 import { Link } from "react-router-dom";
+import {
+  StrengthColorTypo,
+  strengthColor,
+  strengthIndicator,
+} from "../../utils/password-strength";
 
-const Login = () => {
+const Register = () => {
   const theme = useTheme();
 
   const scriptedRef = useScriptRef();
   const matchDownSM = useMediaQuery(theme.breakpoints.down("md"));
-
+  const [showPassword, setShowPassword] = useState(false);
   const [checked, setChecked] = useState(true);
 
+  const [strength, setStrength] = useState(0);
+  const [level, setLevel] = useState<StrengthColorTypo | null>(null);
+
   const googleHandler = async () => {
-    console.error("Login");
+    console.error("Register");
   };
 
-  const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleMouseDownPassword = (event: any) => {
     event.preventDefault();
+  };
+
+  const changePassword = (value: string) => {
+    const temp = strengthIndicator(value);
+    setStrength(temp);
+    setLevel(strengthColor(temp));
   };
 
   return (
@@ -92,7 +106,7 @@ const Login = () => {
                 variant="h3"
                 sx={{ fontSize: "1.4rem", color: "#2196f3" }}
               >
-                Hi, Welcome Back
+                SIGN UP
               </Typography>
               <Typography
                 variant="body1"
@@ -133,7 +147,7 @@ const Login = () => {
                     style={{ marginRight: matchDownSM ? 8 : 16 }}
                   />
                 </Box>
-                Sign with Google
+                Sign up with Google
               </Button>
             </AnimateButton>
           </Box>
@@ -177,22 +191,27 @@ const Login = () => {
               mb: "1rem",
             }}
           >
-            <Typography variant="h6">Sign in with Email Address</Typography>
+            <Typography variant="h6">Sign up with Email Address</Typography>
           </Box>
 
           {/* formik */}
+
           <Formik
             initialValues={{
-              email: "info@codedthemes.com",
-              password: "123456",
+              fname: "",
+              lname: "",
+              email: "",
+              password: "",
               submit: null,
             }}
             validationSchema={Yup.object().shape({
+              fname: Yup.string().required("First name is required"),
+              lname: Yup.string().required("Last name is required"),
               email: Yup.string()
                 .email("Must be a valid email")
-                .max(25)
+                .max(255)
                 .required("Email is required"),
-              password: Yup.string().max(15).required("Password is required"),
+              password: Yup.string().max(255).required("Password is required"),
             })}
             onSubmit={async (
               values,
@@ -200,14 +219,13 @@ const Login = () => {
             ) => {
               try {
                 if (scriptedRef.current) {
-                  console.log(values, "value");
                   setStatus({ success: true });
                   setSubmitting(false);
                 }
               } catch (err: any) {
                 if (scriptedRef.current) {
                   setStatus({ success: false });
-                  setErrors({ submit: err?.message });
+                  setErrors({ submit: err.message });
                   setSubmitting(false);
                 }
               }
@@ -223,28 +241,83 @@ const Login = () => {
               values,
             }) => (
               <form noValidate onSubmit={handleSubmit}>
+                <Grid container spacing={matchDownSM ? 0 : 2}>
+                  <Grid item xs={12} sm={6}>
+                    <FormControl
+                      error={Boolean(touched.fname || errors.fname)}
+                      sx={{ mb: "1rem" }}
+                    >
+                      <InputLabel htmlFor="outlined-adornment-fname-register">
+                        First Name
+                      </InputLabel>
+                      <OutlinedInput
+                        fullWidth
+                        label="First Name"
+                        name="fname"
+                        type="text"
+                        value={values.fname}
+                        onChange={handleChange}
+                      />
+                      {touched.fname && errors.fname && (
+                        <FormHelperText
+                          error
+                          id="standard-weight-helper-text--register"
+                        >
+                          {errors.fname}
+                        </FormHelperText>
+                      )}
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <FormControl
+                      sx={{ mb: "1rem" }}
+                      error={Boolean(touched.lname && errors.lname)}
+                    >
+                      <InputLabel htmlFor="outlined-adornment-lname-register">
+                        Last Name
+                      </InputLabel>
+                      <OutlinedInput
+                        fullWidth
+                        label="Last Name"
+                        name="lname"
+                        value={values.lname}
+                        type="text"
+                        onChange={handleChange}
+                      />
+                      {touched.lname && errors.lname && (
+                        <FormHelperText
+                          error
+                          id="standard-weight-helper-text--register"
+                        >
+                          {errors.lname}
+                        </FormHelperText>
+                      )}
+                    </FormControl>
+                  </Grid>
+                </Grid>
                 <FormControl
                   fullWidth
                   error={Boolean(touched.email && errors.email)}
-                  sx={{ mb: "1rem" }}
+                  sx={{
+                    mb: "1rem",
+                  }}
                 >
-                  <InputLabel htmlFor="outlined-adornment-email-login">
+                  <InputLabel htmlFor="outlined-adornment-email-register">
                     Email Address / Username
                   </InputLabel>
                   <OutlinedInput
-                    id="outlined-adornment-email-login"
+                    label=" Email Address / Username"
+                    id="outlined-adornment-email-register"
                     type="email"
                     value={values.email}
                     name="email"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    label="Email Address / Username"
-                    inputProps={{}}
                   />
                   {touched.email && errors.email && (
                     <FormHelperText
                       error
-                      id="standard-weight-helper-text-email-login"
+                      id="standard-weight-helper-text--register"
                     >
                       {errors.email}
                     </FormHelperText>
@@ -254,18 +327,24 @@ const Login = () => {
                 <FormControl
                   fullWidth
                   error={Boolean(touched.password && errors.password)}
-                  sx={{}}
+                  sx={{
+                    mb: "1rem",
+                  }}
                 >
-                  <InputLabel htmlFor="outlined-adornment-password-login">
+                  <InputLabel htmlFor="outlined-adornment-password-register">
                     Password
                   </InputLabel>
                   <OutlinedInput
-                    id="outlined-adornment-password-login"
+                    id="outlined-adornment-password-register"
                     type={showPassword ? "text" : "password"}
                     value={values.password}
                     name="password"
+                    label="Password"
                     onBlur={handleBlur}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      handleChange(e);
+                      changePassword(e.target.value);
+                    }}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
@@ -279,43 +358,68 @@ const Login = () => {
                         </IconButton>
                       </InputAdornment>
                     }
-                    label="Password"
                     inputProps={{}}
                   />
                   {touched.password && errors.password && (
                     <FormHelperText
                       error
-                      id="standard-weight-helper-text-password-login"
+                      id="standard-weight-helper-text-password-register"
                     >
                       {errors.password}
                     </FormHelperText>
                   )}
                 </FormControl>
-                <Stack
-                  direction="row"
+
+                {strength !== 0 && (
+                  <FormControl fullWidth>
+                    <Box sx={{ mb: 2 }}>
+                      <Grid container spacing={2} alignItems="center">
+                        <Grid item>
+                          <Box
+                            style={{ background: level?.color }}
+                            sx={{ width: 85, height: 8, borderRadius: "7px" }}
+                          />
+                        </Grid>
+                        <Grid item>
+                          <Typography variant="subtitle1" fontSize="0.75rem">
+                            {level?.label}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                  </FormControl>
+                )}
+
+                <Grid
+                  container
                   alignItems="center"
                   justifyContent="space-between"
-                  spacing={1}
                 >
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={checked}
-                        onChange={(event) => setChecked(event.target.checked)}
-                        name="checked"
-                        color="primary"
-                      />
-                    }
-                    label="Remember me"
-                  />
-                  <Typography
-                    variant="subtitle1"
-                    color="primary"
-                    sx={{ textDecoration: "none", cursor: "pointer" }}
-                  >
-                    Forgot Password?
-                  </Typography>
-                </Stack>
+                  <Grid item>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={checked}
+                          onChange={(event) => setChecked(event.target.checked)}
+                          name="checked"
+                          color="primary"
+                        />
+                      }
+                      label={
+                        <Typography variant="subtitle1">
+                          Agree with &nbsp;
+                          <Typography
+                            variant="subtitle1"
+                            component={Link}
+                            to="#"
+                          >
+                            Terms & Condition.
+                          </Typography>
+                        </Typography>
+                      }
+                    />
+                  </Grid>
+                </Grid>
                 {errors.submit && (
                   <Box sx={{ mt: 3 }}>
                     <FormHelperText error>{errors.submit}</FormHelperText>
@@ -333,7 +437,7 @@ const Login = () => {
                       variant="contained"
                       color="primary"
                     >
-                      Sign in
+                      Sign up
                     </Button>
                   </AnimateButton>
                 </Box>
@@ -354,11 +458,11 @@ const Login = () => {
           >
             <Typography
               component={Link}
-              to="/register"
+              to="/login"
               variant="subtitle1"
               sx={{ textDecoration: "none" }}
             >
-              Don&apos;t have an account?
+              Already have an account?
             </Typography>
           </Box>
         </Paper>
@@ -367,4 +471,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

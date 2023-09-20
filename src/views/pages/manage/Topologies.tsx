@@ -34,6 +34,7 @@ import {
   setSelectTopologyData,
 } from "../../../features/setupTestSlice";
 import { useNavigate } from "react-router";
+import PerfectScrollBar from "react-perfect-scrollbar";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -85,8 +86,8 @@ const Topologies = (): ReactElement => {
   });
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
+    <Grid container spacing={1}>
+      <Grid item xs={12} md={12} sm={12}>
         <CustomFilter title={"Filter by tags:"} />
       </Grid>
       {!activeTopologies ? (
@@ -95,11 +96,22 @@ const Topologies = (): ReactElement => {
             <Box
               sx={{
                 ...theme.typography.darkModeBg4,
-                px: "1rem",
+                height: "100%",
+                px: ".5rem",
                 py: "1rem",
                 display: "flex",
-                gap: "2rem",
+                gap: "4rem",
+                justifyContent: "space-around",
                 flexWrap: "wrap",
+                [theme.breakpoints.down("sm")]: {
+                  justifyContent: "center",
+                },
+                [theme.breakpoints.down("md")]: {
+                  justifyContent: "center",
+                },
+                [theme.breakpoints.down("lg")]: {
+                  justifyContent: "center",
+                },
               }}
             >
               {topologiesData.map((data) => {
@@ -118,75 +130,81 @@ const Topologies = (): ReactElement => {
         </>
       ) : (
         <>
-          <Grid item md={3} xs={12}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                height: "41rem",
-                gap: "1rem",
-                overflowY: "scroll",
-                overflowX: "hidden",
-              }}
-            >
-              {sortedTopologiesData.map((data) => {
-                return (
-                  <Card
-                    key={data.id}
-                    sx={{
-                      maxWidth: 390,
-                      minHeight: 130,
-                      display: "flex",
-                      gap: "0",
-                      cursor: "pointer",
-                      ...theme.typography.darkModeBg3,
-                      border: ` ${
-                        activeTopologies.id == data.id
-                          ? "2px solid #2196f3"
-                          : "none"
-                      }`,
-                      transition: "all 0.8s ease-in-out",
-                      transform:
-                        activeTopologies.id === data.id
-                          ? "translateY(5px)"
-                          : "none",
-                    }}
-                    onClick={() => dispatch(setActiveTopologies(data))}
-                  >
-                    <img
-                      src={MockGem}
-                      alt="gemo"
-                      style={{
-                        height: "120px",
-                        width: "200px",
-                        objectFit: "cover",
+          <Grid item md={3} xs={12} sm={12}>
+            <PerfectScrollBar>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  height: "41rem",
+                  gap: "2rem",
+                  px: "1rem",
+                }}
+              >
+                {sortedTopologiesData.map((data) => {
+                  return (
+                    <Card
+                      key={data.id}
+                      sx={{
+                        ...theme.typography.darkModeBg3,
+                        minHeight: "8rem",
+                        width: "100%",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        display: "flex",
+                        gap: "1rem",
+                        // flexWrap: "wrap",
+                        cursor: "pointer",
+                        border: ` ${
+                          activeTopologies.id == data.id
+                            ? "2px solid #2196f3"
+                            : "1px solid grey"
+                        }`,
+                        transition: "all 0.8s ease-in-out",
+                        transform:
+                          activeTopologies.id === data.id
+                            ? "translateY(5px)"
+                            : "none",
                       }}
-                    />
-                    <CardContent>
-                      <Typography
-                        gutterBottom
-                        variant="h5"
-                        sx={{ width: "10rem" }}
-                      >
-                        {data.title}
-                      </Typography>
-                      <Box sx={{ ml: "1.4rem" }}>
-                        <Typography variant="body2">
-                          {data.deviceName}
+                      onClick={() => dispatch(setActiveTopologies(data))}
+                    >
+                      <CardContent sx={{ flex: "1 1 auto" }}>
+                        <img
+                          src={MockGem}
+                          height={100}
+                          width={140}
+                          alt="gemo"
+                          style={{
+                            objectFit: "contain",
+                          }}
+                        />
+                      </CardContent>
+                      <CardContent sx={{}}>
+                        <Typography
+                          gutterBottom
+                          variant="h5"
+                          sx={{ width: "10rem" }}
+                        >
+                          {data.title}
                         </Typography>
-                        <Typography variant="body2">
-                          {data.reservationName}
-                        </Typography>
-                      </Box>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </Box>
+                        <Box sx={{ ml: "1.4rem" }}>
+                          <Typography variant="body2">
+                            {data.deviceName}
+                          </Typography>
+                          <Typography variant="body2">
+                            {data.reservationName}
+                          </Typography>
+                        </Box>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </Box>
+            </PerfectScrollBar>
           </Grid>
 
-          <Grid item md={9} xs={12}>
+          <Grid item md={9} xs={12} sm={12}>
             <Box
               sx={{
                 ...theme.typography.darkModeBg4,

@@ -76,59 +76,52 @@ const MainLayout = () => {
     dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
   };
 
-  const { isAuthenticated } = useSelector((state: AppState) => state.auth);
-
-  const msAuthenticated = useIsAuthenticated();
-  const navigate = useNavigate();
   return (
-    <AuthenticatedTemplate>
-      <Box sx={{ display: "flex", ...theme.typography.darkModeBg4 }}>
-        <CssBaseline />
-        {/* header */}
-        <AppBar
-          enableColorOnDark
-          position="fixed"
-          color="inherit"
-          elevation={0}
-          sx={{
-            ...theme.typography.darkModeBg4,
-            transition: leftDrawerOpened
-              ? theme.transitions.create("width")
-              : "none",
-            height: "4rem",
-          }}
-        >
-          <Toolbar>
-            <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
-          </Toolbar>
-          {/* <Divider
+    <Box sx={{ display: "flex", ...theme.typography.darkModeBg4 }}>
+      <CssBaseline />
+      {/* header */}
+      <AppBar
+        enableColorOnDark
+        position="fixed"
+        color="inherit"
+        elevation={0}
+        sx={{
+          ...theme.typography.darkModeBg4,
+          transition: leftDrawerOpened
+            ? theme.transitions.create("width")
+            : "none",
+          height: "4rem",
+        }}
+      >
+        <Toolbar>
+          <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
+        </Toolbar>
+        {/* <Divider
           absolute={false}
           orientation="horizontal"
           sx={{ background: "red", height: "1.4rem" }}
         /> */}
-        </AppBar>
-        {/* drawer */}
-        <Sidebar
-          drawerOpen={!matchDownMd ? leftDrawerOpened : !leftDrawerOpened}
-          drawerToggle={handleLeftDrawerToggle}
-        />
+      </AppBar>
+      {/* drawer */}
+      <Sidebar
+        drawerOpen={!matchDownMd ? leftDrawerOpened : !leftDrawerOpened}
+        drawerToggle={handleLeftDrawerToggle}
+      />
 
-        {/* main content */}
-        <Main theme={theme} open={leftDrawerOpened} sx={{}}>
-          {/* breadcrumb */}
-          {/* <Breadcrumbs
+      {/* main content */}
+      <Main theme={theme} open={leftDrawerOpened} sx={{}}>
+        {/* breadcrumb */}
+        {/* <Breadcrumbs
           separator={IconChevronRight}
           navigation={navigation}
           icon
           title
           rightAlign
         /> */}
-          {/* {isAuthenticated ? <Outlet /> : navigate("/login")} */}
-          {msAuthenticated ? <Outlet /> : navigate("/login")}
-        </Main>
-        {/* <Customization /> */}
-      </Box>
-    </AuthenticatedTemplate>
+        <Outlet />
+      </Main>
+      {/* <Customization /> */}
+    </Box>
   );
 };
 

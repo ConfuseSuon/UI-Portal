@@ -7,7 +7,8 @@ import {
   SelectChangeEvent,
   Typography,
 } from "@mui/material";
-import React, { ReactElement } from "react";
+import { useTheme } from "@mui/material/styles";
+import { ReactElement } from "react";
 
 type Props = {
   name: string;
@@ -23,6 +24,7 @@ type Props = {
 
 const CustomSelectOption = (props: Props): ReactElement => {
   const { name, label, value, onChange, options, sx, disabled } = props;
+  const theme = useTheme<any>();
 
   return (
     <Box sx={{ width: "20rem" }}>
@@ -48,8 +50,12 @@ const CustomSelectOption = (props: Props): ReactElement => {
                 data-testid="customOptionList"
                 key={item.id}
                 value={item.title}
+                sx={{
+                  ...theme.typography.menuItem,
+                  m: 0,
+                }}
               >
-                <Typography variant="body1" sx={{ color: "black" }}>
+                <Typography variant="body1">
                   {(item.title as string) ?? (item?.title as string)}
                 </Typography>
               </MenuItem>

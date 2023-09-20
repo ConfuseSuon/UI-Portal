@@ -15,6 +15,7 @@ import { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { LoadingButton } from "@mui/lab";
+import ArrowRightOutlinedIcon from "@mui/icons-material/ArrowRightOutlined";
 
 const MyTest = () => {
   const theme = useTheme<any>();
@@ -54,9 +55,9 @@ const MyTest = () => {
             ...theme.typography.darkModeBg4,
           },
         }}
-        style={{
-          backdropFilter: "blur(2px)",
-        }}
+        // style={{
+        //   backdropFilter: "blur(2px)",
+        // }}
         aria-describedby="alert-dialog-slide-description"
         open={showPopup}
       >
@@ -66,12 +67,16 @@ const MyTest = () => {
           </Button>
         </Box>
 
-        <DialogTitle sx={{ pt: 0 }}>
-          <Typography variant="h5" sx={{ fontSize: "1.4rem" }}>
-            My Test : <span style={{ marginLeft: "1rem" }} /> Advanced Chamber
-            1.1
+        <DialogTitle sx={{ pt: 0, display: "flex", alignItems: "center" }}>
+          <Typography variant="h5" sx={{ fontSize: "1.2rem" }}>
+            My Test
           </Typography>
-          <Typography variant="h3"></Typography>
+          <ArrowRightOutlinedIcon />
+          <Typography variant="body1">Advanced Chamber 1.1</Typography>
+          <Typography
+            variant="h3"
+            sx={{ ml: ".4rem", mt: ".1rem" }}
+          ></Typography>
         </DialogTitle>
         <Divider orientation="horizontal" sx={{ background: "black" }} />
 
@@ -88,7 +93,9 @@ const MyTest = () => {
             sx={{
               width: "100%",
               display: "flex",
+              flexWrap: "wrap",
               justifyContent: "space-between",
+              gap: "1rem",
             }}
           >
             <Typography variant="body1" sx={{ fontSize: "1rem" }}>
@@ -106,7 +113,8 @@ const MyTest = () => {
             sx={{
               width: "100%",
               display: "flex",
-              alignItems: "center",
+              flexWrap: "wrap",
+              gap: "1rem",
               justifyContent: "space-between",
             }}
           >
@@ -151,33 +159,31 @@ const MyTest = () => {
             <Box
               sx={{
                 display: "flex",
-                alignItems: "flex-start",
+                alignItems: "center",
+                gap: "2rem",
               }}
             >
-              <LoadingButton
-                loading
-                loadingPosition="start"
-                variant="text"
-                size="large"
+              <CircularProgress
+                size={15}
+                sx={{ ...theme.typography.chipText }}
               />
               <Typography
                 variant="body1"
                 sx={{ fontSize: "1rem", mr: "-4rem" }}
               >
-                Test 1
+                Test 1{" "}
               </Typography>
             </Box>
             <Box
               sx={{
                 display: "flex",
-                alignItems: "flex-start",
+                alignItems: "center",
+                gap: "2rem",
               }}
             >
-              <LoadingButton
-                loading
-                loadingPosition="start"
-                variant="text"
-                size="large"
+              <CircularProgress
+                size={15}
+                sx={{ ...theme.typography.chipText }}
               />
               <Typography
                 variant="body1"
@@ -189,20 +195,19 @@ const MyTest = () => {
             <Box
               sx={{
                 display: "flex",
-                alignItems: "flex-start",
+                alignItems: "center",
+                gap: "2rem",
               }}
             >
-              <LoadingButton
-                loading
-                loadingPosition="start"
-                variant="text"
-                size="large"
+              <CircularProgress
+                size={15}
+                sx={{ ...theme.typography.chipText }}
               />
               <Typography
                 variant="body1"
                 sx={{ fontSize: "1rem", mr: "-4rem" }}
               >
-                Test 3
+                Test 2{" "}
               </Typography>
             </Box>
           </Box>

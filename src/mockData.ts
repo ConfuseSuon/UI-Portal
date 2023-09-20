@@ -128,6 +128,11 @@ export const topologiesData = [
         title: "1.9 Advanced Chamber",
         deviceName: "Samsung Galaxy ",
         reservationName: "Ranchod Das"
+    },{
+        id: '10',
+        title: "2.0 Advanced Chamber",
+        deviceName: "Samsung Galaxy ",
+        reservationName: "Ranchod Das"
     },
 ]
 

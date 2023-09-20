@@ -54,15 +54,13 @@ const CustomCard = (props: Props): ReactElement => {
       {!!testSuiteData ? (
         <Card
           sx={{
-            borderRadius: "3%",
-            minWidth: "14rem",
-            maxWidth: "17rem",
-            flex: "1 0 0",
-            maxHeight: "20rem",
-            transition: "transform 0.4s ease-in-out",
-            boxShadow:
-              "rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
             ...theme.typography.dashboardCard,
+            borderRadius: "3%",
+            transition: "transform 0.4s ease-in-out",
+            minWidth: "15rem",
+            maxWidth: "19rem",
+            flex: "1 1 auto",
+            maxHeight: "320",
           }}
         >
           <CardContent sx={{ textAlign: "center" }}>
@@ -102,11 +100,13 @@ const CustomCard = (props: Props): ReactElement => {
       ) : viewBy === "topologies" ? (
         <Card
           sx={{
-            width: "22rem",
-            flex: "1 0 auto",
-            borderRadius: "3%",
             ...theme.typography.dashboardCard,
+            borderRadius: "3%",
             transition: "transform 0.4s ease-in-out",
+            minWidth: "15rem",
+            maxWidth: "19rem",
+            flex: "1 1 auto",
+            maxHeight: "320",
           }}
         >
           <CardContent sx={{ textAlign: "center" }}>
@@ -165,8 +165,9 @@ const CustomCard = (props: Props): ReactElement => {
             ...theme.typography.dashboardCard,
             borderRadius: "3%",
             transition: "transform 0.4s ease-in-out",
-            width: "22rem",
-            flex: "1 0 auto",
+            minWidth: "15rem",
+            maxWidth: "19rem",
+            flex: "1 1 auto",
             maxHeight: "320",
           }}
         >

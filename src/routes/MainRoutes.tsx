@@ -30,11 +30,7 @@ const MainRoutes = {
   children: [
     {
       path: "/",
-      element: (
-        <AuthenticatedTemplate>
-          <DashboardDefault />,
-        </AuthenticatedTemplate>
-      ),
+      element: <DashboardDefault />,
     },
     {
       path: "tests",

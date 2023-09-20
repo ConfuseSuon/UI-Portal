@@ -8,6 +8,7 @@ import MinimalLayout from "../layout/MinimalLayout";
 import Login from "../views/utilities/Login";
 import { AuthenticatedTemplate } from "@azure/msal-react";
 import Callback from "../views/utilities/Callback";
+import Register from "../views/utilities/Register";
 // const Callback = Loadable(lazy(async () => await import("../views/utilities/auth/Callback")))
 
 // ==============================|| AUTHENTICATION ROUTING ||============================== //
@@ -22,11 +23,11 @@ const AuthenticationRoutes = {
     },
     {
       path: "/callback",
-      element: (
-        <AuthenticatedTemplate>
-          <Callback />
-        </AuthenticatedTemplate>
-      ),
+      element: <Callback />,
+    },
+    {
+      path: "/register",
+      element: <Register />,
     },
   ],
 };

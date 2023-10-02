@@ -352,3 +352,34 @@ export const dashboardNumCardData = [
         footer: "" 
     },
 ]
+
+
+export const topologyAssetData = [
+    {
+    id: '1',
+    title: '1.1 Basic Chamber',
+    filter: ["Tag 1", "Tag 2"],
+    },
+    {
+    id: '2',
+    title: '1.2 Basic Chamber',
+    filter: ["Tag 1", "Tag 2"],
+    },
+    {
+        id: '3',
+        title: 'Router 3',
+        filter: ["Tag 1", "Tag 2"],
+    }, 
+    {
+        id: '4',
+        title: 'MSA 1',
+        filter: ["Tag 1", "Tag 2"],
+    },
+    {
+        id: '5',
+        title: 'Roaming 1',
+        filter: ["Tag 1", "Tag 2"],
+    }
+    
+
+]

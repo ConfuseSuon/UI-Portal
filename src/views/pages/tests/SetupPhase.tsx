@@ -43,11 +43,11 @@ const SetupPhase = (): ReactElement => {
   const { testSuiteDetail, selectTopoloy, testBlockData, dutConfigData } =
     useSelector((state: AppState) => state.setupTest);
 
-  useEffect(() => {
-    if (!testSuiteDetail) {
-      navigate("/tests/setup-a-test");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!testSuiteDetail) {
+  //     navigate("/tests/setup-a-test");
+  //   }
+  // }, []);
 
   const [openPopup, setOpenPopup] = useState(false);
   const handlePopupClose = () => setOpenPopup(false);

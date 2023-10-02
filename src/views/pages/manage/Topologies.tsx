@@ -11,7 +11,10 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
+  Fab,
   Grid,
+  IconButton,
+  ImageListItem,
   Stack,
   Tab,
   Tabs,
@@ -35,6 +38,9 @@ import {
 } from "../../../features/setupTestSlice";
 import { useNavigate } from "react-router";
 import PerfectScrollBar from "react-perfect-scrollbar";
+import AddIcon from "@mui/icons-material/Add";
+import { PlayArrowOutlined } from "@mui/icons-material";
+import { SkipNext } from "@mui/icons-material";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -130,81 +136,151 @@ const Topologies = (): ReactElement => {
         </>
       ) : (
         <>
-          <Grid item md={3} xs={12} sm={12}>
+          <Grid
+            item
+            md={3}
+            xs={12}
+            sm={3}
+            sx={{
+              maxHeight: "41rem",
+              overflowY: "scroll",
+            }}
+          >
             <PerfectScrollBar>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  height: "41rem",
-                  gap: "2rem",
-                  px: "1rem",
-                }}
-              >
-                {sortedTopologiesData.map((data) => {
-                  return (
-                    <Card
-                      key={data.id}
-                      sx={{
-                        ...theme.typography.darkModeBg3,
-                        minHeight: "8rem",
-                        width: "100%",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        display: "flex",
-                        gap: "1rem",
-                        // flexWrap: "wrap",
-                        cursor: "pointer",
-                        border: ` ${
-                          activeTopologies.id == data.id
-                            ? "2px solid #2196f3"
-                            : "1px solid grey"
-                        }`,
-                        transition: "all 0.8s ease-in-out",
-                        transform:
-                          activeTopologies.id === data.id
-                            ? "translateY(5px)"
-                            : "none",
-                      }}
-                      onClick={() => dispatch(setActiveTopologies(data))}
-                    >
-                      <CardContent sx={{ flex: "1 1 auto" }}>
-                        <img
-                          src={MockGem}
-                          height={100}
-                          width={140}
-                          alt="gemo"
-                          style={{
-                            objectFit: "contain",
+
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "2rem",
+                px: "1rem",
+                ...theme.typography.darkModeBg4,
+
+              }}
+            >
+              {sortedTopologiesData.map((data) => {
+                return (
+                  <Card
+                    key={data.id}
+                    sx={{
+                      ...theme.typography.darkModeBg3,
+                      maxWidth: 400,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexWrap: "wrap",
+                      cursor: "pointer",
+                          border: ` ${
+                            activeTopologies.id == data.id
+                              ? "2px solid #2196f3"
+                              : "1px solid grey"
+                          }`,
+                          transition: "all 0.8s ease-in-out",
+                          transform:
+                            activeTopologies.id === data.id
+                              ? "translateY(5px)"
+                              : "none",
+                        }}
+                        onClick={() => dispatch(setActiveTopologies(data))}
+                  >
+                    <CardContent>
+                      <CardMedia
+                        component={"img"}
+                        image={MockGem}
+                        width={80}
+                        height={80}
+                      />
+                    </CardContent>
+
+                    <Box>
+                      <CardContent>
+                        <Typography variant="subtitle1">{data.title}</Typography>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            mt: '.3rem'
                           }}
-                        />
-                      </CardContent>
-                      <CardContent sx={{}}>
-                        <Typography
-                          gutterBottom
-                          variant="h5"
-                          sx={{ width: "10rem" }}
                         >
-                          {data.title}
-                        </Typography>
-                        <Box sx={{ ml: "1.4rem" }}>
-                          <Typography variant="body2">
+                          <Typography variant="body1">
                             {data.deviceName}
                           </Typography>
-                          <Typography variant="body2">
+                          <Typography variant="body1">
                             {data.reservationName}
                           </Typography>
                         </Box>
                       </CardContent>
-                    </Card>
-                  );
-                })}
-              </Box>
+                    </Box>
+                  </Card>
+
+                  // <Card
+                  //   key={data.id}
+                  //   sx={{
+                  //     ...theme.typography.darkModeBg3,
+                  //     minHeight: "10rem",
+                  //     alignItems: "center",
+                  //     // justifyContent: 'flex-start',
+                  //     justifyContent: "center",
+                  //     display: "flex",
+                  //     gap: "1rem",
+                  //     flexWrap: "wrap",
+                  //     cursor: "pointer",
+                  //     border: ` ${
+                  //       activeTopologies.id == data.id
+                  //         ? "2px solid #2196f3"
+                  //         : "1px solid grey"
+                  //     }`,
+                  //     transition: "all 0.8s ease-in-out",
+                  //     transform:
+                  //       activeTopologies.id === data.id
+                  //         ? "translateY(5px)"
+                  //         : "none",
+                  //   }}
+                  //   onClick={() => dispatch(setActiveTopologies(data))}
+                  // >
+                  //   <Box sx={{ }}>
+                  //     <img
+                  //       src={MockGem}
+                  //       height={100}
+                  //       width={100}
+                  //       alt="gemo"
+
+                  //       style={{
+                  //         objectFit: "contain",
+                  //         background: "red"
+                  //       }}
+                  //     />
+                  //   </Box>
+                  //   <Box sx={{background: 'red'}}>
+                  //     <Typography
+                  //       variant="h5"
+                  //       sx={{ width: "10rem", whiteSpace: 'normal' }}
+                  //       component={"div"}
+                  //     >
+                  //       {data.title}
+                  //     </Typography>
+                  //     <Box sx={{ ml: "1.4rem" }}>
+                  //       <Typography variant="body2" component={"div"}>
+                  //         {data.deviceName}
+                  //       </Typography>
+                  //       <Typography variant="body2" component={"div"}>
+                  //         {data.reservationName}
+                  //       </Typography>
+                  //     </Box>
+                  //   </Box>
+                  // </Card>
+                );
+              })}
+            </Box>
             </PerfectScrollBar>
+
           </Grid>
 
-          <Grid item md={9} xs={12} sm={12}>
+          <Grid item md={9} xs={12} sm={9}>
             <Box
               sx={{
                 ...theme.typography.darkModeBg4,
@@ -363,6 +439,23 @@ const Topologies = (): ReactElement => {
           </Grid>
         </>
       )}
+
+      {/* --------------------------------------------------Add Button--------------------------------------------- */}
+      <Box
+        sx={{
+          position: "fixed",
+          right: 80,
+          bottom: 40,
+          [theme.breakpoints.down("md")]: {
+            right: 40,
+          },
+        }}
+        onClick={() => navigate("/manage/add-topology")}
+      >
+        <Fab color="primary" aria-label="add">
+          <AddIcon />
+        </Fab>
+      </Box>
 
       {/* --------------------------------------------------Dialog Box--------------------------------------------- */}
 

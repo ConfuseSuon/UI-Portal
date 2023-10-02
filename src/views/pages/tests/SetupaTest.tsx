@@ -51,15 +51,16 @@ const SetupaTest = (): ReactElement => {
   const theme = useTheme<any>();
   const color = colors;
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [testSuites, setTestSuites] = useState<TestSuiteTypos[]>(testSuiteData);
 
-  const { selectTestSuite } = useSelector((state: AppState) => state.setupTest);
+  const { selectTestSuite, dutConfigData } = useSelector((state: AppState) => state.setupTest);
   const dispatch: AppDispatch = useDispatch();
   const handlePopupClose = () => dispatch(setSelectTestData(null));
 
   useEffect(() => {
-    dispatch(setSetupTestNull());
+    // dispatch(setSetupTestNull());
+    dutConfigData ? setIsOpen(false) : setIsOpen(true)
   }, []);
 
   return (
@@ -106,7 +107,7 @@ const SetupaTest = (): ReactElement => {
           </Box>
         </Grid>
 
-        {/* --------------------------------------------------Dialog Box--------------------------------------------- */}
+        {/* -------------------------------------------------- Drag Drop Dialog Box--------------------------------------------- */}
 
         <Dialog
           PaperProps={{
@@ -162,6 +163,54 @@ const SetupaTest = (): ReactElement => {
             <DragDrop />
           </DialogContent>
         </Dialog>
+
+{/* ----------------------------------------------------- Dialog Box--------------------------------------- */}
+
+<Dialog
+          PaperProps={{
+            style: {
+              maxWidth: "90rem",
+              ...theme.typography.darkModeBg4,
+            },
+          }}
+          sx={{ width: "100%", height: "100%", backdropFilter: 'blur(8px)' }}
+          open={isOpen}
+        >
+          <Box sx={{ textAlign: "right" }}>
+            <Button size="small" onClick={() => navigate('/')}>
+              <CloseOutlinedIcon sx={{ color: "red" }} />
+            </Button>
+          </Box>
+
+          <DialogTitle
+            sx={{
+              pt: "0",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: 'center'
+            }}
+          >
+            <Typography variant="h5" sx={{ fontSize: "1.2rem" }}>
+            How do you want to start ?
+            </Typography>
+          
+          </DialogTitle>
+
+          <Divider orientation="horizontal" />
+
+          <DialogContent
+            sx={{
+              pb: "1rem",
+              overflow: "hidden",
+              display: 'flex',
+              gap: "2rem"
+            }}
+          >
+           <Button variant="contained">Schedule a test</Button>
+           <Button variant="contained" onClick={() => navigate('/tests/setup-phase')}>Configure from scratch</Button>
+          </DialogContent>
+        </Dialog>
+
       </Grid>
     </>
   );

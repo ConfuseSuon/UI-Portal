@@ -19,6 +19,7 @@ import SetupPhase from "../views/pages/tests/SetupPhase";
 // import { Outlet } from 'react-router';
 import { AuthenticatedTemplate } from "@azure/msal-react";
 import Callback from "../views/utilities/Callback";
+import AddTopology from "../views/pages/manage/AddTopology";
 
 // dashboard routing
 
@@ -75,7 +76,11 @@ const MainRoutes = {
         },
         {
           path: "topologies",
-          element: <Topologies />,
+          element: <Topologies />
+        },
+        {
+          path: "add-topology",
+          element: <AddTopology />
         },
         {
           path: "testing-assests",

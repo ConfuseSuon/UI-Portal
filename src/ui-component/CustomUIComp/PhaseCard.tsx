@@ -161,6 +161,7 @@ const PhaseCard = (props: Props): ReactElement => {
                 onClick={() => {
                   navigate("/tests/setup-a-test");
                 }}
+                disabled = {!dutConfigData}
               >
                 Select
               </Button>

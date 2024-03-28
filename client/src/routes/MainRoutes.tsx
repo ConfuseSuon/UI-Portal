@@ -4,22 +4,24 @@ import { lazy } from "react";
 
 import MainLayout from "../layout/MainLayout";
 import Loadable from "../ui-component/Loadable";
-import MyTest from "../views/pages/tests/MyTest";
+import DashboardDefault from "../views/dashboard/Default";
+import Faq from "../views/pages/learn/Faq";
+import Platfrom from "../views/pages/learn/Platfrom";
+import Inventory from "../views/pages/manage/Inventory";
+import TestingAssests from "../views/pages/manage/TestingAssests";
+import Topologies from "../views/pages/manage/Topologies";
+import Reports from "../views/pages/results/Reports";
 import Results from "../views/pages/results/Results";
 import Slas from "../views/pages/results/Slas";
-import Reports from "../views/pages/results/Reports";
-import Inventory from "../views/pages/manage/Inventory";
-import Topologies from "../views/pages/manage/Topologies";
-import TestingAssests from "../views/pages/manage/TestingAssests";
-import Platfrom from "../views/pages/learn/Platfrom";
-import Faq from "../views/pages/learn/Faq";
-import SetupaTest from "../views/pages/tests/SetupaTest";
-import DashboardDefault from "../views/dashboard/Default";
+import MyTest from "../views/pages/tests/MyTest";
 import SetupPhase from "../views/pages/tests/SetupPhase";
+import SetupaTest from "../views/pages/tests/SetupaTest";
 // import { Outlet } from 'react-router';
 import { AuthenticatedTemplate } from "@azure/msal-react";
-import Callback from "../views/utilities/Callback";
 import AddTopology from "../views/pages/manage/AddTopology";
+import AllTestCases from "../views/pages/test-management/AllTestCases";
+import Playlists from "../views/pages/test-management/Playlists";
+import Callback from "../views/utilities/Callback";
 
 // dashboard routing
 
@@ -76,11 +78,11 @@ const MainRoutes = {
         },
         {
           path: "topologies",
-          element: <Topologies />
+          element: <Topologies />,
         },
         {
           path: "add-topology",
-          element: <AddTopology />
+          element: <AddTopology />,
         },
         {
           path: "testing-assests",
@@ -98,6 +100,19 @@ const MainRoutes = {
         {
           path: "faq",
           element: <Faq />,
+        },
+      ],
+    },
+    {
+      path: "test-management",
+      children: [
+        {
+          path: "all-test-cases",
+          element: <AllTestCases />,
+        },
+        {
+          path: "playlists",
+          element: <Playlists />,
         },
       ],
     },

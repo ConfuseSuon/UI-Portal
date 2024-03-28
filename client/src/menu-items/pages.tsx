@@ -100,6 +100,26 @@ const pages = {
         },
       ],
     },
+    {
+      id: "test-management",
+      title: "Test Management",
+      type: "collapse",
+      icon: icon.IconUsers,
+      children: [
+        {
+          id: "all-test-cases",
+          title: "All Test Cases",
+          type: "item",
+          url: "/test-management/all-test-cases",
+        },
+        {
+          id: "playlists",
+          title: "Playlists",
+          type: "item",
+          url: "/test-management/playlists",
+        },
+      ],
+    },
   ],
 };
 

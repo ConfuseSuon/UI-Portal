@@ -1,4 +1,8 @@
 import {
+  KeyboardArrowDown as KeyboardArrowDownIcon,
+  KeyboardArrowUp as KeyboardArrowUpIcon,
+} from "@mui/icons-material";
+import {
   Avatar,
   Box,
   Collapse,
@@ -13,23 +17,21 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import moment from "moment";
 import React, { Fragment, useState } from "react";
 import { useExpanded, useTable } from "react-table";
 import { v4 } from "uuid";
-
-import {
-  KeyboardArrowDown as KeyboardArrowDownIcon,
-  KeyboardArrowUp as KeyboardArrowUpIcon,
-} from "@mui/icons-material";
-import moment from "moment";
 
 const CustomTable = ({
   className,
   data,
   columns,
   handleSort,
-  fontSize = ".9rem",
+  fontSize = ".8rem",
 }: any): React.ReactElement => {
+  const theme = useTheme<any>();
+
   const [openRows, setOpenRows] = useState<any>([]);
 
   const handleRowClick = (rowIndex: any): void => {
@@ -74,9 +76,13 @@ const CustomTable = ({
             <TableRow {...headerGroup.getHeaderGroupProps()} key={v4()}>
               {hasCollapsibleItem === true && <TableCell key={v4()} />}
               {headerGroup.headers.map((column, columnIndex) => (
-                <TableCell {...column.getHeaderProps()} key={v4()}>
+                <TableCell
+                  {...column.getHeaderProps()}
+                  key={v4()}
+                  sx={{ ...theme.typography.darkModeBg4 }}
+                >
                   <Grid sx={{ display: "flex" }}>
-                    <Typography fontSize={fontSize} color="#000000">
+                    <Typography variant="subtitle1">
                       {column.render("Header")}
                     </Typography>
                     {column.id !== "selection" &&
@@ -105,6 +111,7 @@ const CustomTable = ({
                       sx={{
                         background: isRowOpen === true ? "#d82d2b" : "white",
                       }}
+                      size="medium"
                     >
                       <IconButton
                         aria-label="expand row"
@@ -131,22 +138,24 @@ const CustomTable = ({
                   )}
                   {row.cells.map((cell: any, cellIndex: any) => (
                     <TableCell
-                      size="small"
+                      size="medium"
                       {...cell.getCellProps()}
                       key={v4()}
                       sx={{
-                        fontSize,
-                        background:
-                          isRowOpen === true && hasCollapsibleItem === true
-                            ? "#d82d2b"
-                            : "white",
-                        color:
-                          isRowOpen === true && hasCollapsibleItem === true
-                            ? "white"
-                            : "",
+                        ...theme.typography.darkModeBg4,
+                        // background:
+                        //   isRowOpen === true && hasCollapsibleItem === true
+                        //     ? "#d82d2b"
+                        //     : "white",
+                        // color:
+                        //   isRowOpen === true && hasCollapsibleItem === true
+                        //     ? "white"
+                        //     : "",
                       }}
                     >
-                      {cell.render("Cell")}
+                      <Typography variant="body1">
+                        {cell.render("Cell")}
+                      </Typography>
                     </TableCell>
                   ))}
                 </TableRow>

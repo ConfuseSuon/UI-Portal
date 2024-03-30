@@ -69,8 +69,5 @@ export default function themePalette(theme: any) {
       paper: theme.paper,
       default: theme.backgroundDefault,
     },
-    hero: {
-      rap: "her",
-    },
   };
 }

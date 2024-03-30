@@ -1,3 +1,6 @@
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import PowerSettingsNewOutlinedIcon from "@mui/icons-material/PowerSettingsNewOutlined";
 import {
   Accordion,
   AccordionDetails,
@@ -20,13 +23,6 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import React, { useState } from "react";
-import CustomSelectOption from "../../../ui-component/CustomUIComp/CustomSelectOption";
-import CustomFilter from "../../../ui-component/CustomUIComp/CustomFilter";
-import CustomMyTestCard from "../../../ui-component/CustomUIComp/CustomMyTestCard";
-import PowerSettingsNewOutlinedIcon from "@mui/icons-material/PowerSettingsNewOutlined";
-import SelectOption from "../../../ui-component/extended/CustomSelect";
-import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
   Cell,
   Legend,
@@ -35,6 +31,10 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
+import CustomFilter from "../../../ui-component/CustomUIComp/CustomFilter";
+import CustomMyTestCard from "../../../ui-component/CustomUIComp/CustomMyTestCard";
+import CustomSelectOption from "../../../ui-component/CustomUIComp/CustomSelectOption";
+import SelectOption from "../../../ui-component/extended/CustomSelect";
 
 const pieChartData = [
   {
@@ -76,12 +76,14 @@ const Results = () => {
             name="firmware"
             value="Firmware 1"
             onChange={(event) => {}}
+            width="15rem"
           />
           <CustomSelectOption
             label="Select Test Suite"
             name="test-suite"
             value="Firmware 1"
             onChange={(event) => {}}
+            width="15rem"
           />
           <Button
             variant="contained"

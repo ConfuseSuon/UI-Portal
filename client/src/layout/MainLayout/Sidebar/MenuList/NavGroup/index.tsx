@@ -1,15 +1,15 @@
 import * as PropTypes from "prop-types";
 
 // material-ui
-import { useTheme } from "@mui/material/styles";
 import { Divider, List, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 // project imports
-import NavItem from "../NavItem";
-import NavCollapse from "../NavCollapse";
-import colors from "../../../../../assets/scss/_themes-vars.module.scss";
 import { useSelector } from "react-redux";
+import colors from "../../../../../assets/scss/_themes-vars.module.scss";
 import { AppState } from "../../../../../store/reducer";
+import NavCollapse from "../NavCollapse";
+import NavItem from "../NavItem";
 
 // ==============================|| SIDEBAR MENU LIST GROUP ||============================== //
 

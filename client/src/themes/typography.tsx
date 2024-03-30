@@ -154,6 +154,9 @@ export default function themeTypography(theme: any) {
         ? theme.backgroundDarkMode4
         : theme.backgroundDefault,
     },
+    basicDarkModeBg3: {
+      background: darkMode ? theme.backgroundDarkMode3 : theme.background,
+    },
     darkModeBg3: {
       background: darkMode ? theme.backgroundDarkMode3 : theme.background,
       border: darkMode
@@ -210,6 +213,13 @@ export default function themeTypography(theme: any) {
         // border: "1px solid grey",
         color: darkMode ? theme.darkTextSecondary : "",
       },
+    },
+    table: {
+      background: darkMode ? "#24323e" : "",
+      color: darkMode ? "white" : "",
+    },
+    appBar: {
+      background: darkMode ? theme.backgroundDarkMode4 : "",
     },
   };
 }

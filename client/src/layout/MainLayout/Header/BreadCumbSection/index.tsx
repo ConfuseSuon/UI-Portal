@@ -1,23 +1,29 @@
-import * as React from "react";
-import { emphasize, styled } from "@mui/material/styles";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import HomeIcon from "@mui/icons-material/Home";
+import { Box } from "@mui/material";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Chip from "@mui/material/Chip";
-import HomeIcon from "@mui/icons-material/Home";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { emphasize, styled, useTheme } from "@mui/material/styles";
+import * as React from "react";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
-import { Box } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import { AppState } from "../../../../store/reducer";
 //mui.com/material-ui/react-breadcrumbs/#
 
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
-  const backgroundColor =
-    theme.palette.mode === "light"
-      ? theme.palette.grey[100]
-      : theme.palette.grey[800];
+  const { darkMode } = useSelector((state: AppState) => state.auth);
+  // const backgroundColor =
+  //   theme.palette.mode === "light"
+  //     ? theme.palette.grey[100]
+  //     : theme.palette.grey[800];
+  const backgroundColor = darkMode
+    ? theme.palette.grey[800]
+    : theme.palette.grey[100];
+  const color = darkMode ? theme.palette.grey[100] : theme.palette.grey[800];
   return {
     backgroundColor,
-    color: theme.palette.text.primary,
+    color,
     height: "1.9rem",
     fontSize: "0.8rem",
     [theme.breakpoints.down("md")]: {

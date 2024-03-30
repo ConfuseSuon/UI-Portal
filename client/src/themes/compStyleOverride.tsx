@@ -42,6 +42,7 @@ export default function componentStyleOverrides(theme: any) {
     MuiCardContent: {
       styleOverrides: {
         root: {
+          background: darkMode ? theme.backgroundDarkMode4 : "",
           padding: "1rem",
         },
       },
@@ -79,6 +80,7 @@ export default function componentStyleOverrides(theme: any) {
         },
       },
     },
+
     MuiListItemIcon: {
       styleOverrides: {
         root: {
@@ -90,7 +92,15 @@ export default function componentStyleOverrides(theme: any) {
     MuiListItemText: {
       styleOverrides: {
         primary: {
-          color: theme.textDark,
+          color: darkMode ? "white" : theme.textDark,
+        },
+      },
+    },
+    MuiListSubheader: {
+      styleOverrides: {
+        root: {
+          background: darkMode ? theme.backgroundDarkMode4 : "",
+          color: darkMode ? theme.colors.grey300 : "",
         },
       },
     },
@@ -137,6 +147,7 @@ export default function componentStyleOverrides(theme: any) {
         },
         notchedOutline: {
           borderRadius: `${theme?.customization?.borderRadius}px`,
+          borderColor: darkMode ? theme.colors.grey600 : "",
         },
       },
     },
@@ -187,6 +198,11 @@ export default function componentStyleOverrides(theme: any) {
           color: theme.paper,
           background: theme.colors?.grey700,
         },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {},
       },
     },
   };

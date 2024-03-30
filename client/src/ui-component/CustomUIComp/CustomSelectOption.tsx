@@ -13,21 +13,22 @@ import { ReactElement } from "react";
 type Props = {
   name: string;
   label: string;
-  value: string | any;
+  value?: string | any;
   onChange?: (event: SelectChangeEvent<string>) => void;
   options?: any;
   placeholder?: string;
   sx?: any;
   variant?: any;
   disabled?: boolean;
+  width?: string;
 };
 
 const CustomSelectOption = (props: Props): ReactElement => {
-  const { name, label, value, onChange, options, sx, disabled } = props;
+  const { name, label, value, onChange, options, sx, disabled, width } = props;
   const theme = useTheme<any>();
 
   return (
-    <Box sx={{ width: "20rem" }}>
+    <Box sx={{ width }}>
       <FormControl fullWidth size="small">
         <InputLabel sx={sx}>{label}</InputLabel>
         <Select
@@ -38,7 +39,6 @@ const CustomSelectOption = (props: Props): ReactElement => {
           label={label}
           onChange={onChange}
           autoWidth={false}
-          fullWidth={false}
           variant="outlined"
           name={name}
           sx={sx}
@@ -52,7 +52,6 @@ const CustomSelectOption = (props: Props): ReactElement => {
                 value={item.title}
                 sx={{
                   ...theme.typography.menuItem,
-                  m: 0,
                 }}
               >
                 <Typography variant="body1">

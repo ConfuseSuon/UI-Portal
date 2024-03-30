@@ -9,12 +9,8 @@ import {
   Button,
   Card,
   CardContent,
-  Chip,
-  CircularProgress,
   Grid,
   Stack,
-  Table,
-  TableContainer,
   TextField,
   Typography,
 } from "@mui/material";
@@ -22,138 +18,31 @@ import { useTheme } from "@mui/material/styles";
 
 import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
 import { ChangeEvent, useMemo, useState } from "react";
+import { addPlaylistSelectData, allTestCaseTabledata } from "../../../mockData";
 import CustomPagination from "../../../ui-component/CustomUIComp/CustomPagination";
+import CustomSearch from "../../../ui-component/CustomUIComp/CustomSearch";
+import CustomSelectOption from "../../../ui-component/CustomUIComp/CustomSelectOption";
 import CustomTable from "../../../ui-component/CustomUIComp/CustomTable";
+import { allTestCaseColumns } from "../../../utils/tableColumns";
 
 const AllTestCases = () => {
   const theme = useTheme<any>();
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const [page, setPage] = useState(0);
   const [skipCount, setSkipCount] = useState(0);
   const [maxResultCount, setMaxResultCount] = useState(10);
 
-  const columns = useMemo(
-    () => [
-      {
-        Header: "ID",
-        accessor: "id",
-      },
-      {
-        Header: "Name",
-        accessor: "name",
-      },
-      {
-        Header: "Type",
-        accessor: "type",
-        // hidden: true,
-      },
-      {
-        Header: "Runner",
-        accessor: "runner",
-        // hidden: true,
-      },
-      {
-        Header: "Action",
-        Cell: ({ row }: any) => {
-          return (
-            <Stack direction="row" alignItems={"center"} gap={".3rem"}>
-              <EditOutlined
-                sx={{ fontSize: "1rem", cursor: "pointer", color: "#2196f3" }}
-              />
-              <DeleteOutline
-                sx={{ fontSize: "1rem", cursor: "pointer", color: "#2196f3" }}
-              />
-            </Stack>
-          );
-        },
-      },
-    ],
-    []
-  );
+  // Search Feature
 
-  const data = [
-    {
-      id: 58011,
-      name: "LAT_5_80_S3_M4_C1_US",
-      type: "Latency",
-      runner: "Ixia",
-    },
-    {
-      id: 58011,
-      name: "LAT_5_80_S3_M4_C1_US",
-      type: "Latency",
-      runner: "Ixia",
-    },
-    {
-      id: 58011,
-      name: "LAT_5_80_S3_M4_C1_US",
-      type: "Latency",
-      runner: "Ixia",
-    },
-    {
-      id: 58011,
-      name: "LAT_5_80_S3_M4_C1_US",
-      type: "Latency",
-      runner: "Ixia",
-    },
-    {
-      id: 58011,
-      name: "LAT_5_80_S3_M4_C1_US",
-      type: "Latency",
-      runner: "Ixia",
-    },
-    {
-      id: 58011,
-      name: "LAT_5_80_S3_M4_C1_US",
-      type: "Latency",
-      runner: "Ixia",
-    },
-    {
-      id: 58011,
-      name: "LAT_5_80_S3_M4_C1_US",
-      type: "Latency",
-      runner: "Ixia",
-    },
-    {
-      id: 58011,
-      name: "LAT_5_80_S3_M4_C1_US",
-      type: "Latency",
-      runner: "Ixia",
-    },
-    {
-      id: 58011,
-      name: "LAT_5_80_S3_M4_C1_US",
-      type: "Latency",
-      runner: "Ixia",
-    },
-    {
-      id: 58011,
-      name: "LAT_5_80_S3_M4_C1_US",
-      type: "Latency",
-      runner: "Ixia",
-    },
-    {
-      id: 58011,
-      name: "LAT_5_80_S3_M4_C1_US",
-      type: "Latency",
-      runner: "Ixia",
-    },
-    {
-      id: 58011,
-      name: "LAT_5_80_S3_M4_C1_US",
-      type: "Latency",
-      runner: "Ixia",
-    },
-    {
-      id: 58011,
-      name: "LAT_5_80_S3_M4_C1_US",
-      type: "Latency",
-      runner: "Ixia",
-    },
-  ];
+  const filteredTableData = useMemo(() => {
+    if (searchTerm.length === 0) return allTestCaseTabledata;
+    return allTestCaseTabledata?.filter((data) =>
+      data?.name.toLocaleLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]);
 
   // Pagination
-
   const putInTableFirstPage = () => {
     setPage(0);
     setSkipCount(0);
@@ -191,18 +80,26 @@ const AllTestCases = () => {
             }}
           >
             <Box display="flex" gap={"1rem"}>
-              <Button variant="outlined" size="small">
-                Selected Filter Tag 1
-              </Button>
-              <Button variant="outlined" size="small">
-                Selected Filter Tag 2
-              </Button>
+              <CustomSelectOption
+                name="Select filter"
+                label="Select filter"
+                options={addPlaylistSelectData}
+                width="15rem"
+              />
+              <CustomSelectOption
+                name="Select filter"
+                label="Select filter"
+                options={addPlaylistSelectData}
+                width="15rem"
+              />
             </Box>
-            <TextField
+
+            <CustomSearch
               label="Search by name, suite or tag"
               size="small"
               id="filled-basic"
-              type="search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               InputProps={{
                 startAdornment: <SearchOutlined sx={{ mr: ".5rem" }} />,
               }}
@@ -211,23 +108,36 @@ const AllTestCases = () => {
         </Box>
       </Grid>
       <Grid item md={12} sm={12} xs={12}>
-        <CustomTable data={data} columns={columns} />
-        {/* <Card sx={{ mb: "1rem" }} elevation={1}>
-          <CardContent sx={{ p: 2 }}>
+        <Card sx={{ mb: "1rem" }} elevation={1}>
+          <CardContent sx={{ p: 2, ...theme.typography.darkModeBg4 }}>
             <Box>
-              <CustomTable columns={columns} data={data} />
-              <CustomPagination
-                component={"div"}
-                count={data?.length ?? 0}
-                onPageChange={(event, value) => handlePageChange(event, value)}
-                onRowsPerPageChange={handleLimitChange}
-                page={page}
-                rowsPerPage={maxResultCount}
-                rowsPerPageOptions={[5, 10, 15, 20, 25]}
+              <CustomTable
+                columns={allTestCaseColumns}
+                data={filteredTableData}
               />
+              {filteredTableData?.length > 0 ? (
+                <CustomPagination
+                  component={"div"}
+                  count={allTestCaseTabledata?.length ?? 0}
+                  onPageChange={(event, value) =>
+                    handlePageChange(event, value)
+                  }
+                  onRowsPerPageChange={handleLimitChange}
+                  page={page}
+                  rowsPerPage={maxResultCount}
+                  rowsPerPageOptions={[5, 10, 15, 20, 25]}
+                />
+              ) : (
+                <Typography
+                  variant="h5"
+                  sx={{ textAlign: "center", p: "4rem" }}
+                >
+                  No Data
+                </Typography>
+              )}
             </Box>
           </CardContent>
-        </Card> */}
+        </Card>
       </Grid>
     </Grid>
   );

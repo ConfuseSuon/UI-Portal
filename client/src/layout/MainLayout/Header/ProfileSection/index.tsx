@@ -1,10 +1,9 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 // material-ui
-import { useTheme } from "@mui/material/styles";
 import {
   Avatar,
   Box,
@@ -26,21 +25,22 @@ import {
   Switch,
   Typography,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 // third-party
 import PerfectScrollbar from "react-perfect-scrollbar";
 
 // project imports
+import User1 from "../../../../assets/images/users/user-round.svg";
 import MainCard from "../../../../ui-component/cards/MainCard";
 import Transitions from "../../../../ui-component/extended/Transitions";
 import UpgradePlanCard from "./UpgradePlanCard";
-import User1 from "../../../../assets/images/users/user-round.svg";
 // const User1:string = require('assets/images/users/user-round.svg').default;
 // assets
+import { useMsal } from "@azure/msal-react";
 import { IconLogout, IconSearch, IconSettings, IconUser } from "@tabler/icons";
 import { TypeUserInfo, toggleDarkMode } from "../../../../features/authSlice";
 import { AppDispatch, AppState } from "../../../../store/reducer";
-import { useMsal } from "@azure/msal-react";
 
 // ==============================|| PROFILE MENU ||============================== //
 type RootState = {
@@ -271,7 +271,7 @@ const ProfileSection = () => {
                           width: "100%",
                           maxWidth: 350,
                           minWidth: 300,
-                          backgroundColor: theme.palette.background.paper,
+
                           borderRadius: "10px",
                           [theme.breakpoints.down("md")]: {
                             minWidth: "100%",

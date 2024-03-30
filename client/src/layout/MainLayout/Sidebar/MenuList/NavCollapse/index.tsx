@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 
 // material-ui
-import { useTheme } from "@mui/material/styles";
 import {
   Collapse,
   List,
@@ -13,6 +12,7 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 // project imports
 import NavItem from "../NavItem";

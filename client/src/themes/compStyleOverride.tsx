@@ -200,10 +200,5 @@ export default function componentStyleOverrides(theme: any) {
         },
       },
     },
-    MuiSelect: {
-      styleOverrides: {
-        root: {},
-      },
-    },
   };
 }

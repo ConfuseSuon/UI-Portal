@@ -49,6 +49,8 @@ type RootState = {
 const ProfileSection = () => {
   const dispatch: AppDispatch = useDispatch();
   const theme = useTheme<any>();
+  const { darkMode } = useSelector((state: AppState) => state.auth);
+
   const customization = useSelector((state: RootState) => state.customization);
   const navigate = useNavigate();
 

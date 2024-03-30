@@ -1,11 +1,15 @@
-import { Avatar, Box, ButtonBase } from "@mui/material";
-import React from "react";
-import { useTheme } from "@mui/material/styles";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import { Avatar, Box, ButtonBase } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import React from "react";
+import { useSelector } from "react-redux";
+import { AppState } from "../../../../store/reducer";
 
 const QuerySection = () => {
   const theme = useTheme<any>();
+  const { darkMode } = useSelector((state: AppState) => state.auth);
+
   return (
     <Box
       sx={{
@@ -25,7 +29,9 @@ const QuerySection = () => {
             ...theme.typography.commonAvatar,
             ...theme.typography.customAvatar,
             transition: "all .2s ease-in-out",
-            background: theme.palette.primary.light,
+            background: darkMode
+              ? theme.palette.grey[800]
+              : theme.palette.grey[100],
             color: theme.palette.primary.dark,
             '&[aria-controls="menu-list-grow"],&:hover': {
               background: theme.palette.primary.dark,

@@ -1,11 +1,11 @@
-import { useTheme } from "@mui/material/styles";
-import { Box, Typography } from "@mui/material";
-import React, { ReactElement } from "react";
-import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
-import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
-import { DashboardNumCardTypos } from "../../views/dashboard/Default";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
+import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
+import { Box, Popover, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import React, { ReactElement } from "react";
+import { DashboardNumCardTypos } from "../../views/dashboard/Default";
 interface DashCardNumProps {
   color?: string;
   fontStyle?: string;
@@ -57,6 +57,22 @@ const CustomDashboardNumCard = (props: DashCardNumProps): ReactElement => {
     return <Box style={dragginStyle} ref={setNodeRef}></Box>;
   }
 
+  // For Popover
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
   return (
     <Box
       ref={setNodeRef}
@@ -98,6 +114,18 @@ const CustomDashboardNumCard = (props: DashCardNumProps): ReactElement => {
         <MoreVertOutlinedIcon
           sx={{ justifySelf: "flex-end", fontSize: "1.1rem" }}
         />
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+        >
+          <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+        </Popover>
       </Box>
 
       <Box

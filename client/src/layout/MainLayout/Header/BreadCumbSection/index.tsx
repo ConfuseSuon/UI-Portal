@@ -30,6 +30,7 @@ const StyledBreadcrumb = styled(Chip)(({ theme }) => {
       fontSize: "0.8rem",
       height: "1.5rem",
     },
+    marginTop: ".1rem",
     fontWeight: theme.typography.fontWeightRegular,
     "&:hover, &:focus": {
       backgroundColor: emphasize(backgroundColor, 0.06),
@@ -68,21 +69,18 @@ export default function CustomizedBreadcrumbs() {
             pathnames.map((name, index) => {
               const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
               return (
-                <Link to={routeTo} key={index}>
-                  <StyledBreadcrumb
-                    label={name}
-                    sx={{ textTransform: "capitalize", cursor: "pointer" }}
-                  />
-                </Link>
+                <StyledBreadcrumb
+                  key={index}
+                  label={name}
+                  sx={{ textTransform: "capitalize", cursor: "pointer" }}
+                />
               );
             })
           ) : (
-            <Link to={"/"}>
-              <StyledBreadcrumb
-                label="Dashboard"
-                // icon={<HomeIcon fontSize="small" />}
-              />
-            </Link>
+            <StyledBreadcrumb
+              label="Dashboard"
+              // icon={<HomeIcon fontSize="small" />}
+            />
           )}
         </Breadcrumbs>
       </div>

@@ -60,7 +60,7 @@ const AllTestCases = () => {
 
   return (
     <Grid container spacing={2}>
-      <Grid item md={12}>
+      <Grid item md={12} sm={12} xs={12}>
         <Box display="flex" flexDirection="column">
           <Typography variant="h3" mb={"1rem"}>
             All Test Cases
@@ -79,7 +79,7 @@ const AllTestCases = () => {
               gap: "1rem",
             }}
           >
-            <Box display="flex" gap={"1rem"}>
+            <Box display="flex" gap={"1rem"} flexWrap="wrap">
               <CustomSelectOption
                 name="Select filter"
                 label="Select filter"

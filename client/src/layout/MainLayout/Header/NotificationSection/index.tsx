@@ -1,8 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 // material-ui
-import { useTheme } from "@mui/material/styles";
 import {
   Avatar,
   Box,
@@ -20,6 +19,7 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 // third-party
 import PerfectScrollbar from "react-perfect-scrollbar";
@@ -32,6 +32,8 @@ import NotificationList from "./NotificationList";
 // assets
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import { useSelector } from "react-redux";
+import { AppState } from "../../../../store/reducer";
 // notification status options
 const status = [
   {
@@ -56,6 +58,7 @@ const status = [
 
 const NotificationSection = () => {
   const theme = useTheme<any>();
+  const { darkMode } = useSelector((state: AppState) => state.auth);
   const matchesXs = useMediaQuery(theme.breakpoints.down("md"));
 
   const [open, setOpen] = useState<boolean>(false);
@@ -107,7 +110,9 @@ const NotificationSection = () => {
               ...theme.typography.commonAvatar,
               ...theme.typography.customAvatar,
               transition: "all .2s ease-in-out",
-              background: theme.palette.primary.light,
+              background: darkMode
+                ? theme.palette.grey[800]
+                : theme.palette.grey[100],
               color: theme.palette.primary.dark,
               '&[aria-controls="menu-list-grow"],&:hover': {
                 background: theme.palette.primary.dark,
